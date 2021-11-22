@@ -36,11 +36,17 @@ dependencies {
   implementation "androidx.core:core-ktx:$core_ktx_version"
   implementation "androidx.appcompat:appcompat:$app_compat_version"
   implementation "com.google.android.material:material:$material_version"
+  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+  implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+  implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+  implementation "com.google.code.gson:gson:$gson_version"
   testImplementation 'junit:junit:4.+'
   androidTestImplementation "androidx.test.ext:junit:$junit_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
   implementation project(':domain')
   implementation project(':dataSource')
-  implementation project(':repository')
+  implementation project(':core')
+
 }
