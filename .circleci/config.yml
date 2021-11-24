@@ -14,7 +14,6 @@ jobs:
 
       - slack/notify:
           template: basic_success_1 
-          channel: $quizapp 
           custom: |
             {
               "blocks": [
