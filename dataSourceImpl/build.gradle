@@ -46,7 +46,7 @@ dependencies {
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
   implementation project(':domain')
-  implementation project(':dataSource')
+  implementation project(':dataSource1')
   implementation project(':core')
 
 }

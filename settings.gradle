@@ -9,7 +9,7 @@ dependencyResolutionManagement {
 rootProject.name = "Quiz App"
 include ':app'
 include ':domain'
-include ':dataSource'
+include ':dataSource1'
 include ':repository'
 include ':useCase'
 include ':core'
