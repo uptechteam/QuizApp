@@ -13,7 +13,6 @@ jobs:
       - checkout
 
       - slack/notify:
-          SLACK_ACCESS_TOKEN: xoxb-2761735606565-2766965716980-DeQ4V40BIcLT6WZC2eiIdZjX
           template: basic_success_1 
           channel: $quizapp 
 
