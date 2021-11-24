@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   android: circleci/android@1.0.3
-  telegram: woltsu/telegram@0.0.9
+  slack: circleci/slack@4.4.4
 
 jobs:
   build:
@@ -11,7 +11,11 @@ jobs:
 
     steps:
       - checkout
-      - telegram/getme
+
+      - slack/notify:
+          SLACK_ACCESS_TOKEN: xoxb-2761735606565-2766965716980-DeQ4V40BIcLT6WZC2eiIdZjX
+          template: basic_success_1 
+          channel: $quizapp 
 
       #- android/run-tests:
       #    test-command: ./gradlew lint testDebug --continue
@@ -27,4 +31,5 @@ jobs:
 workflows:
   sample:
     jobs:
-      - build
+      - build: 
+          context: slack-secrets
