@@ -15,6 +15,22 @@ jobs:
       - slack/notify:
           template: basic_success_1 
           channel: $quizapp 
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
       #- android/run-tests:
       #    test-command: ./gradlew lint testDebug --continue
