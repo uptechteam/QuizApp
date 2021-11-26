@@ -1,19 +1,29 @@
 package model
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import com.panhuk.core.BuildConfig
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.single
 
-class PreferencesRepository(context: Context) {
-    private var sharedPreferences: SharedPreferences =
-        context.getSharedPreferences(BuildConfig.APP_PREFERENCES, Context.MODE_PRIVATE)
+class PreferencesRepository(val context: Context) {
 
-    fun saveToken(token: String) {
-        sharedPreferences
-            .edit()
-            .putString(BuildConfig.TOKEN, token)
-            .apply()
+  private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(BuildConfig.APP_PREFERENCES)
+  private val TOKEN = stringPreferencesKey(BuildConfig.TOKEN)
+
+  suspend fun saveToken(token: String) {
+    context.dataStore.edit { settings ->
+      settings[TOKEN] = token
     }
+  }
 
-    fun getToken() = sharedPreferences.getString(BuildConfig.TOKEN, "")!!
+  suspend fun getToken(): String? {
+    return context.dataStore.data.map { preferences: Preferences ->
+      preferences[TOKEN]
+    }.single()
+  }
 }

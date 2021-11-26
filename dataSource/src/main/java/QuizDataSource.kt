@@ -1,4 +1,3 @@
-interface QuizGateway {
-    fun getSessionToken(): String
+interface QuizDataSource {
     fun getQuestions(amount: Int = 10, category: String, difficulty: String, type: String): String
 }
