@@ -1,0 +1,34 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@1.0.3
+  slack: circleci/slack@4.4.4
+
+jobs:
+  build:
+    executor:
+      name: android/android-machine
+
+    steps:
+      - checkout
+
+      - run:
+          name: Test build
+          command: |
+            ./gradlew assembleRelease
+
+      #- android/run-tests:
+      #    test-command: ./gradlew lint testDebug --continue
+
+      - store_artifacts:
+              path: app/build/outputs/apk/
+              destination: apks/
+              
+      - slack/notify:
+          template: basic_success_1 
+          event: pass
+workflows:
+  sample:
+    jobs:
+      - build: 
+          context: slack-secrets
