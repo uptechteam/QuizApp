@@ -1,10 +1,12 @@
 package model
 
 data class Question(
-    val category: Category,
-    val correct_answer: String,
-    val difficulty: Difficulty,
-    val incorrect_answers: List<String>,
-    val question: String,
-    val type: Type
+  val category: Category,
+  @SerializedName("correct_answer")
+  val correctAnswer: String,
+  val difficulty: Difficulty,
+  @SerializedName("incorrect_answers")
+  val incorrectAnswers: List<String>,
+  val question: String,
+  val type: Type
 )

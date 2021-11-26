@@ -1,6 +1,6 @@
 package model
 
 enum class Type(val type: String) {
-    Boolean("boolean"),
-    Multiple("multiple")
+  BOOLEAN_TYPE("boolean"),
+  MULTIPLE_TYPE("multiple")
 }
