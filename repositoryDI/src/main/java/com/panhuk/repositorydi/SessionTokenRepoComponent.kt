@@ -19,4 +19,12 @@ interface SessionTokenRepoComponent {
     fun sessionTokenRepoModule(module: SessionTokenRepoModule): Builder
     fun build(): SessionTokenRepoComponent
   }
+
+  companion object {
+    fun create(): SessionTokenRepoComponent =
+      DaggerSessionTokenRepoComponent.builder()
+        .sessionTokenComponent(SessionTokenComponent.create())
+        .sessionTokenRepoModule(SessionTokenRepoModule())
+        .build()
+  }
 }

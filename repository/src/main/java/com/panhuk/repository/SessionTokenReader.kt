@@ -4,5 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SessionTokenReader {
 
-  val token: Flow<String?>
+  val currentSessionToken: Flow<String?>
+  fun generateNewToken(): Flow<String?>
 }

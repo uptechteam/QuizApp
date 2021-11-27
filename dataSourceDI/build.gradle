@@ -47,4 +47,5 @@ dependencies {
 
   implementation project(':dataSource')
   implementation project(':dataSourceImpl')
+  implementation project(':api')
 }
