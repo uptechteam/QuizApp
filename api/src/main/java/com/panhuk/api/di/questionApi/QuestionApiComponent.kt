@@ -1,6 +1,6 @@
 package com.panhuk.api.di.questionApi
 
-import com.panhuk.api.api.QuestionsApi
+import com.panhuk.api.api.QuestionApi
 import com.panhuk.api.di.base.BaseApiModule
 import dagger.Component
 
@@ -11,7 +11,7 @@ import dagger.Component
   ]
 )
 interface QuestionApiComponent {
-  fun questionsApi(): QuestionsApi
+  fun questionsApi(): QuestionApi
 
   @Component.Builder
   interface Builder {
