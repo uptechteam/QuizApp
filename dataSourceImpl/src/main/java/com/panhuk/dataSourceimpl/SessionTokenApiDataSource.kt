@@ -1,6 +1,6 @@
 package com.panhuk.datasourceimpl
 
-import com.panhuk.api.SessionTokenApi
+import com.panhuk.api.api.SessionTokenApi
 import com.panhuk.datasource.SessionTokenReader
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

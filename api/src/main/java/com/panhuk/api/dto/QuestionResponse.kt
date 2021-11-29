@@ -1,8 +1,8 @@
-package com.panhuk.datasourceimpl.model
+package com.panhuk.api.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Question(
+data class QuestionResponse(
   val category: String,
   @SerializedName("correct_answer")
   val correctAnswer: String,
