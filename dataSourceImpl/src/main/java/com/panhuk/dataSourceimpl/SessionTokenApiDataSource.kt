@@ -5,9 +5,7 @@ import com.panhuk.datasource.SessionTokenReader
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SessionTokenApiDataSource(
-  private val api: SessionTokenApi
-) : SessionTokenReader {
+class SessionTokenApiDataSource(private val api: SessionTokenApi) : SessionTokenReader {
 
   override val token: Flow<String?>
     get() = api.getSessionToken().map { tokenResponse ->

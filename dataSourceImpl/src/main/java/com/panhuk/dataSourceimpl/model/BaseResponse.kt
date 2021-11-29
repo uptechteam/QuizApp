@@ -1,6 +1,9 @@
 package com.panhuk.datasourceimpl.model
 
+import com.google.gson.annotations.SerializedName
+
 data class BaseResponse(
-    val response_code: Int,
-    val results: List<Question>
+  @SerializedName("response_code")
+  val responseCode: Int,
+  val results: List<Question>
 )
