@@ -32,6 +32,10 @@ android {
   }
   buildFeatures {
     viewBinding = true
+    compose true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion = "$compose_version"
   }
 }
 
@@ -49,6 +53,7 @@ dependencies {
   implementation "androidx.compose.material:material:$compose_version"
   implementation "androidx.compose.material:material-icons-core:$compose_version"
   implementation "androidx.compose.material:material-icons-extended:$compose_version"
+  implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
   testImplementation 'junit:junit:4.+'
   androidTestImplementation "androidx.test.ext:junit:$junit_version"
