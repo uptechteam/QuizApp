@@ -3,7 +3,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    jcenter() // Warning: this repository is going to shut down soon
   }
 }
 rootProject.name = "Quiz App"
@@ -14,6 +13,9 @@ include ':repository'
 include ':useCase'
 include ':core'
 include ':database'
-include ':datasourceImpl'
+include ':dataSourceImpl'
 include ':repositoryImpl'
 include ':usecaseImpl'
+include ':dataSourceDI'
+include ':repositoryDI'
+include ':api'

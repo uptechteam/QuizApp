@@ -1,5 +1,7 @@
 package model
 
+import com.google.gson.annotations.SerializedName
+
 data class Question(
   val category: Category,
   @SerializedName("correct_answer")
