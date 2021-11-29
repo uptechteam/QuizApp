@@ -1,10 +1,10 @@
 package com.panhuk.repository_impl
 
-import com.panhuk.repository.QuestionReader
+import com.panhuk.repository.QuestionRepository
 import kotlinx.coroutines.flow.Flow
 import model.Question
 
-typealias RepositoryQuestionReader = QuestionReader
+typealias RepositoryQuestionReader = QuestionRepository
 typealias DataSourceQuestionReader = com.panhuk.datasource.QuestionReader
 
 class QuestionRepoImpl(
@@ -13,4 +13,5 @@ class QuestionRepoImpl(
 
   override val questions: Flow<List<Question?>>
     get() = questionApiReader.questions
+
 }
