@@ -1,6 +1,5 @@
 package com.panhuk.api.di
 
-import android.content.Context
 import com.panhuk.api.BuildConfig
 import com.panhuk.api.SessionTokenApi
 import dagger.Module
@@ -12,6 +11,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class SessionTokenApiModule {
+
+  @Provides
+  fun provideSessionTokenApi(retrofit: Retrofit): SessionTokenApi =
+    retrofit.create(SessionTokenApi::class.java)
 
   @Provides
   fun provideOkhttpClient(): OkHttpClient =
@@ -31,8 +34,4 @@ class SessionTokenApiModule {
       .client(okHttpClient)
       .addConverterFactory(converterFactory)
       .build()
-
-  @Provides
-  fun provideSessionTokenApi(retrofit: Retrofit): SessionTokenApi =
-    retrofit.create(SessionTokenApi::class.java)
 }

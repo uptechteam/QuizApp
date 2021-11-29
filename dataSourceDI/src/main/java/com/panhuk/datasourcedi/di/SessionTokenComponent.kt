@@ -15,6 +15,7 @@ import dagger.Component
   ]
 )
 interface SessionTokenComponent {
+
   @Api fun sessionTokenApiReader(): SessionTokenReader
   @Cache fun sessionTokenCacheReader(): SessionTokenReader
   fun sessionTokenCache(): SessionTokenCache

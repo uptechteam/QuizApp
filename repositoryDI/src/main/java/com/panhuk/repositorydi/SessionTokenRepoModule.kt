@@ -14,12 +14,12 @@ typealias DataSourceSessionTokenReader = com.panhuk.datasource.SessionTokenReade
 @Module
 class SessionTokenRepoModule {
 
-  @Provides
+  /*@Provides
   fun provideSessionReader(
     @Api sessionTokenApiReader: DataSourceSessionTokenReader,
     @Cache sessionTokenCacheReader: DataSourceSessionTokenReader,
     sessionTokenCache: SessionTokenCache
   ): RepositorySessionTokenReader = SessionTokenRepoImpl(
     sessionTokenApiReader, sessionTokenCacheReader, sessionTokenCache
-  )
+  )*/
 }

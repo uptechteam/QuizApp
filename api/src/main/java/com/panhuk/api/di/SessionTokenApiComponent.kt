@@ -1,5 +1,6 @@
 package com.panhuk.api.di
 
+import com.panhuk.api.SessionTokenApi
 import dagger.Component
 
 @Component(
@@ -8,6 +9,7 @@ import dagger.Component
   ]
 )
 interface SessionTokenApiComponent {
+  fun sessionTokenApi(): SessionTokenApi
 
   @Component.Builder
   interface Builder {
