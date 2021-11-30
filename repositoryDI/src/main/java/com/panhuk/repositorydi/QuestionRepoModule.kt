@@ -1,13 +1,13 @@
 package com.panhuk.repositorydi
 
 import com.panhuk.datasourcedi.di.Api
-import com.panhuk.repository.QuestionRepository
+import com.panhuk.repository.QuestionRepoReader
 import com.panhuk.repository_impl.QuestionRepoImpl
 import dagger.Module
 import dagger.Provides
 
-typealias RepositoryQuestionReader = QuestionRepository
-typealias DataSourceQuestionReader = com.panhuk.datasource.QuestionReader
+typealias RepositoryQuestionReader = QuestionRepoReader
+typealias DataSourceQuestionReader = com.panhuk.datasource.QuestionDSReader
 
 @Module
 class QuestionRepoModule {

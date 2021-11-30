@@ -2,12 +2,12 @@ package com.panhuk.repository_impl
 
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.domain.exception.SessionExpiredException
-import com.panhuk.repository.SessionTokenRepository
+import com.panhuk.repository.SessionTokenRepoReader
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 
-typealias RepositorySessionTokenReader = SessionTokenRepository
+typealias RepositorySessionTokenReader = SessionTokenRepoReader
 typealias DataSourceSessionTokenReader = com.panhuk.datasource.SessionTokenReader
 
 class SessionTokenRepoImpl(

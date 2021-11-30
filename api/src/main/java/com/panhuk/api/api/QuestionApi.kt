@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface QuestionApi {
-  @GET("api_token.php")
+  @GET("api.php")
   fun getQuestions(
     @Query("amount") amount: Int = 10,
     @Query("category") category: String? = null,

@@ -3,12 +3,12 @@ package com.panhuk.repositorydi
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.datasourcedi.di.Cache
-import com.panhuk.repository.SessionTokenRepository
+import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.repository_impl.SessionTokenRepoImpl
 import dagger.Module
 import dagger.Provides
 
-typealias RepositorySessionTokenReader = SessionTokenRepository
+typealias RepositorySessionTokenReader = SessionTokenRepoReader
 typealias DataSourceSessionTokenReader = com.panhuk.datasource.SessionTokenReader
 
 @Module

@@ -1,10 +1,7 @@
 package com.panhuk.datasourcedi.di
 
 import com.panhuk.api.di.questionApi.QuestionApiComponent
-import com.panhuk.api.di.sessionTokenApi.SessionTokenApiComponent
-import com.panhuk.datasource.QuestionReader
-import com.panhuk.datasource.SessionTokenCache
-import com.panhuk.datasource.SessionTokenReader
+import com.panhuk.datasource.QuestionDSReader
 import dagger.Component
 
 @Component(
@@ -17,7 +14,7 @@ import dagger.Component
 )
 interface QuestionComponent {
 
-  @Api fun sessionTokenApiReader(): QuestionReader
+  @Api fun questionApiReader(): QuestionDSReader
 
   @Component.Builder
   interface Builder {

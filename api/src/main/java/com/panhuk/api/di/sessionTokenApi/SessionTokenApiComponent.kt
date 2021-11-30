@@ -16,6 +16,7 @@ interface SessionTokenApiComponent {
   @Component.Builder
   interface Builder {
     fun sessionTokenApiModule(module: SessionTokenApiModule): Builder
+    fun baseApiModule(module: BaseApiModule): Builder
     fun build(): SessionTokenApiComponent
   }
 
@@ -23,6 +24,7 @@ interface SessionTokenApiComponent {
     fun create(): SessionTokenApiComponent =
       DaggerSessionTokenApiComponent.builder()
         .sessionTokenApiModule(SessionTokenApiModule())
+        .baseApiModule(BaseApiModule())
         .build()
   }
 }

@@ -2,7 +2,7 @@ package com.panhuk.repository
 
 import kotlinx.coroutines.flow.Flow
 
-interface SessionTokenRepository {
+interface SessionTokenRepoReader {
   val currentSessionToken: Flow<String?>
   fun generateNewToken(): Flow<String?>
 }

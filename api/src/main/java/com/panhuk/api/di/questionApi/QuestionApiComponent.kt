@@ -16,6 +16,7 @@ interface QuestionApiComponent {
   @Component.Builder
   interface Builder {
     fun questionsApiModule(module: QuestionApiModule): Builder
+    fun baseApiModule(module: BaseApiModule): Builder
     fun build(): QuestionApiComponent
   }
 
@@ -23,6 +24,7 @@ interface QuestionApiComponent {
     fun create(): QuestionApiComponent =
       DaggerQuestionApiComponent.builder()
         .questionsApiModule(QuestionApiModule())
+        .baseApiModule(BaseApiModule())
         .build()
   }
 }
