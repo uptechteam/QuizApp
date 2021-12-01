@@ -25,20 +25,26 @@ import com.example.settingsfeature.R.string
 import com.example.settingsfeature.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
-  private lateinit var binding: FragmentSettingsBinding
+  private var _binding: FragmentSettingsBinding? = null
+  private val binding get() = _binding!!
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    binding = FragmentSettingsBinding.inflate(inflater, container, false)
+    _binding = FragmentSettingsBinding.inflate(inflater, container, false)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.settingsFragment.setContent { CreateSettingsFragment() }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
   }
 
   @Preview(showBackground = true)
@@ -67,7 +73,7 @@ class SettingsFragment : Fragment() {
   }
 
   @Composable
-  fun CreateTextWithSwitchInRow(){
+  fun CreateTextWithSwitchInRow() {
     Row() {
       Text(stringResource(string.use_your_data_to_improve_our_service))
       CreateSwitch()

@@ -23,24 +23,31 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.example.leaderboardfeature.model.DataProvider
 import com.example.leaderboardfeature.R.string
 import com.example.leaderboardfeature.databinding.FragmentLeaderboardBinding
+import com.example.leaderboardfeature.model.DataProvider
 
 class LeaderboardFragment : Fragment() {
-  private lateinit var binding: FragmentLeaderboardBinding
+
+  private var _binding: FragmentLeaderboardBinding? = null
+  private val binding get() = _binding!!
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+    _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.leaderboardFragment.setContent { CreateLeaderboardFragment() }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
   }
 
   @Preview(showBackground = true)

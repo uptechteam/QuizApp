@@ -21,15 +21,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.leaderboardfeature.date.DateType
-import com.example.leaderboardfeature.date.DateType.DAYS
-import com.example.leaderboardfeature.date.DateType.HOURS
-import com.example.leaderboardfeature.date.DateType.MINUTES
-import com.example.leaderboardfeature.date.DateType.MONTHS
-import com.example.leaderboardfeature.date.DateType.YEARS
-import com.example.leaderboardfeature.R.string
+import com.example.leaderboardfeature.R
 import com.example.leaderboardfeature.date.getDateAgo
 import com.example.leaderboardfeature.model.Leaderboard
+import java.time.temporal.ChronoUnit
+import java.time.temporal.ChronoUnit.DAYS
+import java.time.temporal.ChronoUnit.HOURS
+import java.time.temporal.ChronoUnit.MINUTES
+import java.time.temporal.ChronoUnit.MONTHS
+import java.time.temporal.ChronoUnit.YEARS
 
 @Composable
 fun LeaderboardListItem(leaderboard: Leaderboard) {
@@ -52,7 +52,7 @@ fun LeaderboardListItem(leaderboard: Leaderboard) {
       }
     }
 
-    val date = getDateAgo(leaderboard.date)
+    val date = getDateAgo(leaderboard.scoreLocalDate)
     val dateFormatted = formatDate(date)
     LeaderBoardSetTimeAgo(dateFormatted)
   }
@@ -75,19 +75,20 @@ private fun LeaderboardImage(leaderboard: Leaderboard) {
 private fun LeaderboardUsernameAndScore(leaderboard: Leaderboard) {
   Text(text = leaderboard.username, style = typography.h6)
   Text(
-    text = stringResource(id = string.Score) + leaderboard.score,
+    text = stringResource(id = R.string.Score) + leaderboard.score,
     style = typography.caption
   )
 }
 
 @Composable
-private fun formatDate(date: Pair<DateType, Long>): String {
+private fun formatDate(date: Pair<ChronoUnit, Long>): String {
   return when (date.first) {
-    MINUTES -> stringResource(id = string.minutes_ago, date.second)
-    HOURS -> stringResource(id = string.hours_ago, date.second)
-    DAYS -> stringResource(id = string.days_ago, date.second)
-    MONTHS -> stringResource(id = string.months_ago, date.second)
-    YEARS -> stringResource(id = string.years_ago, date.second)
+    MINUTES -> stringResource(id = R.string.minutes_ago, date.second)
+    HOURS -> stringResource(id = R.string.hours_ago, date.second)
+    DAYS -> stringResource(id = R.string.days_ago, date.second)
+    MONTHS -> stringResource(id = R.string.months_ago, date.second)
+    YEARS -> stringResource(id = R.string.years_ago, date.second)
+    else -> stringResource(id = R.string.minutes_ago, date.second)
   }
 }
 

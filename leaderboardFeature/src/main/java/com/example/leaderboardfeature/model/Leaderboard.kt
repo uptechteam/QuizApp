@@ -1,10 +1,10 @@
 package com.example.leaderboardfeature.model
 
-import java.util.Date
+import java.time.LocalDate
 
 data class Leaderboard(
   val imageId: Int,
   val username: String,
   val score: Int,
-  val date: Date
+  val scoreLocalDate: LocalDate
 )

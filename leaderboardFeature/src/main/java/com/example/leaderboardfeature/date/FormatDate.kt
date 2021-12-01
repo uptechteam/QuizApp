@@ -1,28 +1,24 @@
 package com.example.leaderboardfeature.date
 
-import com.example.leaderboardfeature.date.DateType.DAYS
-import com.example.leaderboardfeature.date.DateType.HOURS
-import com.example.leaderboardfeature.date.DateType.MINUTES
-import com.example.leaderboardfeature.date.DateType.MONTHS
-import com.example.leaderboardfeature.date.DateType.YEARS
 import java.time.Instant
-import java.util.Date
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
-fun getDateAgo(date: Date): Pair<DateType, Long> {
-  val nowDate = Date.from(Instant.now())
-  val differenceInTime = nowDate.time - date.time
-  val seconds = differenceInTime / 1000
-  val minutes = seconds / 60
-  val hours = minutes / 60
-  val days = hours / 24
-  val months = days / 30
-  val years = months / 12
+fun getDateAgo(date: LocalDate): Pair<ChronoUnit, Long> {
+  val nowDate = LocalDate.from(Instant.now())
+
+  val minutes = ChronoUnit.MINUTES.between(nowDate, date)
+  val hours = ChronoUnit.HOURS.between(nowDate, date)
+  val days = ChronoUnit.DAYS.between(nowDate, date)
+  val months = ChronoUnit.MONTHS.between(nowDate, date)
+  val years = ChronoUnit.YEARS.between(nowDate, date)
 
   return when {
-    minutes < 60 -> Pair(MINUTES, minutes)
-    hours < 24 -> Pair(HOURS, hours)
-    days < 30 -> Pair(DAYS, days)
-    months < 12 -> Pair(MONTHS, months)
-    else -> Pair(YEARS, years)
+    years > 0 -> Pair(ChronoUnit.MINUTES, years)
+    months > 0 -> Pair(ChronoUnit.MONTHS, months)
+    days > 0 -> Pair(ChronoUnit.DAYS, days)
+    hours > 0 -> Pair(ChronoUnit.HOURS, hours)
+    minutes > 0 -> Pair(ChronoUnit.MINUTES, minutes)
+    else -> Pair(ChronoUnit.MINUTES, minutes)
   }
 }
