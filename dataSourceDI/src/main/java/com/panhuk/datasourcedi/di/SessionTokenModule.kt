@@ -1,6 +1,6 @@
 package com.panhuk.datasourcedi.di
 
-import com.panhuk.api.SessionTokenApi
+import com.panhuk.api.api.SessionTokenApi
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenReader
 import com.panhuk.datasourceimpl.SessionTokenApiDataSource

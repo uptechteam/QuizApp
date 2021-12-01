@@ -1,4 +1,4 @@
-package model
+package com.panhuk.domain.model
 
 enum class Category(val title: String, val id: Int) {
   GENERAL_KNOWLEDGE("General Knowledge", 9),

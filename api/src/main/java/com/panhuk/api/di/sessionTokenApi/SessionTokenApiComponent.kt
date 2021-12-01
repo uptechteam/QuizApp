@@ -1,11 +1,13 @@
-package com.panhuk.api.di
+package com.panhuk.api.di.sessionTokenApi
 
-import com.panhuk.api.SessionTokenApi
+import com.panhuk.api.api.SessionTokenApi
+import com.panhuk.api.di.base.BaseApiModule
 import dagger.Component
 
 @Component(
   modules = [
-    SessionTokenApiModule::class
+    SessionTokenApiModule::class,
+    BaseApiModule::class
   ]
 )
 interface SessionTokenApiComponent {
@@ -14,6 +16,7 @@ interface SessionTokenApiComponent {
   @Component.Builder
   interface Builder {
     fun sessionTokenApiModule(module: SessionTokenApiModule): Builder
+    fun baseApiModule(module: BaseApiModule): Builder
     fun build(): SessionTokenApiComponent
   }
 
@@ -21,6 +24,7 @@ interface SessionTokenApiComponent {
     fun create(): SessionTokenApiComponent =
       DaggerSessionTokenApiComponent.builder()
         .sessionTokenApiModule(SessionTokenApiModule())
+        .baseApiModule(BaseApiModule())
         .build()
   }
 }
