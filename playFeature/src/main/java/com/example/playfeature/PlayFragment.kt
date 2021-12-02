@@ -26,10 +26,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.example.playfeature.databinding.PlayFragmentBinding
+import com.example.playfeature.di.PlayComponent
+import com.panhuk.datasourcedi.di.DaggerSessionTokenComponent
+import com.panhuk.datasourcedi.di.QuestionComponent
+import javax.inject.Inject
 
 class PlayFragment : Fragment() {
   private var _binding: PlayFragmentBinding? = null
   private val binding get() = _binding!!
+
+  @Inject
+  protected lateinit var viewModel: PlayViewModel
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -43,6 +50,8 @@ class PlayFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.playFragment.setContent { CreatePlayFragment() }
+    PlayComponent.create(this)
+    viewModel.temp()
   }
 
   override fun onDestroyView() {
