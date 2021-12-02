@@ -46,8 +46,8 @@ class PlayFragment : Fragment() {
   }
 
   override fun onDestroyView() {
-    super.onDestroyView()
     _binding = null
+    super.onDestroyView()
   }
 
   @Preview(showBackground = true)
