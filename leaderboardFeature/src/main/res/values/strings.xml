@@ -1,0 +1,10 @@
+<resources>
+  <string name="leaderboard">LEADERBOARD</string>
+  <string name="Score">Score:</string>
+  <string name="minutes_ago">%1$dm. ago</string>
+  <string name="seconds_ago">%1$ds. ago</string>
+  <string name="hours_ago">%1$dh. ago</string>
+  <string name="days_ago">%1$dd. ago</string>
+  <string name="months_ago">%1$dmth. ago</string>
+  <string name="years_ago">%1$dy. ago</string>
+</resources>
