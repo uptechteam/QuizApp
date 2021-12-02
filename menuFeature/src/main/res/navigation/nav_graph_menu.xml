@@ -10,8 +10,15 @@
     <action
         android:id="@+id/menu_play"
         app:destination="@id/nav_graph_play" />
+    <action
+        android:id="@+id/menu_settings"
+        app:destination="@id/nav_graph_settings" />
+    <action
+        android:id="@+id/menu_leaderboard"
+        app:destination="@id/nav_graph_leaderboard" />
   </fragment>
 
   <include app:graph="@navigation/nav_graph_play" />
-
+  <include app:graph="@navigation/nav_graph_settings" />
+  <include app:graph="@navigation/nav_graph_leaderboard" />
 </navigation>

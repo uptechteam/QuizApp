@@ -54,18 +54,19 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      MakeOutlinedButtonWithText(text = stringResource(id = string.play))
-      MakeOutlinedButtonWithText(text = stringResource(id = string.settings))
-      MakeOutlinedButtonWithText(text = stringResource(id = string.leaderboard))
+      MakeOutlinedButtonWithText(text = stringResource(id = string.play), R.id.menu_play)
+      MakeOutlinedButtonWithText(text = stringResource(id = string.settings), R.id.menu_settings)
+      MakeOutlinedButtonWithText(
+        text = stringResource(id = string.leaderboard),
+        R.id.menu_leaderboard
+      )
     }
   }
 
   @Composable
-  fun MakeOutlinedButtonWithText(text: String) {
+  fun MakeOutlinedButtonWithText(text: String, navigationId: Int) {
     OutlinedButton(
-      onClick = {
-                findNavController().navigate(R.id.menu_play)
-      },
+      onClick = { findNavController().navigate(navigationId) },
       modifier = Modifier
         .padding(bottom = 30.dp)
         .width(300.dp)
