@@ -45,6 +45,7 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$app_compat_version"
   implementation "com.google.android.material:material:$material_version"
   implementation "com.google.dagger:dagger:$dagger_version"
+  implementation 'androidx.fragment:fragment:1.4.0'
   kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
   implementation "androidx.compose.ui:ui:$compose_version"
@@ -53,9 +54,12 @@ dependencies {
   implementation "androidx.compose.material:material:$compose_version"
   implementation "androidx.compose.material:material-icons-core:$compose_version"
   implementation "androidx.compose.material:material-icons-extended:$compose_version"
-  implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
-  testImplementation 'junit:junit:4.+'
+  implementation("androidx.navigation:navigation-fragment-ktx:$navigation_version")
+  implementation("androidx.navigation:navigation-ui-ktx:$navigation_version")
+  implementation("androidx.navigation:navigation-compose:$compose_navigation_version")
+
+  testImplementation "junit:junit:$junit_version"
   androidTestImplementation "androidx.test.ext:junit:$junit_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
@@ -63,4 +67,9 @@ dependencies {
   implementation project(':core')
   implementation project(':repository')
   implementation project(':useCase')
+
+  implementation project(':playFeature')
+  implementation project(':settingsFeature')
+  implementation project(':leaderboardFeature')
+  implementation project(':menuFeature')
 }
