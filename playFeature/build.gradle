@@ -61,8 +61,10 @@ dependencies {
 
   implementation project(':domain')
   implementation project(':core')
-  implementation project(':repository')
-  implementation project(':useCase')
-  implementation project(':repositoryDI')
+  implementation project(':api')
   implementation project(':dataSourceDI')
+  implementation project(':repository')
+  implementation project(':repositoryDI')
+  implementation project(':usecaseDI')
+  implementation project(':useCase')
 }

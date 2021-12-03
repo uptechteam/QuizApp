@@ -1,9 +1,11 @@
 package com.example.playfeature
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,10 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.playfeature.databinding.PlayFragmentBinding
 import com.example.playfeature.di.PlayComponent
-import com.panhuk.datasourcedi.di.DaggerSessionTokenComponent
-import com.panhuk.datasourcedi.di.QuestionComponent
 import javax.inject.Inject
 
 class PlayFragment : Fragment() {
@@ -38,10 +39,13 @@ class PlayFragment : Fragment() {
   @Inject
   protected lateinit var viewModel: PlayViewModel
 
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    PlayComponent.create().inject(this)
+  }
+
   override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
   ): View {
     _binding = PlayFragmentBinding.inflate(inflater, container, false)
     return binding.root
@@ -50,8 +54,6 @@ class PlayFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.playFragment.setContent { CreatePlayFragment() }
-    PlayComponent.create(this)
-    viewModel.temp()
   }
 
   override fun onDestroyView() {
@@ -62,20 +64,20 @@ class PlayFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun CreatePlayFragment() {
-    MakeQuestionTitle(text = "Question")
+    MakeQuestionTitle()
     MakeQuestionsAndScore()
     QuitButton()
   }
 
   @Composable
-  fun MakeQuestionTitle(text: String) {
+  fun MakeQuestionTitle() {
     Box(
       modifier = Modifier
         .fillMaxSize()
         .padding(top = 100.dp),
       contentAlignment = Alignment.TopCenter
     ) {
-      Text(text, fontSize = 24.sp)
+      Text(viewModel.title, fontSize = 24.sp)
     }
   }
 
@@ -86,19 +88,17 @@ class PlayFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      val answer = "Answer"
-      MakeOutlinedButtonWithText(text = answer)
-      MakeOutlinedButtonWithText(text = answer)
-      MakeOutlinedButtonWithText(text = answer)
-      MakeOutlinedButtonWithText(text = answer)
+      viewModel.questionAnswers.forEach { answer ->
+        MakeQuestion(text = answer)
+      }
       MakeScore()
     }
   }
 
   @Composable
-  fun MakeOutlinedButtonWithText(text: String) {
+  fun MakeQuestion(text: String) {
     Button(
-      onClick = {},
+      onClick = { checkAnswerAndShowToast(text) },
       modifier = Modifier
         .padding(bottom = 30.dp)
         .width(300.dp),
@@ -108,11 +108,28 @@ class PlayFragment : Fragment() {
     }
   }
 
+  private fun checkAnswerAndShowToast(text: String) {
+    val toastMessageStringId: Int = if (viewModel.checkAnswer(text)) {
+      R.string.right_answer
+    } else {
+      R.string.wrong_answer
+    }
+    showToast(toastMessageStringId)
+  }
+
+  private fun showToast(messageId: Int) {
+    Toast.makeText(
+      requireContext(),
+      getString(messageId),
+      Toast.LENGTH_SHORT
+    ).show()
+  }
+
   @Composable
   fun MakeScore() {
     Row() {
       Text(stringResource(id = R.string.score), modifier = Modifier.padding(end = 5.dp))
-      Text("2")
+      Text(viewModel.totalScore.toString())
     }
   }
 
@@ -123,11 +140,11 @@ class PlayFragment : Fragment() {
       contentAlignment = Alignment.BottomCenter
     ) {
       OutlinedButton(
-        onClick = { /*TODO*/ },
+        onClick = { findNavController().popBackStack() },
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
         shape = RoundedCornerShape(40.dp)
       ) {
-        Text("Quit", color = Color.Red)
+        Text(stringResource(id = R.string.quit), color = Color.Red)
       }
     }
   }

@@ -1,6 +1,7 @@
 package com.panhuk.repositorydi
 
 import com.panhuk.datasourcedi.di.SessionTokenComponent
+import com.panhuk.repository.SessionTokenRepoReader
 import dagger.Component
 
 @Component(
@@ -12,6 +13,8 @@ import dagger.Component
   ]
 )
 interface SessionTokenRepoComponent {
+
+  fun getSessionTokenRepoReader(): SessionTokenRepoReader
 
   @Component.Builder
   interface Builder {

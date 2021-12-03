@@ -1,6 +1,7 @@
 package com.panhuk.repositorydi
 
 import com.panhuk.datasourcedi.di.QuestionComponent
+import com.panhuk.repository.QuestionRepoReader
 import dagger.Component
 
 @Component(
@@ -12,6 +13,7 @@ import dagger.Component
   ]
 )
 interface QuestionRepoComponent {
+  fun getQuestionRepoReader(): QuestionRepoReader
 
   @Component.Builder
   interface Builder {
