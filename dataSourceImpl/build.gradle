@@ -14,6 +14,7 @@ android {
     versionName "1.0"
 
     buildConfigField "String", "APP_PREFERENCES", '"settings"'
+    buildConfigField "String", "TOKEN", '"token"'
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
@@ -52,6 +53,7 @@ dependencies {
 
   implementation "androidx.datastore:datastore-core:$datastore_preferences_version"
   implementation "androidx.datastore:datastore-preferences:$datastore_preferences_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
   implementation project(':domain')
   implementation project(':dataSource')

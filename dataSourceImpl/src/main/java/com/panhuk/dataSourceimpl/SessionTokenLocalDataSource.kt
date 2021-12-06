@@ -1,15 +1,17 @@
 package com.panhuk.datasourceimpl
 
+import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.datasource.SessionTokenCache
-import com.panhuk.datasource.SessionTokenReader
+import com.panhuk.datasource.SessionTokenDSReader
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 
-object SessionTokenLocalDataSource : SessionTokenReader, SessionTokenCache {
-  private val _token: MutableSharedFlow<String?> = MutableSharedFlow()
+class SessionTokenLocalDataSource(private val datastorePreferences: DatastorePreferences) :
+  SessionTokenDSReader, SessionTokenCache {
 
   override val token: Flow<String?>
-    get() = _token
+    get() = datastorePreferences.getSessionToken()
 
-  override suspend fun cacheToken(token: String?) = _token.emit(token)
+  override suspend fun cacheToken(token: String?) {
+    datastorePreferences.saveSessionToken(token!!)
+  }
 }

@@ -1,7 +1,9 @@
-package com.panhuk.datasourcedi.di
+package com.panhuk.datasourcedi.di.Question
 
 import com.panhuk.api.di.questionApi.QuestionApiComponent
 import com.panhuk.datasource.QuestionDSReader
+import com.panhuk.datasourcedi.di.Api
+import com.panhuk.datasourcedi.di.DaggerQuestionComponent
 import dagger.Component
 
 @Component(

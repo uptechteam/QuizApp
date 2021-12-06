@@ -1,6 +1,7 @@
-package com.panhuk.repositorydi
+package com.panhuk.repositorydi.SessionToken
 
 import com.panhuk.datasource.SessionTokenCache
+import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.datasourcedi.di.Cache
 import com.panhuk.repository.SessionTokenRepoReader
@@ -8,17 +9,14 @@ import com.panhuk.repository_impl.SessionTokenRepoImpl
 import dagger.Module
 import dagger.Provides
 
-typealias RepositorySessionTokenReader = SessionTokenRepoReader
-typealias DataSourceSessionTokenReader = com.panhuk.datasource.SessionTokenReader
-
 @Module
 class SessionTokenRepoModule {
   @Provides
   fun provideSessionReader(
-    @Api sessionTokenApiReader: DataSourceSessionTokenReader,
-    @Cache sessionTokenCacheReader: DataSourceSessionTokenReader,
+    @Api sessionTokenApiReader: SessionTokenDSReader,
+    @Cache sessionTokenCacheReader: SessionTokenDSReader,
     sessionTokenCache: SessionTokenCache
-  ): RepositorySessionTokenReader = SessionTokenRepoImpl(
+  ): SessionTokenRepoReader = SessionTokenRepoImpl(
     sessionTokenApiReader, sessionTokenCacheReader, sessionTokenCache
   )
 }
