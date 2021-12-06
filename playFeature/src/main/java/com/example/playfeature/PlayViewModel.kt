@@ -28,7 +28,7 @@ class PlayViewModel @Inject constructor(
     viewModelScope.launch(dispatcher) {
       try {
         getCurrentSessionToken()
-      } catch (e: Throwable) {
+      } catch (e: Exception) {
         generateNewSessionToken()
       } finally {
         getQuestions()

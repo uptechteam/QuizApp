@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface SessionTokenApi {
   @GET("api_token.php")
-  fun getSessionToken(
+  suspend fun getSessionToken(
     @Query("command") command: String = "request"
-  ): Flow<SessionTokenResponse>
+  ): SessionTokenResponse
 }
