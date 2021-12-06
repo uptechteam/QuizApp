@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class DatastorePreferencesImpl(private val context: Context) : DatastorePreferences {
-  private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(BuildConfig.APP_PREFERENCES)
+
   private val TOKEN = stringPreferencesKey(BuildConfig.TOKEN)
 
   override suspend fun saveSessionToken(token: String) {

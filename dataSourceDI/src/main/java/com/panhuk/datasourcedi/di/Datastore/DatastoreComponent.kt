@@ -1,6 +1,7 @@
 package com.panhuk.datasourcedi.di.Datastore
 
 import com.panhuk.datasource.DatastorePreferences
+import dagger.BindsInstance
 import dagger.Component
 
 @Component(
@@ -15,13 +16,17 @@ interface DatastoreComponent {
   @Component.Builder
   interface Builder {
     fun datastoreModule(module: DatastoreModule): Builder
+
+    @BindsInstance
+    fun datastorePreferences(datastorePreferences: DatastorePreferences): Builder
     fun build(): DatastoreComponent
   }
 
   companion object {
-    fun create(): DatastoreComponent =
+    fun create(datastorePreferences: DatastorePreferences): DatastoreComponent =
       DatastoreComponent.builder()
         .datastoreModule(DatastoreModule())
+        .datastorePreferences(datastorePreferences)
         .build()
   }
 }
