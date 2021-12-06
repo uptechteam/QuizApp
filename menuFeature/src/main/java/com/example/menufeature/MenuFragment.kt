@@ -19,8 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.menufeature.R.string
 import com.example.menufeature.databinding.MenuFragmentBinding
 
 class MenuFragment : Fragment() {
@@ -54,24 +52,30 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      MakeOutlinedButtonWithText(text = stringResource(id = string.play), R.id.menu_play)
-      MakeOutlinedButtonWithText(text = stringResource(id = string.settings), R.id.menu_settings)
-      MakeOutlinedButtonWithText(
-        text = stringResource(id = string.leaderboard),
-        R.id.menu_leaderboard
-      )
+      MakeOutlinedButtonWithText(R.string.play)
+      MakeOutlinedButtonWithText(R.string.settings)
+      MakeOutlinedButtonWithText(R.string.leaderboard)
     }
   }
 
   @Composable
-  fun MakeOutlinedButtonWithText(text: String, navigationId: Int) {
+  fun MakeOutlinedButtonWithText(textId: Int) {
     OutlinedButton(
-      onClick = { findNavController().navigate(navigationId) },
+      onClick = { navigateToFragment(textId) },
       modifier = Modifier
         .padding(bottom = 30.dp)
         .width(300.dp)
     ) {
-      Text(text, fontSize = 24.sp)
+      Text(stringResource(textId), fontSize = 24.sp)
+    }
+  }
+
+  private fun navigateToFragment(textId: Int) {
+    val navigator = (requireActivity() as MenuNavigator)
+    when (textId) {
+      R.string.play -> navigator.navigateMenuToPlayFragment()
+      R.string.settings -> navigator.navigateMenuToSettingsFragment()
+      R.string.leaderboard -> navigator.navigateMenuToLeaderboardFragment()
     }
   }
 }

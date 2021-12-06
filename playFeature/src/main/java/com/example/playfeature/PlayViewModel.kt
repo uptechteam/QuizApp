@@ -20,8 +20,8 @@ class PlayViewModel @Inject constructor(
   private lateinit var sessionToken: String
   private var numberOfQuestion = 0
 
-  lateinit var title: String
-  lateinit var questionAnswers: List<String>
+  var title: String = ""
+  var questionAnswers: List<String> = listOf()
   var totalScore: Int = 0
 
   init {
