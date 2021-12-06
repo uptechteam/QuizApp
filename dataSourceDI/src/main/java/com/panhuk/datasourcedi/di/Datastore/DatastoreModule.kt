@@ -1,9 +1,9 @@
 package com.panhuk.datasourcedi.di.Datastore
 
-import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.panhuk.dataSourceimpl.DatastorePreferencesImpl
 import com.panhuk.datasource.DatastorePreferences
-import com.panhuk.datasourcedi.di.Api
 import dagger.Module
 import dagger.Provides
 
@@ -11,6 +11,6 @@ import dagger.Provides
 class DatastoreModule {
 
   @Provides
-  fun provideDatastorePreferences(context: Context): DatastorePreferences =
-    DatastorePreferencesImpl(context)
+  fun provideDatastorePreferences(datastorePreferences: DataStore<Preferences>): DatastorePreferences =
+    DatastorePreferencesImpl(datastorePreferences)
 }
