@@ -1,7 +1,7 @@
-package com.panhuk.api.di.questionApi
+package com.example.apidi.questionApi
 
 import com.panhuk.api.api.QuestionApi
-import com.panhuk.api.di.base.BaseApiModule
+import com.example.apidi.base.BaseApiModule
 import dagger.Component
 
 @Component(

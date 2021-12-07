@@ -1,4 +1,4 @@
-package com.panhuk.api.di.sessionTokenApi
+package com.example.apidi.sessionTokenApi
 
 import com.panhuk.api.api.SessionTokenApi
 import dagger.Module

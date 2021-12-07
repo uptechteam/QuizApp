@@ -1,4 +1,4 @@
-package com.panhuk.api.di.questionApi
+package com.example.apidi.questionApi
 
 import com.panhuk.api.api.QuestionApi
 import dagger.Module
