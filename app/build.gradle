@@ -40,24 +40,10 @@ android {
 }
 
 dependencies {
-
-  implementation "androidx.core:core-ktx:$core_ktx_version"
-  implementation "androidx.appcompat:appcompat:$app_compat_version"
-  implementation "com.google.android.material:material:$material_version"
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-  implementation "androidx.compose.ui:ui:$compose_version"
-  implementation "androidx.compose.ui:ui-tooling:$compose_version"
-  implementation "androidx.compose.foundation:foundation:$compose_version"
-  implementation "androidx.compose.material:material:$compose_version"
-  implementation "androidx.compose.material:material-icons-core:$compose_version"
-  implementation "androidx.compose.material:material-icons-extended:$compose_version"
-  implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation "androidx.test.ext:junit:$junit_version"
-  androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+  implementation kotlin_core.values()
+  implementation dagger2.values()
+  implementation compose.values()
+  implementation junit_test.values()
 
   implementation project(':domain')
   implementation project(':core')
