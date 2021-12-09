@@ -1,4 +1,4 @@
-package com.panhuk.datasourceimpl
+package com.panhuk.dataSourceimpl
 
 import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.datasource.SessionTokenCache

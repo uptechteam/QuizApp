@@ -15,7 +15,6 @@ android {
 
     buildConfigField "String", "APP_PREFERENCES", '"settings"'
 
-
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
   }

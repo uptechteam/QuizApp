@@ -1,6 +1,8 @@
 package com.panhuk.datasourcedi.di.datastore
 
+import android.content.Context
 import androidx.datastore.core.DataStore
+import com.panhuk.datasource.DatastorePreferences
 import dagger.BindsInstance
 import dagger.Component
 import java.util.prefs.Preferences
@@ -12,18 +14,23 @@ import java.util.prefs.Preferences
 )
 interface DatastoreComponent {
 
+  fun datastorePreferences(): DatastorePreferences
+
   @Component.Builder
   interface Builder {
     fun datastoreModule(module: DatastoreModule): Builder
-    @BindsInstance fun datastorePreferences(datastorePreferences: DataStore<Preferences>): Builder
+
+    @BindsInstance
+    fun context(context: Context): Builder
     fun build(): DatastoreComponent
   }
 
   companion object {
-    fun create(datastorePreferences: DataStore<Preferences>): DatastoreComponent =
-      DatastoreComponent.builder()
+    // need to be always application context
+    fun create(context: Context): DatastoreComponent =
+      DaggerDatastoreComponent.builder()
         .datastoreModule(DatastoreModule())
-        .datastorePreferences(datastorePreferences)
+        .context(context)
         .build()
   }
 }

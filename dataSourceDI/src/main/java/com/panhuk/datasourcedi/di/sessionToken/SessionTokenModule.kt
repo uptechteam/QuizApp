@@ -6,8 +6,8 @@ import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.datasourcedi.di.Cache
-import com.panhuk.datasourceimpl.SessionTokenApiDataSource
-import com.panhuk.datasourceimpl.SessionTokenLocalDataSource
+import com.panhuk.dataSourceimpl.SessionTokenApiDataSource
+import com.panhuk.dataSourceimpl.SessionTokenLocalDataSource
 import dagger.Module
 import dagger.Provides
 

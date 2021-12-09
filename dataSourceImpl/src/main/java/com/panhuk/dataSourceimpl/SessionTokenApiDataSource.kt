@@ -1,4 +1,4 @@
-package com.panhuk.datasourceimpl
+package com.panhuk.dataSourceimpl
 
 import com.panhuk.api.api.SessionTokenApi
 import com.panhuk.datasource.SessionTokenDSReader

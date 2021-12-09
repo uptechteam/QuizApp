@@ -1,5 +1,6 @@
 package com.panhuk.datasourcedi.di.sessionToken
 
+import android.content.Context
 import com.panhuk.api.di.sessionTokenApi.SessionTokenApiComponent
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader
@@ -27,14 +28,16 @@ interface SessionTokenComponent {
   interface Builder {
     fun sessionTokenApiComponent(component: SessionTokenApiComponent): Builder
     fun sessionTokenModule(module: SessionTokenModule): Builder
+    fun datastoreComponent(component: DatastoreComponent): Builder
     fun build(): SessionTokenComponent
   }
 
   companion object {
-    fun create(): SessionTokenComponent =
+    fun create(context: Context): SessionTokenComponent =
       DaggerSessionTokenComponent.builder()
         .sessionTokenApiComponent(SessionTokenApiComponent.create())
         .sessionTokenModule(SessionTokenModule())
+        .datastoreComponent(DatastoreComponent.create(context))
         .build()
   }
 }

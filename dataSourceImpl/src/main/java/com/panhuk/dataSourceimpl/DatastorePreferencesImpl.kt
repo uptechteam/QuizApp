@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.map
 class DatastorePreferencesImpl(private val dataStore: DataStore<Preferences>) :
   DatastorePreferences {
 
-  override suspend fun saveSessionToken(token: String) {
+  override suspend fun saveSessionToken(token: String?) {
+    if (token == null) return
+
     dataStore.edit { settings ->
       settings[TOKEN] = token
     }

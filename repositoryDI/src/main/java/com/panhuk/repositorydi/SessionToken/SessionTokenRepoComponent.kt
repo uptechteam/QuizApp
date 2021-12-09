@@ -1,7 +1,7 @@
 package com.panhuk.repositorydi.SessionToken
 
+import android.content.Context
 import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
-import com.panhuk.repositorydi.DaggerSessionTokenRepoComponent
 import dagger.Component
 
 @Component(
@@ -22,9 +22,9 @@ interface SessionTokenRepoComponent {
   }
 
   companion object {
-    fun create(): SessionTokenRepoComponent =
+    fun create(context: Context): SessionTokenRepoComponent =
       DaggerSessionTokenRepoComponent.builder()
-        .sessionTokenComponent(SessionTokenComponent.create())
+        .sessionTokenComponent(SessionTokenComponent.create(context))
         .sessionTokenRepoModule(SessionTokenRepoModule())
         .build()
   }
