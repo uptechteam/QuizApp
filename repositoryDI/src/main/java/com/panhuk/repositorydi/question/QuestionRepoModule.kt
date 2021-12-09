@@ -1,4 +1,4 @@
-package com.panhuk.repositorydi.Question
+package com.panhuk.repositorydi.question
 
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.repository.QuestionRepoReader

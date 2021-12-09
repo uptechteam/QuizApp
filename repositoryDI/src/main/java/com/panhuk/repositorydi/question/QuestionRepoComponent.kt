@@ -1,4 +1,4 @@
-package com.panhuk.repositorydi.Question
+package com.panhuk.repositorydi.question
 
 import com.panhuk.datasourcedi.di.question.QuestionComponent
 import dagger.Component

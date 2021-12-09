@@ -37,7 +37,7 @@ android {
 dependencies {
   implementation kotlin_core.values()
   implementation dagger2.values()
-  implementation compose.values()
+  kapt dagger2_kapt.values()
   implementation network.values()
   implementation coroutines_flow.values()
   implementation junit_test.values()

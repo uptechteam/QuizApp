@@ -41,6 +41,9 @@ buildscript {
 
     dagger2 = [
         dagger: "com.google.dagger:dagger:$dagger_version",
+    ]
+
+    dagger2_kapt = [
         dagger_compiler: "com.google.dagger:dagger-compiler:$dagger_version"
     ]
 

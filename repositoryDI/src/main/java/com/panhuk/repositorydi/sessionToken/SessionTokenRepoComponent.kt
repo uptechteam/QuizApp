@@ -1,4 +1,4 @@
-package com.panhuk.repositorydi.SessionToken
+package com.panhuk.repositorydi.sessionToken
 
 import android.content.Context
 import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
