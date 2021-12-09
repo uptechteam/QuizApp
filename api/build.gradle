@@ -35,22 +35,10 @@ android {
 }
 
 dependencies {
-
-  implementation 'androidx.core:core-ktx:1.7.0'
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-  implementation 'androidx.appcompat:appcompat:1.4.0'
-  implementation 'com.google.android.material:material:1.4.0'
-
-  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-  implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-  implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-  implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
-  implementation "com.google.code.gson:gson:$gson_version"
-
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  implementation kotlin_core.values()
+  implementation dagger2.values()
+  implementation compose.values()
+  implementation network.values()
+  implementation coroutines_flow.values()
+  implementation junit_test.values()
 }

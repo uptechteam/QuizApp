@@ -9,6 +9,5 @@ java {
 }
 
 dependencies {
-  implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
-  implementation "com.google.code.gson:gson:$gson_version"
+  implementation network.values()
 }
