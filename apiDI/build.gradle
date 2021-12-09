@@ -8,7 +8,7 @@ android {
   compileSdk 31
 
   defaultConfig {
-    minSdk 21
+    minSdk 23
     targetSdk 31
     versionCode 1
     versionName "1.0"
@@ -34,23 +34,11 @@ android {
 }
 
 dependencies {
-  implementation "androidx.core:core-ktx:$core_ktx_version"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-  implementation "androidx.appcompat:appcompat:$app_compat_version"
-  implementation "com.google.android.material:material:$material_version"
-
-  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-  implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-  implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-  implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
-  implementation "com.google.code.gson:gson:$gson_version"
-
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation "androidx.test.ext:junit:$junit_version"
-  androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+  implementation kotlin_core.values()
+  implementation dagger2.values()
+  implementation network.values()
+  implementation coroutines_flow.values()
+  implementation junit_test.values()
 
   implementation project(':api')
 }
