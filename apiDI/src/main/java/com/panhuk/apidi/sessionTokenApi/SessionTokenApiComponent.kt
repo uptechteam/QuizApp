@@ -1,7 +1,7 @@
-package com.example.apidi.sessionTokenApi
+package com.panhuk.apidi.sessionTokenApi
 
 import com.panhuk.api.api.SessionTokenApi
-import com.example.apidi.base.BaseApiModule
+import com.panhuk.apidi.base.BaseApiModule
 import dagger.Component
 
 @Component(
