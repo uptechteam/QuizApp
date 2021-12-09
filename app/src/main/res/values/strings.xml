@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Quiz App</string>
+    <string name="developer_info">Created by Mukola Huk &amp; PanVova</string>
 </resources>
