@@ -1,13 +1,11 @@
-package com.panhuk.datasourcedi.di.SessionToken
+package com.panhuk.datasourcedi.di.sessionToken
 
 import com.panhuk.api.di.sessionTokenApi.SessionTokenApiComponent
-import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.datasourcedi.di.Cache
-import com.panhuk.datasourcedi.di.DaggerSessionTokenComponent
-import com.panhuk.datasourcedi.di.Datastore.DatastoreComponent
+import com.panhuk.datasourcedi.di.datastore.DatastoreComponent
 import dagger.Component
 
 @Component(

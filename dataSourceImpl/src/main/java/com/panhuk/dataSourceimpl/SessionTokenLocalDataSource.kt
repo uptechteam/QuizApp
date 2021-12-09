@@ -9,9 +9,9 @@ class SessionTokenLocalDataSource(private val datastorePreferences: DatastorePre
   SessionTokenDSReader, SessionTokenCache {
 
   override val token: Flow<String?>
-    get() = datastorePreferences.getSessionToken()
+    get() = datastorePreferences.observeSessionToken()
 
   override suspend fun cacheToken(token: String?) {
-    datastorePreferences.saveSessionToken(token!!)
+    datastorePreferences.saveSessionToken(token)
   }
 }

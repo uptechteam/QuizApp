@@ -1,4 +1,4 @@
-package com.panhuk.datasourcedi.di.Datastore
+package com.panhuk.datasourcedi.di.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

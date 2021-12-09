@@ -1,6 +1,6 @@
 package com.panhuk.repositorydi.SessionToken
 
-import com.panhuk.datasourcedi.di.SessionToken.SessionTokenComponent
+import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
 import com.panhuk.repositorydi.DaggerSessionTokenRepoComponent
 import dagger.Component
 

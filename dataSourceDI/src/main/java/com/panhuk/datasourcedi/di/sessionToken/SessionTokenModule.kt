@@ -1,6 +1,7 @@
-package com.panhuk.datasourcedi.di.SessionToken
+package com.panhuk.datasourcedi.di.sessionToken
 
 import com.panhuk.api.api.SessionTokenApi
+import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
@@ -20,10 +21,10 @@ class SessionTokenModule {
 
   @Provides
   @Cache
-  fun provideSessionTokenCacheReader(): SessionTokenDSReader =
-    SessionTokenLocalDataSource
+  fun provideSessionTokenCacheReader(datastorePreferences: DatastorePreferences): SessionTokenDSReader =
+    SessionTokenLocalDataSource(datastorePreferences)
 
   @Provides
-  fun provideSessionTokenCache(): SessionTokenCache =
-    SessionTokenLocalDataSource
+  fun provideSessionTokenCache(datastorePreferences: DatastorePreferences): SessionTokenCache =
+    SessionTokenLocalDataSource(datastorePreferences)
 }
