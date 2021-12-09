@@ -32,14 +32,9 @@ android {
 }
 
 dependencies {
-
-  implementation "androidx.core:core-ktx:$core_ktx_version"
-  implementation "androidx.appcompat:appcompat:$app_compat_version"
-  implementation "com.google.android.material:material:$material_version"
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation "androidx.test.ext:junit:$junit_version"
-  androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+  implementation kotlin_core.values()
+  implementation junit_test.values()
+  implementation coroutines_flow.values()
 
   implementation project(':domain')
   implementation project(':repository')
