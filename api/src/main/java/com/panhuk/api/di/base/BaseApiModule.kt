@@ -1,6 +1,5 @@
 package com.panhuk.api.di.base
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.panhuk.api.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -35,6 +34,5 @@ class BaseApiModule {
       .baseUrl(BuildConfig.TRIVIA_BASE_URL)
       .client(okHttpClient)
       .addConverterFactory(converterFactory)
-      .addCallAdapterFactory(CoroutineCallAdapterFactory())
       .build()
 }

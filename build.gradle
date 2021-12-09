@@ -1,13 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
 
-  ext{
-    navigation_version = '2.3.5'
-    fragment_ktx_version = '1.4.0'
-    compose_navigation_version = '2.4.0-beta02'
-    retrofit_coroutines_adapter_version = '0.9.2'
-
-
+  ext {
     kotlin_version = '1.5.31'
     core_ktx_version = '1.7.0'
     coroutines_version = '1.5.2'
@@ -25,6 +19,9 @@ buildscript {
     datastore_preferences_version = '1.0.0'
     desugaring_version = '1.1.5'
     gradle_version = '7.0.3'
+    navigation_version = '2.3.5'
+    fragment_ktx_version = '1.4.0'
+    compose_navigation_version = '2.4.0-beta02'
 
     kotlin_core = [
         kotlin: "androidx.core:core-ktx:$core_ktx_version",
@@ -38,7 +35,8 @@ buildscript {
         Foundation: "androidx.compose.foundation:foundation:$compose_version",
         material: "androidx.compose.material:material:$compose_version",
         material_icons_core: "androidx.compose.material:material-icons-core:$compose_version",
-        material_icons_extented: "androidx.compose.material:material-icons-extended:$compose_version"
+        material_icons_extented: "androidx.compose.material:material-icons-extended:$compose_version",
+        navigation: "androidx.navigation:navigation-compose:$compose_navigation_version"
     ]
 
     junit_test = [
@@ -48,7 +46,10 @@ buildscript {
     ]
 
     dagger2 = [
-        dagger: "com.google.dagger:dagger:$dagger_version",
+        dagger: "com.google.dagger:dagger:$dagger_version"
+    ]
+
+    dagger2_kapt = [
         dagger_compiler: "com.google.dagger:dagger-compiler:$dagger_version"
     ]
 
@@ -75,6 +76,10 @@ buildscript {
         preferences: "androidx.datastore:datastore-preferences:$datastore_preferences_version"
     ]
 
+    navigation = [
+        navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+        navigation_ui: "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    ]
   }
 
   repositories {

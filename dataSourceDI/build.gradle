@@ -35,6 +35,7 @@ android {
 dependencies {
   implementation kotlin_core.values()
   implementation dagger2.values()
+  kapt dagger2_kapt.values()
   implementation junit_test.values()
 
   implementation project(':dataSource')
