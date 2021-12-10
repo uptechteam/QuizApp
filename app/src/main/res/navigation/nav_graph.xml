@@ -6,7 +6,7 @@
 
   <fragment
       android:id="@+id/menuFragment"
-      android:name="com.example.menufeature.MenuFragment"
+      android:name="com.panhuk.menufeature.MenuFragment"
       android:label="MenuFragment">
     <action
         android:id="@+id/menu_settings"
@@ -20,14 +20,14 @@
   </fragment>
   <fragment
       android:id="@+id/playFragment"
-      android:name="com.example.playfeature.PlayFragment"
+      android:name="com.panhuk.playfeature.PlayFragment"
       android:label="PlayFragment" />
   <fragment
       android:id="@+id/settingsFragment"
-      android:name="com.example.settingsfeature.SettingsFragment"
+      android:name="com.panhuk.settingsfeature.SettingsFragment"
       android:label="SettingsFragment" />
   <fragment
       android:id="@+id/leaderboardFragment"
-      android:name="com.example.leaderboardfeature.ui.LeaderboardFragment"
+      android:name="com.panhuk.leaderboardfeature.ui.LeaderboardFragment"
       android:label="LeaderboardFragment" />
 </navigation>

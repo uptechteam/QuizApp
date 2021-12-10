@@ -21,7 +21,7 @@ class BaseApiModule {
   fun provideConverterFactory(): Converter.Factory = GsonConverterFactory.create()
 
   @Provides
-  fun createLoggingInterceptor(): HttpLoggingInterceptor {
+  fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
   }
 

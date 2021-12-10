@@ -3,7 +3,6 @@ package com.panhuk.apidi.questionApi
 import com.panhuk.api.api.QuestionApi
 import com.panhuk.apidi.base.BaseApiModule
 import dagger.Component
-import kotlinx.coroutines.CoroutineDispatcher
 
 @Component(
   modules = [
