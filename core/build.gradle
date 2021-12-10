@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -41,6 +40,7 @@ dependencies {
     implementation junit_test.values()
     implementation dagger2.values()
     kapt dagger2_kapt.values()
+    implementation datastore.values()
     implementation project(':domain')
     implementation project(':useCase')
 }

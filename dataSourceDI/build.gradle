@@ -37,8 +37,13 @@ dependencies {
   implementation dagger2.values()
   kapt dagger2_kapt.values()
   implementation junit_test.values()
+  implementation datastore.values()
+
+  implementation "androidx.datastore:datastore-core:$datastore_preferences_version"
+  implementation "androidx.datastore:datastore-preferences:$datastore_preferences_version"
 
   implementation project(':dataSource')
   implementation project(':dataSourceImpl')
   implementation project(':api')
+  implementation project(':apiDI')
 }

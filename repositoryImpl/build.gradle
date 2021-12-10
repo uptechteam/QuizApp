@@ -37,6 +37,7 @@ dependencies {
   implementation junit_test.values()
   implementation dagger2.values()
   implementation coroutines_flow.values()
+  implementation datastore.values()
 
   implementation project(':domain')
   implementation project(':dataSource')
