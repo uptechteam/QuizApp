@@ -13,6 +13,7 @@ android {
     versionCode 1
     versionName "1.0"
 
+    buildConfigField "String", "TRIVIA_BASE_URL", '"https://opentdb.com"'
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
   }
@@ -36,14 +37,9 @@ dependencies {
   implementation kotlin_core.values()
   implementation dagger2.values()
   kapt dagger2_kapt.values()
+  implementation network.values()
+  implementation coroutines_flow.values()
   implementation junit_test.values()
-  implementation datastore.values()
 
-  implementation "androidx.datastore:datastore-core:$datastore_preferences_version"
-  implementation "androidx.datastore:datastore-preferences:$datastore_preferences_version"
-
-  implementation project(':dataSource')
-  implementation project(':dataSourceImpl')
   implementation project(':api')
-  implementation project(':apiDI')
 }

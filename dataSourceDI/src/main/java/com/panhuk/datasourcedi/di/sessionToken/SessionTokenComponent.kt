@@ -1,7 +1,7 @@
 package com.panhuk.datasourcedi.di.sessionToken
 
 import android.content.Context
-import com.panhuk.api.di.sessionTokenApi.SessionTokenApiComponent
+import com.panhuk.apidi.sessionTokenApi.SessionTokenApiComponent
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
