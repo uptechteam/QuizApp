@@ -1,4 +1,4 @@
-package com.panhuk.api.di.base
+package com.panhuk.apidi.base
 
 import com.panhuk.api.BuildConfig
 import dagger.Module

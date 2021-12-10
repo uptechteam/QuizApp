@@ -13,6 +13,7 @@ android {
     versionCode 1
     versionName "1.0"
 
+    buildConfigField "String", "TRIVIA_BASE_URL", '"https://opentdb.com"'
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
   }
@@ -35,11 +36,9 @@ android {
 dependencies {
   implementation kotlin_core.values()
   implementation dagger2.values()
+  implementation network.values()
+  implementation coroutines_flow.values()
   implementation junit_test.values()
 
-  implementation project(':repository')
-  implementation project(':repositoryImpl')
-  implementation project(':dataSource')
-  implementation project(':dataSourceDI')
-  implementation project(':apiDI')
+  implementation project(':api')
 }
