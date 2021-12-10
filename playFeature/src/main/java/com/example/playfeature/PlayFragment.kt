@@ -41,7 +41,7 @@ class PlayFragment : Fragment() {
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    PlayComponent.create().inject(this)
+    PlayComponent.create(requireContext().applicationContext).inject(this)
   }
 
   override fun onCreateView(

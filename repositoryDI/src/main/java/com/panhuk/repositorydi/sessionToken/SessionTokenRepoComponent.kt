@@ -1,6 +1,9 @@
 package com.panhuk.repositorydi
 
-import com.panhuk.datasourcedi.di.SessionTokenComponent
+import android.content.Context
+import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
+import com.panhuk.repository.SessionTokenRepoReader
+import com.panhuk.repositorydi.sessionToken.SessionTokenRepoModule
 import dagger.Component
 
 @Component(

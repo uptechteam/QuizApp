@@ -1,7 +1,8 @@
 package com.panhuk.repositorydi
 
-import com.panhuk.datasourcedi.di.QuestionComponent
+import com.panhuk.datasourcedi.di.question.QuestionComponent
 import com.panhuk.repository.QuestionRepoReader
+import com.panhuk.repositorydi.question.QuestionRepoModule
 import dagger.Component
 
 @Component(

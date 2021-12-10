@@ -33,19 +33,15 @@ android {
 }
 
 dependencies {
-  implementation "androidx.core:core-ktx:$core_ktx_version"
-  implementation "androidx.appcompat:appcompat:$app_compat_version"
-  implementation "com.google.android.material:material:$material_version"
-  implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation kotlin_core.values()
+  implementation dagger2.values()
+  kapt dagger2_kapt.values()
 
   implementation project(':repositoryDI')
   implementation project(':useCase')
   implementation project(':usecaseImpl')
+  implementation project(':apiDI')
   implementation project(':repository')
-
   implementation project(':core')
-  implementation project(':api')
   implementation project(':dataSourceDI')
 }

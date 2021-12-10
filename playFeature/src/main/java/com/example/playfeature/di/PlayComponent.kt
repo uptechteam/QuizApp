@@ -1,5 +1,6 @@
 package com.example.playfeature.di
 
+import android.content.Context
 import com.example.playfeature.PlayFragment
 import com.example.usecasedi.UseCaseComponent
 import com.panhuk.core.di.CoreComponent
@@ -26,9 +27,9 @@ interface PlayComponent {
   fun inject(playFragment: PlayFragment)
 
   companion object {
-    fun create(): PlayComponent =
+    fun create(context: Context): PlayComponent =
       DaggerPlayComponent.builder()
-        .sessionTokenRepoComponent(SessionTokenRepoComponent.create())
+        .sessionTokenRepoComponent(SessionTokenRepoComponent.create(context))
         .useCaseComponent(UseCaseComponent.create())
         .coreComponent(CoreComponent.create())
         .build()
