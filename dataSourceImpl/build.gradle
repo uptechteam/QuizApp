@@ -39,6 +39,7 @@ dependencies {
   implementation network.values()
   implementation junit_test.values()
   implementation datastore.values()
+  implementation coroutines_flow.values()
 
   implementation project(':domain')
   implementation project(':dataSource')

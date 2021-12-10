@@ -37,6 +37,8 @@ android {
 dependencies {
     implementation kotlin_core.values()
     implementation junit_test.values()
+    implementation datastore.values()
+
     implementation project(':domain')
     implementation project(':useCase')
 }

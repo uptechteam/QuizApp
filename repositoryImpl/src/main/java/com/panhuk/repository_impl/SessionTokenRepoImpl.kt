@@ -1,24 +1,22 @@
 package com.panhuk.repository_impl
 
 import com.panhuk.datasource.SessionTokenCache
+import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.domain.exception.SessionExpiredException
 import com.panhuk.repository.SessionTokenRepoReader
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 
-typealias RepositorySessionTokenReader = SessionTokenRepoReader
-typealias DataSourceSessionTokenReader = com.panhuk.datasource.SessionTokenReader
-
 class SessionTokenRepoImpl(
-  private val sessionTokenApiReader: DataSourceSessionTokenReader,
-  private val sessionTokenLocalReader: DataSourceSessionTokenReader,
+  private val sessionTokenApiReader: SessionTokenDSReader,
+  private val sessionTokenLocalReader: SessionTokenDSReader,
   private val sessionTokenCache: SessionTokenCache
-) : RepositorySessionTokenReader {
+) : SessionTokenRepoReader {
 
   override val currentSessionToken: Flow<String?>
     get() = sessionTokenLocalReader.token.onEach { cachedToken ->
-      if(cachedToken.isNullOrBlank())
+      if (cachedToken.isNullOrBlank())
         throw SessionExpiredException()
     }
 
