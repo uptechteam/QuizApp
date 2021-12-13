@@ -59,15 +59,15 @@ class PlayViewModel @Inject constructor(
   }
 
   private fun loadQuestion() {
-    questions.element().run {
+    questions.peek()?.run {
       title = questionTitle
       questionAnswers = allAnswers
     }
   }
 
   fun checkAnswer(answer: String): Boolean {
-    val correctAnswer = questions.element().correctAnswer
-    questions.remove()
+    val correctAnswer = questions.peek()?.correctAnswer
+    questions.poll()
     loadQuestion()
 
     return if (correctAnswer == answer) {
