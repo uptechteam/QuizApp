@@ -1,5 +1,6 @@
 package com.panhuk.settingsfeature
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +24,20 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.panhuk.settingsfeature.R.string
 import com.panhuk.settingsfeature.databinding.FragmentSettingsBinding
+import com.panhuk.settingsfeature.di.SettingsComponent
+import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
   private var _binding: FragmentSettingsBinding? = null
   private val binding get() = _binding!!
+
+  @Inject
+  protected lateinit var viewModel: SettingsViewModel
+
+  override fun onAttach(context: Context) {
+    SettingsComponent.create().inject(this)
+    super.onAttach(context)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
