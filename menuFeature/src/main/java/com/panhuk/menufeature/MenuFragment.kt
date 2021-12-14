@@ -90,22 +90,31 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      CreateButton(stringResource(R.string.play))
-      CreateButton(stringResource(R.string.settings))
-      CreateButton(stringResource(R.string.leaderboard))
+      CreateButton(R.string.play)
+      CreateButton(R.string.settings)
+      CreateButton(R.string.leaderboard)
     }
   }
 
   @Composable
-  fun CreateButton(text: String) {
+  fun CreateButton(textId: Int) {
     OutlinedButton(
-      onClick = {},
+      onClick = { navigateToFragment(textId) },
       modifier = Modifier
         .padding(bottom = 30.dp)
         .width(300.dp),
       border = BorderStroke(1.dp, MaterialTheme.colors.primary)
     ) {
-      Text(text, fontSize = 24.sp)
+      Text(stringResource(textId), fontSize = 24.sp)
+    }
+  }
+
+  private fun navigateToFragment(textId: Int) {
+    val navigator = (requireActivity() as MenuNavigator)
+    when (textId) {
+      R.string.play -> navigator.navigateMenuToPlayFragment()
+      R.string.settings -> navigator.navigateMenuToSettingsFragment()
+      R.string.leaderboard -> navigator.navigateMenuToLeaderboardFragment()
     }
   }
 
