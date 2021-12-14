@@ -5,6 +5,6 @@ data class Question(
   val correctAnswer: String,
   val difficulty: Difficulty,
   val allAnswers: List<String>,
-  val question: String,
+  val questionTitle: String,
   val type: Type
 )

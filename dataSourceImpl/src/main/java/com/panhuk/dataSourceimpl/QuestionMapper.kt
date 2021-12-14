@@ -12,7 +12,7 @@ fun QuestionResponse.mapToDomain(): Question {
     correctAnswer = correctAnswer,
     difficulty = Difficulty.valueOf(difficulty),
     allAnswers = incorrectAnswers + correctAnswer,
-    question = question,
+    questionTitle = question,
     type = Type.valueOf(type)
   )
 }

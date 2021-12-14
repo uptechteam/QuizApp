@@ -1,7 +1,9 @@
-package com.panhuk.repositorydi.sessionToken
+package com.panhuk.repositorydi
 
 import android.content.Context
 import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
+import com.panhuk.repository.SessionTokenRepoReader
+import com.panhuk.repositorydi.sessionToken.SessionTokenRepoModule
 import dagger.Component
 
 @Component(
@@ -13,6 +15,8 @@ import dagger.Component
   ]
 )
 interface SessionTokenRepoComponent {
+
+  fun getSessionTokenRepoReader(): SessionTokenRepoReader
 
   @Component.Builder
   interface Builder {

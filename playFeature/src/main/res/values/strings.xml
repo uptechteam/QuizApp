@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="score">Score:</string>
+  <string name="wrong_answer">Wrong answer</string>
+  <string name="right_answer">Right answer</string>
+  <string name="quit">Quit</string>
 </resources>

@@ -8,11 +8,10 @@ import kotlinx.coroutines.flow.map
 
 class GetQuestionsUseCaseImpl(private val questionRepository: QuestionRepoReader) :
   GetQuestionsUseCase {
-  override fun getQuestions(): Flow<List<Question>?> {
-    return questionRepository.questions.map {
-      it?.map {
-        it.copy(allAnswers = it.allAnswers.shuffled())
+  override fun getQuestions(): Flow<List<Question>?> =
+    questionRepository.questions.map { questions ->
+      questions?.map { question ->
+        question.copy(allAnswers = question.allAnswers.shuffled())
       }
     }
-  }
 }
