@@ -49,9 +49,10 @@ class PlayViewModel @Inject constructor(
   }
 
   private suspend fun getQuestions() {
-    getQuestionsUseCase.getQuestions().collect { q ->
-      if (q != null) {
-        questions.addAll(q)
+    getQuestionsUseCase.getQuestions().collect { qst ->
+      if (qst != null) {
+        questions.clear()
+        questions.addAll(qst)
       } else {
         Log.e(ERROR, "questions are null")
       }
