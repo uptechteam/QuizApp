@@ -10,6 +10,7 @@ import com.panhuk.useCase.GetQuestionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.LinkedList
 import java.util.Queue
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class PlayViewModel @Inject constructor(
   private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-  private lateinit var questions: Queue<Question>
+  private var questions: Queue<Question> = LinkedList()
   private lateinit var sessionToken: String
 
   var title: String = ""
