@@ -12,10 +12,8 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -35,7 +33,7 @@ class SettingsFragment : Fragment() {
   protected lateinit var viewModel: SettingsViewModel
 
   override fun onAttach(context: Context) {
-    SettingsComponent.create().inject(this)
+    SettingsComponent.create(requireActivity().applicationContext).inject(this)
     super.onAttach(context)
   }
 
@@ -54,6 +52,7 @@ class SettingsFragment : Fragment() {
   }
 
   override fun onDestroyView() {
+    viewModel.saveUsername()
     _binding = null
     super.onDestroyView()
   }
@@ -65,19 +64,18 @@ class SettingsFragment : Fragment() {
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
     ) {
-      ChangeUsernameTextField()
+      ChangeUsernameTextField(
+        username = viewModel.username.value,
+        onUsernameChanged = { viewModel.username.value = it })
       CreateTextWithSwitchInRow()
     }
   }
 
   @Composable
-  fun ChangeUsernameTextField() {
-    val tempText = "John Smith"
-    var text by remember { mutableStateOf(tempText) }
-
+  fun ChangeUsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
     OutlinedTextField(
-      value = text,
-      onValueChange = { text = it },
+      value = username,
+      onValueChange = onUsernameChanged,
       label = { Text(stringResource(R.string.your_username)) },
       modifier = Modifier.padding(bottom = 10.dp, start = 5.dp, end = 5.dp)
     )
