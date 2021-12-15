@@ -1,5 +1,6 @@
 package com.panhuk.leaderboardfeature.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,12 +27,18 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.panhuk.leaderboardfeature.R.string
 import com.panhuk.leaderboardfeature.databinding.FragmentLeaderboardBinding
+import com.panhuk.leaderboardfeature.di.LeaderboardComponent
 import com.panhuk.leaderboardfeature.model.DataProvider
 
 class LeaderboardFragment : Fragment() {
 
   private var _binding: FragmentLeaderboardBinding? = null
   private val binding get() = _binding!!
+
+  override fun onAttach(context: Context) {
+    LeaderboardComponent.create().inject(this)
+    super.onAttach(context)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
