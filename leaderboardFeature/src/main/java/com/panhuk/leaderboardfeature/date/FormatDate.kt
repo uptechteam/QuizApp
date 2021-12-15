@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 fun getDateAgo(date: LocalDateTime): Pair<ChronoUnit, Long> {
-  val nowDate = LocalDateTime.from(Instant.now())
+  val nowDate = LocalDateTime.now()
 
   val minutes = ChronoUnit.MINUTES.between(nowDate, date)
   val hours = ChronoUnit.HOURS.between(nowDate, date)

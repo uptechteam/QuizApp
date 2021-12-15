@@ -9,6 +9,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -61,7 +63,12 @@ class LeaderboardFragment : Fragment() {
 
   @Composable
   fun CreateLeaderboardTitle() {
-    Box(contentAlignment = Alignment.TopCenter) {
+    Box(
+      contentAlignment = Alignment.TopCenter,
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 5.dp)
+    ) {
       Text(
         modifier = Modifier
           .border(BorderStroke(2.dp, Color.Blue))
