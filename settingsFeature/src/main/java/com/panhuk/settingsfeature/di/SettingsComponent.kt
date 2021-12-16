@@ -2,14 +2,14 @@ package com.panhuk.settingsfeature.di
 
 import android.content.Context
 import com.panhuk.core.di.CoreComponent
+import com.panhuk.repositorydi.username.UsernameRepoComponent
 import com.panhuk.settingsfeature.SettingsFragment
-import com.panhuk.usecasedi.UseCaseComponent
 import dagger.Component
 
 @Component(
   dependencies = [
     CoreComponent::class,
-    UseCaseComponent::class
+    UsernameRepoComponent::class
   ]
 )
 interface SettingsComponent {
@@ -17,7 +17,7 @@ interface SettingsComponent {
   @Component.Builder
   interface Builder {
     fun coreComponent(component: CoreComponent): Builder
-    fun useCaseComponent(component: UseCaseComponent): Builder
+    fun usernameRepoComponent(component: UsernameRepoComponent): Builder
     fun build(): SettingsComponent
   }
 
@@ -27,7 +27,7 @@ interface SettingsComponent {
     fun create(context: Context): SettingsComponent =
       DaggerSettingsComponent.builder()
         .coreComponent(CoreComponent.create())
-        .useCaseComponent(UseCaseComponent.create(context))
+        .usernameRepoComponent(UsernameRepoComponent.create(context))
         .build()
   }
 }

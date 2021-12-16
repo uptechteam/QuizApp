@@ -4,14 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.panhuk.useCase.GetUsernameUseCase
+import com.panhuk.repository.UsernameRepo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
-  private val usernameUseCase: GetUsernameUseCase,
+  private val usernameRepo: UsernameRepo,
   private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -24,14 +24,14 @@ class SettingsViewModel @Inject constructor(
   }
 
   private suspend fun getUsername() {
-    usernameUseCase.getUsername().collect { usr ->
+    usernameRepo.getUsername().collect { usr ->
       username.value = usr ?: ""
     }
   }
 
   fun saveUsername() {
     viewModelScope.launch(dispatcher) {
-      usernameUseCase.saveUsername(username.value)
+      usernameRepo.saveUsername(username.value)
     }
   }
 }

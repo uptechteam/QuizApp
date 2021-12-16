@@ -30,7 +30,7 @@ interface PlayComponent {
     fun create(context: Context): PlayComponent =
       DaggerPlayComponent.builder()
         .sessionTokenRepoComponent(SessionTokenRepoComponent.create(context))
-        .useCaseComponent(UseCaseComponent.create(context))
+        .useCaseComponent(UseCaseComponent.create())
         .coreComponent(CoreComponent.create())
         .build()
   }

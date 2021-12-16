@@ -1,8 +1,8 @@
-package com.panhuk.useCase
+package com.panhuk.repository
 
 import kotlinx.coroutines.flow.Flow
 
-interface GetUsernameUseCase {
+interface UsernameRepo {
   suspend fun saveUsername(username: String)
   fun getUsername(): Flow<String?>
 }
