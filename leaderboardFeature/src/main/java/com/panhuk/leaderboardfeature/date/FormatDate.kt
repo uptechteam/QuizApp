@@ -6,11 +6,11 @@ import java.time.temporal.ChronoUnit
 fun getDateAgo(date: LocalDateTime): Pair<ChronoUnit, Long> {
   val nowDate = LocalDateTime.now()
 
-  val minutes = ChronoUnit.MINUTES.between(date, nowDate)
-  val hours = ChronoUnit.HOURS.between(date, nowDate)
-  val days = ChronoUnit.DAYS.between(date, nowDate)
-  val months = ChronoUnit.MONTHS.between(date, nowDate)
-  val years = ChronoUnit.YEARS.between(date, nowDate)
+  val minutes = calculateBetween(ChronoUnit.MINUTES, date, nowDate)
+  val hours = calculateBetween(ChronoUnit.HOURS, date, nowDate)
+  val days = calculateBetween(ChronoUnit.DAYS, date, nowDate)
+  val months = calculateBetween(ChronoUnit.MONTHS, date, nowDate)
+  val years = calculateBetween(ChronoUnit.YEARS, date, nowDate)
 
   return when {
     years > 0 -> Pair(ChronoUnit.YEARS, years)
@@ -20,4 +20,12 @@ fun getDateAgo(date: LocalDateTime): Pair<ChronoUnit, Long> {
     minutes > 0 -> Pair(ChronoUnit.MINUTES, minutes)
     else -> Pair(ChronoUnit.MINUTES, minutes)
   }
+}
+
+private fun calculateBetween(
+  chronoUnit: ChronoUnit,
+  date: LocalDateTime,
+  nowDate: LocalDateTime
+): Long {
+  return chronoUnit.between(date, nowDate)
 }
