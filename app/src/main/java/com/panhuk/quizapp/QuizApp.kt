@@ -2,6 +2,8 @@ package com.panhuk.quizapp
 
 import android.app.Application
 import android.content.Context
+import com.panhuk.core.di.CoreComponent
+import com.panhuk.repositorydi.firstTime.FirstTimeRepoComponent
 
 class QuizApp : Application() {
 
@@ -18,6 +20,8 @@ class QuizApp : Application() {
     private fun initializeComponent(context: Context) {
       _component = DaggerApplicationComponent.builder()
         .applicationContext(context)
+        .firstTimeRepoComponent(FirstTimeRepoComponent.create(context)) // need to think
+        .coreComponent(CoreComponent.create())
         .build()
     }
   }
