@@ -1,6 +1,6 @@
 package com.panhuk.core
 
-enum class Fragments {
+enum class SCREEN {
   PLAY,
   SETTINGS,
   LEADERBOARD
