@@ -40,7 +40,18 @@ class DatastorePreferencesImpl(private val dataStore: DataStore<Preferences>) :
 
   override fun isFirstTime(): Flow<Boolean> {
     return dataStore.data.map { preferences: Preferences ->
-      preferences[FIRST_TIME] == null
+      if (preferences[FIRST_TIME] == null) {
+        setFirstTimeToFalse()
+        true
+      } else {
+        false
+      }
+    }
+  }
+
+  suspend fun setFirstTimeToFalse() {
+    dataStore.edit { settings ->
+      settings[FIRST_TIME] = false
     }
   }
 
