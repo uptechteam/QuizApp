@@ -47,7 +47,7 @@ class LeaderboardFragment : Fragment() {
   protected lateinit var viewModel: LeaderboardViewModel
 
   override fun onAttach(context: Context) {
-    LeaderboardComponent.create().inject(this)
+    LeaderboardComponent.create(requireActivity().applicationContext).inject(this)
     super.onAttach(context)
   }
 

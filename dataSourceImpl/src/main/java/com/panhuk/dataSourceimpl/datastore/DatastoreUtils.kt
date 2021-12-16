@@ -1,4 +1,4 @@
-package com.panhuk.dataSourceimpl
+package com.panhuk.dataSourceimpl.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
