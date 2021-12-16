@@ -1,6 +1,6 @@
 package com.panhuk.leaderboardfeature.model
 
-import com.panhuk.leaderboardfeature.getDrawable
+import com.panhuk.leaderboardfeature.utils.getDrawable
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
