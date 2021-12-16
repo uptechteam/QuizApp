@@ -4,7 +4,6 @@ import com.panhuk.repositorydi.QuestionRepoComponent
 import com.panhuk.useCase.GetQuestionsUseCase
 import dagger.Component
 
-
 @Component(
   dependencies = [
     QuestionRepoComponent::class

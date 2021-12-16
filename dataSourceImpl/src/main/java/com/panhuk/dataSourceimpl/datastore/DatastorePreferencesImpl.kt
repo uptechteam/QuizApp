@@ -25,8 +25,23 @@ class DatastorePreferencesImpl(private val dataStore: DataStore<Preferences>) :
     }
   }
 
+  override suspend fun saveUsername(username: String) {
+    dataStore.edit { settings ->
+      settings[USERNAME] = username
+    }
+  }
+
+  override fun observeUsername(): Flow<String?> {
+    return dataStore.data.map { preferences: Preferences ->
+      preferences[USERNAME]
+    }
+  }
+
   companion object {
     private const val TOKEN_CONFIG = "TOKEN"
     private val TOKEN = stringPreferencesKey(TOKEN_CONFIG)
+
+    private const val USERNAME_CONFIG = "USERNAME"
+    private val USERNAME = stringPreferencesKey(USERNAME_CONFIG)
   }
 }
