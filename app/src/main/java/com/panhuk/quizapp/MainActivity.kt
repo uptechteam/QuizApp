@@ -6,34 +6,24 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.panhuk.menufeature.MenuNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
-import com.panhuk.repository.FirstTimeRepo
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity @Inject constructor(
-  private val firstTimeRepo: FirstTimeRepo,
-  private val dispatcher: CoroutineDispatcher
-) : AppCompatActivity(), MenuNavigator {
+class MainActivity() : AppCompatActivity(), MenuNavigator {
 
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
-  private var isFirstTime: Boolean = false
+
+  @Inject
+  protected lateinit var viewModel: MainViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
     navigator = findNavController(R.id.nav_fragment)
 
-    CoroutineScope(dispatcher).launch {
-      firstTimeRepo.isFirstTime().collect { value ->
-        isFirstTime = value
-      }
-    }
 
-    if (isFirstTime) {
+
+    if (viewModel.isFirstTimeCheck()) {
       navigateToFirstScreen()
     }
 
@@ -41,7 +31,7 @@ class MainActivity @Inject constructor(
   }
 
   private fun navigateToFirstScreen() {
-    //navigator.navigate(R.id.first_screen)
+    navigator.navigate(R.id.firstTime)
   }
 
   override fun navigateMenuToPlayFragment() {

@@ -30,4 +30,12 @@
       android:id="@+id/leaderboardFragment"
       android:name="com.panhuk.leaderboardfeature.ui.LeaderboardFragment"
       android:label="LeaderboardFragment" />
+  <fragment
+      android:id="@+id/firstTimeFragment"
+      android:name="com.panhuk.firstTimeFeature.FirstTimeFragment"
+      android:label="FirstTimeFragment">
+    <action
+        android:id="@+id/firstTime_Menu"
+        app:destination="@id/menuFragment" />
+  </fragment>
 </navigation>
