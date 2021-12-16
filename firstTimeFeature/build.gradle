@@ -1,5 +1,5 @@
 plugins {
-  id 'com.android.application'
+  id 'com.android.library'
   id 'kotlin-android'
   id 'kotlin-kapt'
 }
@@ -8,13 +8,13 @@ android {
   compileSdk 31
 
   defaultConfig {
-    applicationId "com.panhuk.quizapp"
-    minSdk 23
+    minSdk 21
     targetSdk 31
     versionCode 1
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -27,12 +27,12 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-  kotlinOptions {
-    jvmTarget = '1.8'
-  }
   buildFeatures {
     viewBinding = true
     compose true
+  }
+  kotlinOptions {
+    jvmTarget = '1.8'
   }
   composeOptions {
     kotlinCompilerExtensionVersion = "$compose_version"
@@ -41,22 +41,13 @@ android {
 
 dependencies {
   implementation kotlin_core.values()
+  implementation junit_test.values()
+  implementation compose.values()
   implementation dagger2.values()
   kapt dagger2_kapt.values()
-  implementation compose.values()
-  implementation junit_test.values()
   implementation navigation.values()
 
-  implementation project(':domain')
-  implementation project(':core')
-  implementation project(':repository')
   implementation project(':repositoryDI')
   implementation project(':dataSourceDI')
-  implementation project(':useCase')
-
-  implementation project(':playFeature')
-  implementation project(':settingsFeature')
-  implementation project(':leaderboardFeature')
-  implementation project(':menuFeature')
-  implementation project(':firstTimeFeature')
+  implementation project(':core')
 }
