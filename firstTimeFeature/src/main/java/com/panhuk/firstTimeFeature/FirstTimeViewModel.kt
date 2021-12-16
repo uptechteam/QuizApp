@@ -1,5 +1,7 @@
 package com.panhuk.firstTimeFeature
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.panhuk.repository.UsernameRepo
@@ -12,9 +14,11 @@ class FirstTimeViewModel @Inject constructor(
   private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-  fun saveUsername(username: String) {
+  var username: MutableState<String> = mutableStateOf("")
+
+  fun saveUsername() {
     viewModelScope.launch(dispatcher) {
-      usernameRepo.saveUsername(username)
+      usernameRepo.saveUsername(username.value)
     }
   }
 }

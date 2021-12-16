@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
 import javax.inject.Inject
 
-class MainActivity() : AppCompatActivity(), MenuNavigator {
+class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
 
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
@@ -20,8 +21,6 @@ class MainActivity() : AppCompatActivity(), MenuNavigator {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
     navigator = findNavController(R.id.nav_fragment)
-
-
 
     if (viewModel.isFirstTimeCheck()) {
       navigateToFirstScreen()
@@ -44,5 +43,9 @@ class MainActivity() : AppCompatActivity(), MenuNavigator {
 
   override fun navigateMenuToLeaderboardFragment() {
     navigator.navigate(R.id.menu_leaderboard)
+  }
+
+  override fun navigateToMenuFragment() {
+    navigator.navigate(R.id.firstTime_menu)
   }
 }
