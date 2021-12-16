@@ -1,4 +1,4 @@
-package com.panhuk.leaderboardfeature.date
+package com.panhuk.leaderboardfeature.utils
 
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
