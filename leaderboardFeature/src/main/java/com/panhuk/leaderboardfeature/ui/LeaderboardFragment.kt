@@ -14,9 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.DropdownMenu
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,12 +32,15 @@ import androidx.fragment.app.Fragment
 import com.panhuk.leaderboardfeature.R.string
 import com.panhuk.leaderboardfeature.databinding.FragmentLeaderboardBinding
 import com.panhuk.leaderboardfeature.di.LeaderboardComponent
-import com.panhuk.leaderboardfeature.model.DataProvider
+import javax.inject.Inject
 
 class LeaderboardFragment : Fragment() {
 
   private var _binding: FragmentLeaderboardBinding? = null
   private val binding get() = _binding!!
+
+  @Inject
+  protected lateinit var viewModel: LeaderboardViewModel
 
   override fun onAttach(context: Context) {
     LeaderboardComponent.create().inject(this)
@@ -63,6 +70,7 @@ class LeaderboardFragment : Fragment() {
   fun CreateLeaderboardFragment() {
     Column() {
       CreateLeaderboardTitle()
+      CreateSort()
       CreateLazyColumn()
     }
   }
@@ -86,8 +94,20 @@ class LeaderboardFragment : Fragment() {
   }
 
   @Composable
+  fun CreateSort() {
+    val options = viewModel.sortTypes
+    var expanded by remember { mutableStateOf(false)}
+    var selectedOption by remember { mutableStateOf(options[0]) }
+
+
+    DropdownMenu(expanded = expanded, onDismissRequest = { expanded = !expanded }) {
+      Text(stringResource(selectedOption))
+    }
+  }
+
+  @Composable
   fun CreateLazyColumn() {
-    val leaderboards = remember { DataProvider.leaderboardList }
+    val leaderboards = remember { viewModel.leaderboard }
 
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
       items(
