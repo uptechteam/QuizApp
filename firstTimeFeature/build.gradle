@@ -49,5 +49,9 @@ dependencies {
 
   implementation project(':repositoryDI')
   implementation project(':dataSourceDI')
+
+  implementation project(':domain')
   implementation project(':core')
+  implementation project(':repository')
+  implementation project(':useCase')
 }
