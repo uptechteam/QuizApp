@@ -26,6 +26,7 @@ android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+    coreLibraryDesugaringEnabled = true
   }
   kotlinOptions {
     jvmTarget = '1.8'
@@ -46,6 +47,7 @@ dependencies {
   implementation dagger2.values()
   kapt dagger2_kapt.values()
   implementation navigation.values()
+  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugaring_version")
 
   implementation project(':apiDI')
   implementation project(':dataSourceDI')

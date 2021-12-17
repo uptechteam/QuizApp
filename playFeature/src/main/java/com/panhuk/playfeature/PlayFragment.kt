@@ -2,6 +2,7 @@ package com.panhuk.playfeature
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +78,8 @@ class PlayFragment : Fragment() {
         .padding(top = 100.dp, start = 40.dp, end = 30.dp),
       contentAlignment = Alignment.TopCenter
     ) {
-      Text(viewModel.title, fontSize = 24.sp)
+      val text = Html.fromHtml(viewModel.title).toString()
+      Text(text, fontSize = 24.sp)
     }
   }
 
@@ -89,7 +91,8 @@ class PlayFragment : Fragment() {
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
       viewModel.questionAnswers.forEach { answer ->
-        MakeQuestion(answer)
+        val text = Html.fromHtml(answer).toString()
+        MakeQuestion(text)
       }
       MakeScore()
     }
