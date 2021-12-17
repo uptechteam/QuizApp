@@ -3,5 +3,6 @@
   <string name="score">Score:</string>
   <string name="wrong_answer">Wrong answer</string>
   <string name="right_answer">Right answer</string>
+  <string name="number_of_question">Question: %1$d/%2$d</string>
   <string name="quit">Quit</string>
 </resources>

@@ -65,22 +65,38 @@ class PlayFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun CreatePlayFragment() {
-    MakeQuestionTitle()
+    MakeQuestionTitleAndNumeration()
     MakeQuestionsAndScore()
     QuitButton()
   }
 
   @Composable
-  fun MakeQuestionTitle() {
+  fun MakeQuestionTitleAndNumeration() {
     Box(
       modifier = Modifier
         .fillMaxSize()
         .padding(top = 100.dp, start = 40.dp, end = 30.dp),
       contentAlignment = Alignment.TopCenter
     ) {
-      val text = Html.fromHtml(viewModel.title).toString()
-      Text(text, fontSize = 24.sp)
+      Column(){
+        MakeNumerationOfQuestion()
+        val text = Html.fromHtml(viewModel.title).toString()
+        Text(text, fontSize = 24.sp)
+      }
     }
+  }
+
+  @Composable
+  fun MakeNumerationOfQuestion() {
+    Text(
+      stringResource(
+        R.string.number_of_question,
+        viewModel.currentQuestionNumber,
+        viewModel.totalNumberOfQuestions
+      ),
+      color = Color.LightGray,
+      fontSize = 24.sp
+    )
   }
 
   @Composable
@@ -121,7 +137,7 @@ class PlayFragment : Fragment() {
   }
 
   private fun showSnackbar(messageId: Int, colorId: Int) {
-    Snackbar.make(requireView(), getString(messageId), Snackbar.LENGTH_LONG).apply {
+    Snackbar.make(requireView(), getString(messageId), Snackbar.LENGTH_SHORT).apply {
       view.setBackgroundColor(colorId)
       show()
     }

@@ -29,6 +29,8 @@ class PlayViewModel @Inject constructor(
   var title by mutableStateOf("")
   var questionAnswers by mutableStateOf(listOf<String>())
   var totalScore by mutableStateOf(0)
+  var totalNumberOfQuestions by mutableStateOf(0)
+  var currentQuestionNumber by mutableStateOf(0)
 
   init {
     viewModelScope.launch(dispatcher) {
@@ -57,6 +59,7 @@ class PlayViewModel @Inject constructor(
       if (qst != null) {
         questions.clear()
         questions.addAll(qst)
+        totalNumberOfQuestions = questions.size
       } else {
         Log.e(ERROR, "questions are null")
       }
@@ -67,6 +70,7 @@ class PlayViewModel @Inject constructor(
     questions.peek()?.run {
       title = questionTitle
       questionAnswers = allAnswers
+      currentQuestionNumber++
     }
   }
 
