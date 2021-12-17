@@ -12,7 +12,6 @@ import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue

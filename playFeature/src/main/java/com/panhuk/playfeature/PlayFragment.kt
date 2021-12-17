@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.panhuk.playfeature.databinding.PlayFragmentBinding
 import com.panhuk.playfeature.di.PlayComponent
 import javax.inject.Inject
@@ -89,7 +89,7 @@ class PlayFragment : Fragment() {
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
       viewModel.questionAnswers.forEach { answer ->
-        MakeQuestion(text = answer)
+        MakeQuestion(answer)
       }
       MakeScore()
     }
@@ -109,20 +109,19 @@ class PlayFragment : Fragment() {
   }
 
   private fun checkAnswerAndShowToast(text: String) {
-    val toastMessageStringId: Int = if (viewModel.checkAnswer(text)) {
-      R.string.right_answer
+    val (messageId, colorId) = if (viewModel.checkAnswer(text)) {
+      Pair(R.string.right_answer, android.graphics.Color.GREEN)
     } else {
-      R.string.wrong_answer
+      Pair(R.string.wrong_answer, android.graphics.Color.RED)
     }
-    showToast(toastMessageStringId)
+    showSnackbar(messageId, colorId)
   }
 
-  private fun showToast(messageId: Int) {
-    Toast.makeText(
-      requireContext(),
-      getString(messageId),
-      Toast.LENGTH_SHORT
-    ).show()
+  private fun showSnackbar(messageId: Int, colorId: Int) {
+    Snackbar.make(requireView(), getString(messageId), Snackbar.LENGTH_LONG).apply {
+      view.setBackgroundColor(colorId)
+      show()
+    }
   }
 
   @Composable
