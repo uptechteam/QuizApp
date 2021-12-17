@@ -34,5 +34,4 @@ interface MainComponent {
         .coreComponent(CoreComponent.create())
         .build()
   }
-
 }
