@@ -1,6 +1,9 @@
 package com.panhuk.playfeature
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.panhuk.core.ERROR
@@ -9,6 +12,7 @@ import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue
@@ -23,9 +27,9 @@ class PlayViewModel @Inject constructor(
   private var questions: Queue<Question> = LinkedList()
   private lateinit var sessionToken: String
 
-  var title: String = ""
-  var questionAnswers: List<String> = listOf()
-  var totalScore: Int = 0
+  var title by mutableStateOf("")
+  var questionAnswers by mutableStateOf(listOf<String>())
+  var totalScore by mutableStateOf(0)
 
   init {
     viewModelScope.launch(dispatcher) {
