@@ -49,7 +49,7 @@ class DatastorePreferencesImpl(private val dataStore: DataStore<Preferences>) :
     }
   }
 
-  suspend fun setFirstTimeToFalse() {
+  private suspend fun setFirstTimeToFalse() {
     dataStore.edit { settings ->
       settings[FIRST_TIME] = false
     }

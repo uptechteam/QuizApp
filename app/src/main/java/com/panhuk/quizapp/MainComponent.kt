@@ -2,10 +2,6 @@ package com.panhuk.quizapp
 
 import android.content.Context
 import com.panhuk.core.di.CoreComponent
-import com.panhuk.datasourcedi.di.datastore.DatastoreComponent
-import com.panhuk.datasourcedi.di.sessionToken.DaggerSessionTokenComponent
-import com.panhuk.datasourcedi.di.sessionToken.SessionTokenComponent
-import com.panhuk.datasourcedi.di.sessionToken.SessionTokenModule
 import com.panhuk.repositorydi.firstTime.FirstTimeRepoComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -25,6 +21,8 @@ interface MainComponent {
     fun coreComponent(component: CoreComponent): Builder
     fun build(): MainComponent
   }
+
+  fun inject(mainActivity: MainActivity)
 
   companion object {
     fun create(context: Context): MainComponent =

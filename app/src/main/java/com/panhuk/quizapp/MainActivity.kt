@@ -1,12 +1,15 @@
 package com.panhuk.quizapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
@@ -19,19 +22,24 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    MainComponent.create(applicationContext)
+    MainComponent.create(applicationContext).inject(this)
     binding = ActivityMainBinding.inflate(layoutInflater)
-    navigator = findNavController(R.id.nav_fragment)
-
-    if (viewModel.isFirstTimeCheck()) {
-      navigateToFirstScreen()
-    }
-
     setContentView(binding.root)
+    subscribeStateFlow()
+    navigator = findNavController(R.id.nav_fragment)
+  }
+
+  private fun subscribeStateFlow() {
+    lifecycleScope.launchWhenStarted {
+      if (viewModel.isFirstTime.first()) {
+        navigateToFirstScreen()
+      }
+    }
   }
 
   private fun navigateToFirstScreen() {
-    navigator.navigate(R.id.firstTime)
+    Log.d("TAG123", "Hello world")
+    navigator.navigate(R.id.firstTimeFragment)
   }
 
   override fun navigateMenuToPlayFragment() {
