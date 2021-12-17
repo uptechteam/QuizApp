@@ -19,6 +19,7 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    MainComponent.create(applicationContext)
     binding = ActivityMainBinding.inflate(layoutInflater)
     navigator = findNavController(R.id.nav_fragment)
 
