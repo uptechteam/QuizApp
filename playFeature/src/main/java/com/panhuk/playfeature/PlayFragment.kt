@@ -74,7 +74,7 @@ class PlayFragment : Fragment() {
     Box(
       modifier = Modifier
         .fillMaxSize()
-        .padding(top = 100.dp),
+        .padding(top = 100.dp, start = 40.dp, end = 30.dp),
       contentAlignment = Alignment.TopCenter
     ) {
       Text(viewModel.title, fontSize = 24.sp)
@@ -104,7 +104,7 @@ class PlayFragment : Fragment() {
         .width(300.dp),
       shape = RoundedCornerShape(40.dp)
     ) {
-      Text(text, fontSize = 24.sp)
+      Text(text, fontSize = 18.sp)
     }
   }
 
