@@ -31,6 +31,7 @@ class PlayViewModel @Inject constructor(
   var totalScore by mutableStateOf(0)
   var totalNumberOfQuestions by mutableStateOf(0)
   var currentQuestionNumber by mutableStateOf(0)
+  var isLastQuestion by mutableStateOf(false)
 
   init {
     viewModelScope.launch(dispatcher) {
@@ -71,6 +72,7 @@ class PlayViewModel @Inject constructor(
       title = questionTitle
       questionAnswers = allAnswers
       currentQuestionNumber++
+      isLastQuestion = (currentQuestionNumber == questions.size)
     }
   }
 

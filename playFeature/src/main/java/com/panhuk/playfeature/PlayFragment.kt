@@ -78,7 +78,7 @@ class PlayFragment : Fragment() {
         .padding(top = 100.dp, start = 40.dp, end = 30.dp),
       contentAlignment = Alignment.TopCenter
     ) {
-      Column(){
+      Column() {
         MakeNumerationOfQuestion()
         val text = Html.fromHtml(viewModel.title).toString()
         Text(text, fontSize = 24.sp)
@@ -134,6 +134,9 @@ class PlayFragment : Fragment() {
       Pair(R.string.wrong_answer, android.graphics.Color.RED)
     }
     showSnackbar(messageId, colorId)
+    if (viewModel.isLastQuestion) {
+      (requireActivity() as PlayNavigator).navigateToFinishFragment()
+    }
   }
 
   private fun showSnackbar(messageId: Int, colorId: Int) {

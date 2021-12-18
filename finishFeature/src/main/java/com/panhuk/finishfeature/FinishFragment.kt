@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.panhuk.core.Screen
 import com.panhuk.finishfeature.databinding.FinishFragmentBinding
 
 class FinishFragment : Fragment() {
@@ -42,19 +47,27 @@ class FinishFragment : Fragment() {
     super.onDestroyView()
   }
 
-  @Composable
   @Preview(showBackground = true)
+  @Composable
   fun CreateFinishFragment() {
-    Column() {
-      CreateButton(R.string.retry)
-      CreateButton(R.string.go_main_menu)
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+      CreateButton(R.string.retry, Screen.PLAY)
+      CreateButton(R.string.go_main_menu, Screen.MENU)
     }
   }
 
   @Composable
-  fun CreateButton(textId: Int) {
-    Button(onClick = { /*TODO*/ }) {
-      Text(stringResource(textId))
+  fun CreateButton(textId: Int, navigateScreen: Screen) {
+    Button(onClick = { navigateToScreen(navigateScreen) }) {
+      Text(stringResource(textId), Modifier.padding(bottom = 10.dp))
+    }
+  }
+
+  private fun navigateToScreen(navigateScreen: Screen) {
+    val navigator = (requireActivity() as FinishNavigator)
+    when (navigateScreen) {
+      Screen.PLAY -> navigator.navigateToPlayFragment()
+      Screen.MENU -> navigator.navigateToMenuFragment()
     }
   }
 }
