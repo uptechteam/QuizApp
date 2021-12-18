@@ -75,6 +75,14 @@ class PlayFragment : Fragment() {
       MakeQuestionTitleAndNumeration()
       MakeQuestionsAndScore()
       QuitButton()
+
+      if (viewModel.isLastQuestion) {
+        val bundle = Bundle().apply {
+          putInt(RIGHT_ANSWERS, viewModel.totalScore)
+          putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
+        }
+        (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
+      }
     }
   }
 
@@ -97,10 +105,24 @@ class PlayFragment : Fragment() {
       contentAlignment = Alignment.TopCenter
     ) {
       Column() {
-        MakeNumerationOfQuestion()
+        Row() {
+          MakeNumerationOfQuestion()
+          MakeTimer()
+        }
+
         val text = Html.fromHtml(viewModel.title).toString()
         Text(text, fontSize = 24.sp)
       }
+    }
+  }
+
+  @Composable
+  fun MakeTimer() {
+    Text(stringResource(R.string.timer, viewModel.timer), fontSize = 24.sp, color = Color.LightGray)
+
+    if (!viewModel.timerIsActive) {
+      val (messageId, colorId) = Pair(R.string.out_of_time, android.graphics.Color.MAGENTA)
+      showSnackbar(messageId, colorId)
     }
   }
 
@@ -112,6 +134,7 @@ class PlayFragment : Fragment() {
         viewModel.currentQuestionNumber,
         viewModel.totalNumberOfQuestions
       ),
+      modifier = Modifier.padding(end = 10.dp),
       color = Color.LightGray,
       fontSize = 24.sp
     )
@@ -146,19 +169,11 @@ class PlayFragment : Fragment() {
   }
 
   private fun checkAnswerAndShowToast(text: String) {
-    val (messageId, colorId) = if (viewModel.checkAnswer(text)) {
-      Pair(R.string.right_answer, android.graphics.Color.GREEN)
-    } else {
-      Pair(R.string.wrong_answer, android.graphics.Color.RED)
+    val (messageId, colorId) = when (viewModel.checkAnswer(text)) {
+      true -> Pair(R.string.right_answer, android.graphics.Color.GREEN)
+      false -> Pair(R.string.wrong_answer, android.graphics.Color.RED)
     }
     showSnackbar(messageId, colorId)
-    if (viewModel.isLastQuestion) {
-      val bundle = Bundle().apply {
-        putInt(RIGHT_ANSWERS, viewModel.totalScore)
-        putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
-      }
-      (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
-    }
   }
 
   private fun showSnackbar(messageId: Int, colorId: Int) {
