@@ -32,6 +32,7 @@ class PlayViewModel @Inject constructor(
   var totalNumberOfQuestions by mutableStateOf(0)
   var currentQuestionNumber by mutableStateOf(0)
   var isLastQuestion by mutableStateOf(false)
+  var isLoading by mutableStateOf(true)
 
   init {
     viewModelScope.launch(dispatcher) {
@@ -61,6 +62,7 @@ class PlayViewModel @Inject constructor(
         questions.clear()
         questions.addAll(qst)
         totalNumberOfQuestions = questions.size
+        isLoading = false
       } else {
         Log.e(ERROR, "questions are null")
       }

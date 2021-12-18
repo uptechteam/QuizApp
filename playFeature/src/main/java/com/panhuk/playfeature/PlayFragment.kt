@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -67,9 +69,23 @@ class PlayFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun CreatePlayFragment() {
-    MakeQuestionTitleAndNumeration()
-    MakeQuestionsAndScore()
-    QuitButton()
+    if (viewModel.isLoading) {
+      MakeCircularProgress()
+    } else {
+      MakeQuestionTitleAndNumeration()
+      MakeQuestionsAndScore()
+      QuitButton()
+    }
+  }
+
+  @Composable
+  fun MakeCircularProgress() {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      CircularProgressIndicator(modifier = Modifier.size(200.dp))
+    }
   }
 
   @Composable
