@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.panhuk.core.RIGHT_ANSWERS
-import com.panhuk.core.SCREEN
 import com.panhuk.core.TOTAL_ANSWERS
+import com.panhuk.core.Screen
 import com.panhuk.finishfeature.databinding.FinishFragmentBinding
 
 class FinishFragment : Fragment() {
@@ -65,8 +65,8 @@ class FinishFragment : Fragment() {
     ) {
       CreateCircularProgress()
       CreateTotalScore()
-      CreateButton(R.string.retry, SCREEN.PLAY)
-      CreateButton(R.string.go_main_menu, SCREEN.MENU)
+      CreateButton(R.string.retry, Screen.PLAY)
+      CreateButton(R.string.go_main_menu, Screen.MENU)
     }
   }
 
@@ -89,7 +89,7 @@ class FinishFragment : Fragment() {
   }
 
   @Composable
-  fun CreateButton(textId: Int, navigateScreen: SCREEN) {
+  fun CreateButton(textId: Int, navigateScreen: Screen) {
     Button(
       onClick = { navigateToScreen(navigateScreen) },
       Modifier.padding(top = 10.dp, bottom = 10.dp)
@@ -98,11 +98,12 @@ class FinishFragment : Fragment() {
     }
   }
 
-  private fun navigateToScreen(navigateScreen: SCREEN) {
+  private fun navigateToScreen(navigateScreen: Screen) {
     val navigator = (requireActivity() as FinishNavigator)
     when (navigateScreen) {
-      SCREEN.PLAY -> navigator.navigateFinishToPlayFragment()
-      SCREEN.MENU -> navigator.navigateFinishToMenuFragment()
+      Screen.PLAY -> navigator.navigateFinishToPlayFragment()
+      Screen.MENU -> navigator.navigateFinishToMenuFragment()
+      else -> navigator.navigateFinishToMenuFragment()
     }
   }
 }
