@@ -29,6 +29,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.panhuk.core.RIGHT_ANSWERS
+import com.panhuk.core.TOTAL_ANSWERS
 import com.panhuk.playfeature.databinding.PlayFragmentBinding
 import com.panhuk.playfeature.di.PlayComponent
 import javax.inject.Inject
@@ -135,7 +137,11 @@ class PlayFragment : Fragment() {
     }
     showSnackbar(messageId, colorId)
     if (viewModel.isLastQuestion) {
-      (requireActivity() as PlayNavigator).navigatePlayToFinishFragment()
+      val bundle = Bundle().apply {
+        putInt(RIGHT_ANSWERS, viewModel.totalScore)
+        putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
+      }
+      (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
     }
   }
 

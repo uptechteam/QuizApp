@@ -1,5 +1,7 @@
 package com.panhuk.playfeature
 
+import android.os.Bundle
+
 interface PlayNavigator {
-  fun navigatePlayToFinishFragment()
+  fun navigatePlayToFinishFragment(bundle: Bundle)
 }

@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), MenuNavigator, FinishNavigator, PlayNa
     navigator.navigate(R.id.finish_play)
   }
 
-  override fun navigatePlayToFinishFragment() {
-    navigator.navigate(R.id.play_finish)
+  override fun navigatePlayToFinishFragment(bundle: Bundle) {
+    navigator.navigate(R.id.play_finish, bundle)
   }
 }
