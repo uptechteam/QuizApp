@@ -66,8 +66,8 @@ class FinishFragment : Fragment() {
   private fun navigateToScreen(navigateScreen: Screen) {
     val navigator = (requireActivity() as FinishNavigator)
     when (navigateScreen) {
-      Screen.PLAY -> navigator.navigateToPlayFragment()
-      Screen.MENU -> navigator.navigateToMenuFragment()
+      Screen.PLAY -> navigator.navigateFinishToPlayFragment()
+      Screen.MENU -> navigator.navigateFinishToMenuFragment()
     }
   }
 }

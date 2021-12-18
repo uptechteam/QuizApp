@@ -135,7 +135,7 @@ class PlayFragment : Fragment() {
     }
     showSnackbar(messageId, colorId)
     if (viewModel.isLastQuestion) {
-      (requireActivity() as PlayNavigator).navigateToFinishFragment()
+      (requireActivity() as PlayNavigator).navigatePlayToFinishFragment()
     }
   }
 

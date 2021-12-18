@@ -32,15 +32,15 @@ class MainActivity : AppCompatActivity(), MenuNavigator, FinishNavigator, PlayNa
     navigator.navigate(R.id.menu_leaderboard)
   }
 
-  override fun navigateToMenuFragment() {
+  override fun navigateFinishToMenuFragment() {
     navigator.navigate(R.id.finish_menu)
   }
 
-  override fun navigateToPlayFragment() {
+  override fun navigateFinishToPlayFragment() {
     navigator.navigate(R.id.finish_play)
   }
 
-  override fun navigateToFinishFragment() {
+  override fun navigatePlayToFinishFragment() {
     navigator.navigate(R.id.play_finish)
   }
 }

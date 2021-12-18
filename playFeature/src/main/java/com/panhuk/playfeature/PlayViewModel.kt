@@ -72,13 +72,13 @@ class PlayViewModel @Inject constructor(
       title = questionTitle
       questionAnswers = allAnswers
       currentQuestionNumber++
-      isLastQuestion = (currentQuestionNumber == questions.size)
     }
   }
 
   fun checkAnswer(answer: String): Boolean {
     val correctAnswer = questions.peek()?.correctAnswer
     questions.poll()
+    isLastQuestion()
     loadQuestion()
 
     return if (correctAnswer == answer) {
@@ -87,6 +87,10 @@ class PlayViewModel @Inject constructor(
     } else {
       false
     }
+  }
+
+  private fun isLastQuestion() {
+    isLastQuestion = (currentQuestionNumber == totalNumberOfQuestions)
   }
 }
 
