@@ -8,6 +8,6 @@ fun Leaderboard.mapToDB(): LeaderboardDB {
   return LeaderboardDB(imageId, username, score, scoreLocalDate.toString())
 }
 
-fun LeaderboardDB.mapToDB(): Leaderboard {
+fun LeaderboardDB.mapToDomain(): Leaderboard {
   return Leaderboard(imageId, username, score, LocalDateTime.parse(scoreLocalDate))
 }

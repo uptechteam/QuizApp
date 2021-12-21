@@ -15,7 +15,7 @@ class LeaderboardDSImpl(private val leaderboardDao: LeaderboardDao) : Leaderboar
   override fun getLeaderboards(): Flow<List<Leaderboard>> {
     return leaderboardDao.getLeaderboards().map { value ->
       value.map { leaderboardDB ->
-        leaderboardDB.mapToDB()
+        leaderboardDB.mapToDomain()
       }
     }
   }
