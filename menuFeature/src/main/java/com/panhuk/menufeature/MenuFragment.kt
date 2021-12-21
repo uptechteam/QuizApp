@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.panhuk.core.SCREEN
+import com.panhuk.core.Screen
 import com.panhuk.menufeature.databinding.MenuFragmentBinding
 
 class MenuFragment : Fragment() {
@@ -91,14 +91,14 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      CreateButton(R.string.play, SCREEN.PLAY)
-      CreateButton(R.string.settings, SCREEN.SETTINGS)
-      CreateButton(R.string.leaderboard, SCREEN.LEADERBOARD)
+      CreateButton(R.string.play, Screen.PLAY)
+      CreateButton(R.string.settings, Screen.SETTINGS)
+      CreateButton(R.string.leaderboard, Screen.LEADERBOARD)
     }
   }
 
   @Composable
-  fun CreateButton(textId: Int, fragment: SCREEN) {
+  fun CreateButton(textId: Int, fragment: Screen) {
     OutlinedButton(
       onClick = { navigateToFragment(fragment) },
       modifier = Modifier
@@ -110,12 +110,12 @@ class MenuFragment : Fragment() {
     }
   }
 
-  private fun navigateToFragment(fragment: SCREEN) {
+  private fun navigateToFragment(fragment: Screen) {
     val navigator = (requireActivity() as MenuNavigator)
     when (fragment) {
-      SCREEN.PLAY -> navigator.navigateMenuToPlayFragment()
-      SCREEN.SETTINGS -> navigator.navigateMenuToSettingsFragment()
-      SCREEN.LEADERBOARD -> navigator.navigateMenuToLeaderboardFragment()
+      Screen.PLAY -> navigator.navigateMenuToPlayFragment()
+      Screen.SETTINGS -> navigator.navigateMenuToSettingsFragment()
+      Screen.LEADERBOARD -> navigator.navigateMenuToLeaderboardFragment()
     }
   }
 
