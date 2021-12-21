@@ -90,14 +90,6 @@ class PlayViewModel @Inject constructor(
     }
   }
 
-  private fun loadQuestion() {
-    questions.peek()?.run {
-      title = questionTitle
-      questionAnswers = allAnswers
-      currentQuestionNumber++
-    }
-  }
-
   fun checkAnswer(answer: String = ""): Boolean {
     val correctAnswer = questions.peek()?.correctAnswer
     afterCheckUpdateQuestion()
@@ -111,11 +103,22 @@ class PlayViewModel @Inject constructor(
     }
   }
 
-  private fun afterCheckUpdateQuestion(){
+  private fun afterCheckUpdateQuestion() {
     deleteCurrentQuestion()
     checkIsLastQuestion()
-    loadQuestion()
-    reInitTimer()
+
+    if (!isLastQuestion) {
+      loadQuestion()
+      reInitTimer()
+    }
+  }
+
+  private fun loadQuestion() {
+    questions.peek()?.run {
+      title = questionTitle
+      questionAnswers = allAnswers
+      currentQuestionNumber++
+    }
   }
 
   private fun deleteCurrentQuestion() {
