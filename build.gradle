@@ -21,6 +21,8 @@ buildscript {
     navigation_version = '2.3.5'
     fragment_ktx_version = '1.4.0'
     compose_navigation_version = '2.4.0-beta02'
+    google_services_version = '4.3.3'
+    firebase_analytic_version  = '17.2.2'
 
     kotlin_core = [
         kotlin: "androidx.core:core-ktx:$core_ktx_version",
@@ -79,6 +81,10 @@ buildscript {
         navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
         navigation_ui: "androidx.navigation:navigation-ui-ktx:$navigation_version"
     ]
+
+    firebase_analytic = [
+        analytic: "com.google.firebase:firebase-analytics:$firebase_analytic_version"
+    ]
   }
 
   repositories {
@@ -88,6 +94,7 @@ buildscript {
   dependencies {
     classpath "com.android.tools.build:gradle:$gradle_version"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "com.google.gms:google-services:$google_services_version"
   }
 }
 
