@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.map
 
 class LeaderboardDSImpl(private val leaderboardDao: LeaderboardDao) : LeaderboardDS {
   override suspend fun insert(leaderboard: Leaderboard) {
-    leaderboardDao.insert(leaderboard.mapToDB())
+    val databaseModel = leaderboard.mapToDB()
+    leaderboardDao.insert(databaseModel)
   }
 
   override fun getLeaderboards(): Flow<List<Leaderboard>> {

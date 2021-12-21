@@ -119,7 +119,7 @@ class LeaderboardFragment : Fragment() {
           DropdownMenuItem(onClick = {
             selectedIndex = index
             expanded = false
-            viewModel.sort(item)
+            viewModel.setSortType(item)
           }) {
             Text(stringResource(item))
           }

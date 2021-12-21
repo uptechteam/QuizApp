@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class LeaderboardViewModel @Inject constructor(
   private val leaderboardRepo: LeaderboardRepo,
-  private val coroutineDispatcher: CoroutineDispatcher
+  private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
   private lateinit var leaderboard: List<Leaderboard>
@@ -23,9 +23,9 @@ class LeaderboardViewModel @Inject constructor(
   val sortTypes = listOf(R.string.sort_date, R.string.sort_score)
 
   init {
-    viewModelScope.launch(coroutineDispatcher) {
-      leaderboardRepo.getLeaderboards().collect { leaderbrd ->
-        leaderboard = leaderbrd
+    viewModelScope.launch(dispatcher) {
+      leaderboardRepo.getLeaderboards().collect { leaderboard ->
+        this@LeaderboardViewModel.leaderboard = leaderboard
       }
     }
   }
@@ -42,11 +42,11 @@ class LeaderboardViewModel @Inject constructor(
     }
   }
 
-  fun sort(item: Int) {
-    leaderboardSorted = when (item) {
-      sortTypes[0] -> sortByTime()
-      sortTypes[1] -> sortByScore()
-      else -> sortByTime()
+  fun setSortType(item: Int) {
+    leaderboardSorted = if (item == R.string.sort_date) {
+      sortByTime()
+    } else {
+      sortByScore()
     }
   }
 }

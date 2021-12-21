@@ -1,21 +1,20 @@
 package com.panhuk.leaderboardfeature.utils
 
-import com.panhuk.leaderboardfeature.R.drawable
+import com.panhuk.leaderboardfeature.R
 import kotlin.random.Random
 
-fun getDrawable(): Int {
-  return when (Random.nextInt(11)) {
-    0 -> drawable.add1
-    1 -> drawable.add2
-    2 -> drawable.android1
-    3 -> drawable.android2
-    4 -> drawable.banana
-    5 -> drawable.cash
-    6 -> drawable.crown
-    7 -> drawable.favorite
-    8 -> drawable.footprint
-    9 -> drawable.goal
-    10 -> drawable.handicrafts
-    else -> drawable.android2
-  }
+fun getDrawable(index: Int = Random.nextInt(11)): Int {
+  val drawables = listOf(
+    R.drawable.add1,
+    R.drawable.add2,
+    R.drawable.android1,
+    R.drawable.android2,
+    R.drawable.banana,
+    R.drawable.cash,
+    R.drawable.crown,
+    R.drawable.favorite,
+    R.drawable.goal,
+    R.drawable.handicrafts
+  )
+  return drawables[index]
 }
