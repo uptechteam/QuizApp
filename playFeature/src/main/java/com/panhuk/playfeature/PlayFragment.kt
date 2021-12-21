@@ -24,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,15 +33,12 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.panhuk.core.RIGHT_ANSWERS
+import com.panhuk.core.CORRECT_ANSWERS
 import com.panhuk.core.TOTAL_ANSWERS
-import com.panhuk.playfeature.databinding.PlayFragmentBinding
 import com.panhuk.playfeature.di.PlayComponent
 import javax.inject.Inject
 
 class PlayFragment : Fragment() {
-  private var _binding: PlayFragmentBinding? = null
-  private val binding get() = _binding!!
 
   @Inject
   protected lateinit var viewModel: PlayViewModel
@@ -52,33 +51,27 @@ class PlayFragment : Fragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
   ): View {
-    _binding = PlayFragmentBinding.inflate(inflater, container, false)
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.playFragment.setContent { CreatePlayFragment() }
-  }
-
-  override fun onDestroyView() {
-    _binding = null
-    super.onDestroyView()
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        PlayFragment()
+      }
+    }
   }
 
   @Preview(showBackground = true)
   @Composable
-  fun CreatePlayFragment() {
+  fun PlayFragment() {
     if (viewModel.isLoading) {
-      MakeCircularProgress()
+      CircularProgress()
     } else {
-      MakeQuestionTitleAndNumeration()
-      MakeQuestionsAndScore()
+      QuestionTitleAndNumeration()
+      QuestionsAndScore()
       QuitButton()
 
       if (viewModel.isLastQuestion) {
         val bundle = Bundle().apply {
-          putInt(RIGHT_ANSWERS, viewModel.totalScore)
+          putInt(CORRECT_ANSWERS, viewModel.totalScore)
           putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
         }
         (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
@@ -87,7 +80,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeCircularProgress() {
+  fun CircularProgress() {
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
@@ -97,7 +90,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeQuestionTitleAndNumeration() {
+  fun QuestionTitleAndNumeration() {
     Box(
       modifier = Modifier
         .fillMaxSize()
@@ -106,8 +99,8 @@ class PlayFragment : Fragment() {
     ) {
       Column() {
         Row() {
-          MakeNumerationOfQuestion()
-          MakeTimer()
+          NumerationOfQuestion()
+          Timer()
         }
 
         val text = Html.fromHtml(viewModel.title).toString()
@@ -117,7 +110,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeTimer() {
+  fun Timer() {
     Text(stringResource(R.string.timer, viewModel.timer), fontSize = 24.sp, color = Color.LightGray)
 
     if (!viewModel.timerIsActive) {
@@ -127,7 +120,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeNumerationOfQuestion() {
+  fun NumerationOfQuestion() {
     Text(
       stringResource(
         R.string.number_of_question,
@@ -141,7 +134,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeQuestionsAndScore() {
+  fun QuestionsAndScore() {
     Column(
       modifier = Modifier.fillMaxSize(),
       verticalArrangement = Arrangement.Center,
@@ -149,14 +142,14 @@ class PlayFragment : Fragment() {
     ) {
       viewModel.questionAnswers.forEach { answer ->
         val text = Html.fromHtml(answer).toString()
-        MakeQuestion(text)
+        QuestionButton(text)
       }
-      MakeScore()
+      Score()
     }
   }
 
   @Composable
-  fun MakeQuestion(text: String) {
+  fun QuestionButton(text: String) {
     Button(
       onClick = { checkAnswerAndShowToast(text) },
       modifier = Modifier
@@ -184,7 +177,7 @@ class PlayFragment : Fragment() {
   }
 
   @Composable
-  fun MakeScore() {
+  fun Score() {
     Row() {
       Text(stringResource(id = R.string.score), modifier = Modifier.padding(end = 5.dp))
       Text(viewModel.totalScore.toString())

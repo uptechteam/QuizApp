@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="retry">Retry</string>
-  <string name="go_main_menu">Go to main menu</string>
-  <string name="total_score">Total score: %1$d / %2$d</string>
+  <string name="action_retry">Retry</string>
+  <string name="action_go_main_menu">Go to main menu</string>
+  <string name="finish_quiz_total_score">Total score: %1$d / %2$d</string>
 </resources>

@@ -16,20 +16,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.panhuk.core.RIGHT_ANSWERS
-import com.panhuk.core.TOTAL_ANSWERS
+import com.panhuk.core.CORRECT_ANSWERS
 import com.panhuk.core.Screen
-import com.panhuk.finishfeature.databinding.FinishFragmentBinding
+import com.panhuk.core.TOTAL_ANSWERS
 
 class FinishFragment : Fragment() {
-  private var _binding: FinishFragmentBinding? = null
-  private val binding get() = _binding!!
-  private var rightAnswers: Int = 0
+  private var correctAnswers: Int = 0
   private var totalAnswers: Int = 0
 
   override fun onCreateView(
@@ -37,42 +36,40 @@ class FinishFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _binding = FinishFragmentBinding.inflate(inflater, container, false)
-    return binding.root
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        FinishFragment()
+      }
+    }
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     arguments?.run {
-      rightAnswers = getInt(RIGHT_ANSWERS)
+      correctAnswers = getInt(CORRECT_ANSWERS)
       totalAnswers = getInt(TOTAL_ANSWERS)
     }
-    binding.finishFragment.setContent { CreateFinishFragment() }
-  }
-
-  override fun onDestroyView() {
-    _binding = null
-    super.onDestroyView()
   }
 
   @Preview(showBackground = true)
   @Composable
-  fun CreateFinishFragment() {
+  fun FinishFragment() {
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center,
       modifier = Modifier.fillMaxSize()
     ) {
-      CreateCircularProgress()
-      CreateTotalScore()
-      CreateButton(R.string.retry, Screen.PLAY)
-      CreateButton(R.string.go_main_menu, Screen.MENU)
+      CircularProgress()
+      TotalScore()
+      ActionButton(R.string.action_retry, Screen.PLAY)
+      ActionButton(R.string.action_go_main_menu, Screen.MENU)
     }
   }
 
   @Composable
-  fun CreateCircularProgress() {
-    val totalScore = rightAnswers.toFloat() / totalAnswers.toFloat()
+  fun CircularProgress() {
+    val totalScore = correctAnswers.toFloat() / totalAnswers.toFloat()
     CircularProgressIndicator(
       progress = totalScore,
       modifier = Modifier
@@ -84,12 +81,15 @@ class FinishFragment : Fragment() {
   }
 
   @Composable
-  fun CreateTotalScore() {
-    Text(stringResource(R.string.total_score, rightAnswers, totalAnswers), fontSize = 20.sp)
+  fun TotalScore() {
+    Text(
+      stringResource(R.string.finish_quiz_total_score, correctAnswers, totalAnswers),
+      fontSize = 20.sp
+    )
   }
 
   @Composable
-  fun CreateButton(textId: Int, navigateScreen: Screen) {
+  fun ActionButton(textId: Int, navigateScreen: Screen) {
     Button(
       onClick = { navigateToScreen(navigateScreen) },
       Modifier.padding(top = 10.dp, bottom = 10.dp)
