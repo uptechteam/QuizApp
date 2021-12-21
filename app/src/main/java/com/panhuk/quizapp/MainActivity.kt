@@ -38,7 +38,6 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
   }
 
   private fun navigateToFirstScreen() {
-    Log.d("TAG123", "Hello world")
     navigator.navigate(R.id.firstTimeFragment)
   }
 

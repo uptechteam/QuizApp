@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class FirstTimeRepoImpl(private val datastorePreferences: DatastorePreferences) : FirstTimeRepo {
   override fun isFirstTime(): Flow<Boolean> {
-    return datastorePreferences.isFirstTime()
+    return datastorePreferences.isFirstTimeAppOpened()
   }
 }

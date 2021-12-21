@@ -56,7 +56,7 @@ class FirstTimeFragment : Fragment() {
         onUsernameChanged = { viewModel.username.value = it }
       )
       Button(onClick = {
-        if (viewModel.username.value != "") {
+        if (viewModel.username.value.isNotEmpty()) {
           (requireActivity() as FirstTimeNavigator).navigateToMenuFragment()
           viewModel.saveUsername()
         } else {
