@@ -38,10 +38,10 @@ dependencies {
   kapt dagger2_kapt.values()
 
   implementation project(':repositoryDI')
-  implementation project(':useCase')
-  implementation project(':usecaseImpl')
   implementation project(':apiDI')
+  implementation project(':dataSourceDI')
   implementation project(':repository')
   implementation project(':core')
-  implementation project(':dataSourceDI')
+  implementation project(':useCase')
+  implementation project(':usecaseImpl')
 }

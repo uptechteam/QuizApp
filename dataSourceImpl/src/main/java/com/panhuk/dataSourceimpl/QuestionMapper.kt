@@ -1,18 +1,21 @@
 package com.panhuk.dataSourceimpl
 
+import com.panhuk.api.dto.CategoryResponse
 import com.panhuk.api.dto.QuestionResponse
 import com.panhuk.domain.model.Category
-import com.panhuk.domain.model.Difficulty
 import com.panhuk.domain.model.Question
-import com.panhuk.domain.model.Type
 
 fun QuestionResponse.mapToDomain(): Question {
   return Question(
-    category = Category.valueOf(category),
+    category = Category(category),
     correctAnswer = correctAnswer,
-    difficulty = Difficulty.valueOf(difficulty),
+    difficulty = difficulty,
     allAnswers = incorrectAnswers + correctAnswer,
     questionTitle = question,
-    type = Type.valueOf(type)
+    type = type
   )
+}
+
+fun CategoryResponse.mapToDomain(): Category {
+  return Category(name)
 }

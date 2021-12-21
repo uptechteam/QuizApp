@@ -5,7 +5,6 @@ import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.domain.exception.SessionExpiredException
 import com.panhuk.repository.SessionTokenRepoReader
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 
 class SessionTokenRepoImpl(
@@ -21,7 +20,7 @@ class SessionTokenRepoImpl(
     }
 
   override fun generateNewToken(): Flow<String?> =
-    sessionTokenApiReader.token.flatMapLatest { token ->
+    sessionTokenApiReader.token.onEach { token ->
       sessionTokenCache.cacheToken(token)
       sessionTokenLocalReader.token
     }
