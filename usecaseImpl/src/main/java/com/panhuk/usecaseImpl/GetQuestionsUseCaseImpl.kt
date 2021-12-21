@@ -1,5 +1,6 @@
 package com.panhuk.usecaseImpl
 
+import com.panhuk.domain.model.Category
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.QuestionRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
@@ -14,4 +15,6 @@ class GetQuestionsUseCaseImpl(private val questionRepository: QuestionRepoReader
         question.copy(allAnswers = question.allAnswers.shuffled())
       }
     }
+
+  override fun getCategories(): Flow<List<Category>> = questionRepository.categories
 }

@@ -1,7 +1,8 @@
 package com.panhuk.core
 
-enum class SCREEN {
+enum class Screen {
   PLAY,
   SETTINGS,
-  LEADERBOARD
+  LEADERBOARD,
+  MENU
 }

@@ -12,7 +12,7 @@ import com.panhuk.quizapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
+class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator,  FinishNavigator, PlayNavigator {
 
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
@@ -55,5 +55,17 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator {
 
   override fun navigateToMenuFragment() {
     navigator.navigate(R.id.firstTime_menu)
+  }
+
+  override fun navigateFinishToMenuFragment() {
+    navigator.navigate(R.id.finish_menu)
+  }
+
+  override fun navigateFinishToPlayFragment() {
+    navigator.navigate(R.id.finish_play)
+  }
+
+  override fun navigatePlayToFinishFragment(bundle: Bundle) {
+    navigator.navigate(R.id.play_finish, bundle)
   }
 }

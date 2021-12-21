@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.flow
 
 class SessionTokenApiDataSource(private val api: SessionTokenApi) : SessionTokenDSReader {
   override val token: Flow<String?>
-    get() = flow { api.getSessionToken().token }  //TODO: handle error codes
+    get() = flow { emit(api.getSessionToken().token) }  //TODO: handle error codes
 }

@@ -21,7 +21,11 @@
   <fragment
       android:id="@+id/playFragment"
       android:name="com.panhuk.playfeature.PlayFragment"
-      android:label="PlayFragment" />
+      android:label="PlayFragment">
+    <action
+        android:id="@+id/play_finish"
+        app:destination="@id/finishFragment" />
+  </fragment>
   <fragment
       android:id="@+id/settingsFragment"
       android:name="com.panhuk.settingsfeature.SettingsFragment"
@@ -30,6 +34,17 @@
       android:id="@+id/leaderboardFragment"
       android:name="com.panhuk.leaderboardfeature.ui.LeaderboardFragment"
       android:label="LeaderboardFragment" />
+  <fragment
+      android:id="@+id/finishFragment"
+      android:name="com.panhuk.finishfeature.FinishFragment"
+      android:label="FinishFragment">
+    <action
+        android:id="@+id/finish_menu"
+        app:destination="@id/menuFragment" />
+    <action
+        android:id="@+id/finish_play"
+        app:destination="@id/playFragment" />
+  </fragment>
   <fragment
       android:id="@+id/firstTimeFragment"
       android:name="com.panhuk.firstTimeFeature.FirstTimeFragment"
