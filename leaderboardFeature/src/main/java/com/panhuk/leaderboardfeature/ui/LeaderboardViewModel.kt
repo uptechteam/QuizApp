@@ -18,26 +18,26 @@ class LeaderboardViewModel @Inject constructor(
   private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-  private lateinit var leaderboard: List<Leaderboard>
+  private lateinit var leaderboards: List<Leaderboard>
   var leaderboardSorted by mutableStateOf(sortByTime())
   val sortTypes = listOf(R.string.sort_date, R.string.sort_score)
 
   init {
     viewModelScope.launch(dispatcher) {
       leaderboardRepo.getLeaderboards().collect { leaderboard ->
-        this@LeaderboardViewModel.leaderboard = leaderboard
+        this@LeaderboardViewModel.leaderboards = leaderboard
       }
     }
   }
 
   private fun sortByScore(): List<Leaderboard> {
-    return leaderboard.sortedByDescending {
+    return leaderboards.sortedByDescending {
       it.score
     }
   }
 
   private fun sortByTime(): List<Leaderboard> {
-    return leaderboard.sortedByDescending {
+    return leaderboards.sortedByDescending {
       it.scoreLocalDate
     }
   }
