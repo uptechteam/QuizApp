@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(
 
   init {
     viewModelScope.launch(dispatcher) {
-      isFirstTime.emit(firstTimeRepo.isFirstTime().first())
+      isFirstTime.emit(firstTimeRepo.isFirstTimeAppOpened().first())
     }
   }
 }

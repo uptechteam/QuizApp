@@ -8,4 +8,5 @@ interface DatastorePreferences {
   suspend fun saveUsername(username: String)
   fun observeUsername(): Flow<String?>
   fun isFirstTimeAppOpened(): Flow<Boolean>
+  suspend fun setFirstTimeAppOpenedToFalse()
 }

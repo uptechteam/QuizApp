@@ -49,7 +49,7 @@ class DatastorePreferencesImpl(private val dataStore: DataStore<Preferences>) :
     }
   }
 
-  private suspend fun setFirstTimeAppOpenedToFalse() {
+  override suspend fun setFirstTimeAppOpenedToFalse() {
     dataStore.edit { settings ->
       settings[FIRST_TIME] = false
     }
