@@ -10,6 +10,7 @@ import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
 import com.panhuk.playfeature.PlayNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
+import com.panhuk.quizapp.di.MainActivityComponent
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    MainComponent.create(applicationContext).inject(this)
+    MainActivityComponent.create(applicationContext).inject(this)
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
     subscribeStateFlow()
