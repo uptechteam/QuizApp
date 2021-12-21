@@ -1,18 +1,20 @@
 package com.panhuk.quizapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.panhuk.finishfeature.FinishNavigator
 import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
+import com.panhuk.playfeature.PlayNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator,  FinishNavigator, PlayNavigator {
+class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, FinishNavigator,
+  PlayNavigator {
 
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
