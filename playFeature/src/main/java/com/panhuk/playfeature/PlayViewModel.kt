@@ -105,7 +105,7 @@ class PlayViewModel @Inject constructor(
 
   private fun afterCheckUpdateQuestion() {
     deleteCurrentQuestion()
-    checkIsLastQuestion()
+    checkLastQuestion()
 
     if (!isLastQuestion) {
       loadQuestion()
@@ -131,7 +131,7 @@ class PlayViewModel @Inject constructor(
     timerIsActive = true
   }
 
-  private fun checkIsLastQuestion() {
+  private fun checkLastQuestion() {
     isLastQuestion = (currentQuestionNumber == totalNumberOfQuestions)
   }
 
