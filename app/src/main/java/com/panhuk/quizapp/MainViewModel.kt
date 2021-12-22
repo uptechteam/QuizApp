@@ -18,7 +18,14 @@ class MainViewModel @Inject constructor(
 
   init {
     viewModelScope.launch(dispatcher) {
-      isFirstTime.emit(firstTimeRepo.isFirstTimeAppOpened().first())
+      if (checkIfAppOpenedForFirstTime()) {
+        firstTimeRepo.setFirstTimeAppOpenedToFalse()
+      }
     }
+  }
+
+  private suspend fun checkIfAppOpenedForFirstTime(): Boolean {
+    isFirstTime.emit(firstTimeRepo.isFirstTimeAppOpened().first())
+    return isFirstTime.value
   }
 }

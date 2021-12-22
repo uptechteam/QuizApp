@@ -8,4 +8,8 @@ class FirstTimeRepoImpl(private val datastorePreferences: DatastorePreferences) 
   override fun isFirstTimeAppOpened(): Flow<Boolean> {
     return datastorePreferences.isFirstTimeAppOpened()
   }
+
+  override suspend fun setFirstTimeAppOpenedToFalse() {
+    datastorePreferences.setFirstTimeAppOpenedToFalse()
+  }
 }
