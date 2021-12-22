@@ -1,9 +1,9 @@
 package com.panhuk.datasource
 
-import com.panhuk.domain.model.Leaderboard
 import kotlinx.coroutines.flow.Flow
+import com.panhuk.database.LeaderboardDB
 
 interface LeaderboardDS {
-  suspend fun insert(leaderboard: Leaderboard)
-  fun getLeaderboards(): Flow<List<Leaderboard>>
+  suspend fun insert(leaderboardDB: LeaderboardDB)
+  fun getLeaderboards(): Flow<List<LeaderboardDB>>
 }
