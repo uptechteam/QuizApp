@@ -5,7 +5,7 @@ import com.panhuk.datasource.SessionTokenDSReader
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.datasourcedi.di.Cache
 import com.panhuk.repository.SessionTokenRepoReader
-import com.panhuk.repository_impl.SessionTokenRepoImpl
+import com.panhuk.repository_impl.sessionToken.SessionTokenRepoImpl
 import dagger.Module
 import dagger.Provides
 

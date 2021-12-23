@@ -48,6 +48,7 @@ dependencies {
   implementation compose.values()
   implementation junit_test.values()
   implementation navigation.values()
+  implementation timber.values()
 
   implementation project(':domain')
   implementation project(':core')
@@ -60,7 +61,7 @@ dependencies {
 
   implementation project(':dataSourceModules:dataSourceDI')
   implementation project(':apiModules:apiDI')
-  
+
   implementation project(':features:playFeature')
   implementation project(':features:settingsFeature')
   implementation project(':features:leaderboardFeature')

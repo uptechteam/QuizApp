@@ -1,4 +1,4 @@
-package com.panhuk.repository_impl
+package com.panhuk.repository_impl.firstTime
 
 import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.repository.FirstTimeRepo

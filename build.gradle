@@ -22,6 +22,7 @@ buildscript {
     compose_navigation_version = '2.4.0-beta02'
     google_services_version = '4.3.3'
     firebase_analytic_version  = '17.2.2'
+    timber_version = '4.7.1'
 
     kotlin_core = [
         kotlin: "androidx.core:core-ktx:$core_ktx_version",
@@ -37,6 +38,10 @@ buildscript {
         material_icons_core: "androidx.compose.material:material-icons-core:$compose_version",
         material_icons_extented: "androidx.compose.material:material-icons-extended:$compose_version",
         navigation: "androidx.navigation:navigation-compose:$compose_navigation_version"
+    ]
+
+    timber = [
+        timber: "com.jakewharton.timber:timber:$timber_version"
     ]
 
     junit_test = [

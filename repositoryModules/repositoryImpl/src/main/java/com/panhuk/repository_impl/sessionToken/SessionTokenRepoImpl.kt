@@ -1,4 +1,4 @@
-package com.panhuk.repository_impl
+package com.panhuk.repository_impl.sessionToken
 
 import com.panhuk.datasource.SessionTokenCache
 import com.panhuk.datasource.SessionTokenDSReader

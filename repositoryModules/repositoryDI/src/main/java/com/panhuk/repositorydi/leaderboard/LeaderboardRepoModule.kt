@@ -2,7 +2,7 @@ package com.panhuk.repositorydi.leaderboard
 
 import com.panhuk.datasource.LeaderboardDS
 import com.panhuk.repository.LeaderboardRepo
-import com.panhuk.repository_impl.LeaderboardRepoImpl
+import com.panhuk.repository_impl.leaderboard.LeaderboardRepoImpl
 import dagger.Module
 import dagger.Provides
 

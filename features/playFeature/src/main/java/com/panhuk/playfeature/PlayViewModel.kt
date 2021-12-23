@@ -1,13 +1,11 @@
 package com.panhuk.playfeature
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.panhuk.core.ERROR
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
@@ -16,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.LinkedList
 import java.util.Queue
 import javax.inject.Inject
@@ -63,7 +62,7 @@ class PlayViewModel @Inject constructor(
         loadQuestion()
         initTimer()
       } catch (e: Exception) {
-        Log.e(ERROR, e.toString())
+        Timber.e(e.toString())
       }
     }
   }
@@ -73,7 +72,7 @@ class PlayViewModel @Inject constructor(
       if (token != null) {
         sessionToken = token
       } else {
-        Log.e(ERROR, "sessionToken is null")
+        Timber.e("sessionToken is null")
       }
     }
   }
@@ -86,7 +85,7 @@ class PlayViewModel @Inject constructor(
         totalNumberOfQuestions = questions.size
         isLoading = false
       } else {
-        Log.e(ERROR, "questions are null")
+        Timber.e("questions are null")
       }
     }
   }

@@ -12,6 +12,7 @@ import com.panhuk.playfeature.PlayNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
 import com.panhuk.quizapp.di.MainActivityComponent
 import kotlinx.coroutines.flow.first
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, FinishNavigator,
@@ -26,10 +27,21 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     MainActivityComponent.create(applicationContext).inject(this)
+
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
     subscribeStateFlow()
+    setupNavigation()
+    setupTimber()
+  }
+
+  private fun setupNavigation(){
     navigator = findNavController(R.id.nav_fragment)
+  }
+
+  private fun setupTimber(){
+    Timber.plant(Timber.DebugTree())
   }
 
   private fun subscribeStateFlow() {

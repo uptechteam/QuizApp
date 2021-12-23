@@ -1,4 +1,4 @@
-package com.panhuk.repository_impl
+package com.panhuk.repository_impl.leaderboard
 
 import com.panhuk.datasource.LeaderboardDS
 import com.panhuk.domain.model.Leaderboard

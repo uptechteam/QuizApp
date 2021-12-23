@@ -2,7 +2,7 @@ package com.panhuk.repositorydi.firstTime
 
 import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.repository.FirstTimeRepo
-import com.panhuk.repository_impl.FirstTimeRepoImpl
+import com.panhuk.repository_impl.firstTime.FirstTimeRepoImpl
 import dagger.Module
 import dagger.Provides
 

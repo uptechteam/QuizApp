@@ -1,4 +1,4 @@
-package com.panhuk.repository_impl
+package com.panhuk.repository_impl.username
 
 import com.panhuk.datasource.DatastorePreferences
 import com.panhuk.repository.UsernameRepo

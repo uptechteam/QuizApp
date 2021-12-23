@@ -1,4 +1,4 @@
-package com.panhuk.repository_impl
+package com.panhuk.repository_impl.question
 
 import com.panhuk.domain.model.Category
 import com.panhuk.domain.model.Question

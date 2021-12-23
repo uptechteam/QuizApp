@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import com.panhuk.settingsfeature.R.string
 import com.panhuk.settingsfeature.di.SettingsComponent
 import javax.inject.Inject
 
@@ -47,6 +46,11 @@ class SettingsFragment : Fragment() {
         Settings()
       }
     }
+  }
+
+  override fun onDestroy() {
+    viewModel.saveUsername()
+    super.onDestroy()
   }
 
   @Preview(showBackground = true)
@@ -76,7 +80,7 @@ class SettingsFragment : Fragment() {
   @Composable
   fun TextWithSwitchInRow() {
     Row() {
-      Text(stringResource(string.use_your_data_to_improve_our_service))
+      Text(stringResource(R.string.use_your_data_to_improve_our_service))
       Switch()
     }
   }
