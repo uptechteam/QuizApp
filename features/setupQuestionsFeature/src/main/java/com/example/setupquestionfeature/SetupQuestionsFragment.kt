@@ -36,10 +36,10 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.example.setupquestionfeature.di.SetupQuestionsComponent
 import com.panhuk.core.CATEGORY_ID
-import com.panhuk.core.CATEGORY_TITLE
 import com.panhuk.core.DIFFICULTY
 import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TYPE
+import com.panhuk.domain.model.Category
 import javax.inject.Inject
 
 class SetupQuestionsFragment : Fragment() {
@@ -75,10 +75,13 @@ class SetupQuestionsFragment : Fragment() {
       if (viewModel.isLoading) {
         CircularProgress()
       } else {
-        Spinner(R.string.number_of_questions, stringArrayResource(viewModel.questions).toList())
-        Spinner(R.string.category, viewModel.categories.map { it.title })
-        Spinner(R.string.difficulty, stringArrayResource(viewModel.difficulties).toList())
-        Spinner(R.string.type, stringArrayResource(viewModel.types).toList())
+        Spinner(
+          R.string.number_of_questions,
+          stringArrayResource(viewModel.questions).toMutableList()
+        )
+        Spinner(R.string.category, viewModel.categories.map { it.title } as MutableList<String>)
+        Spinner(R.string.difficulty, stringArrayResource(viewModel.difficulties).toMutableList())
+        Spinner(R.string.type, stringArrayResource(viewModel.types).toMutableList())
         Confirm()
       }
     }
@@ -95,9 +98,13 @@ class SetupQuestionsFragment : Fragment() {
   }
 
   @Composable
-  fun Spinner(title: Int, options: List<String>) {
+  fun Spinner(title: Int, options: MutableList<String>) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
+
+    if(title != R.string.number_of_questions){
+      options.add(0, ADD_ANY_TYPE)
+    }
 
     OutlinedButton(
       onClick = { expanded = true },
@@ -112,12 +119,16 @@ class SetupQuestionsFragment : Fragment() {
         modifier = Modifier
       )
 
-
-
       when (title) {
         R.string.number_of_questions -> viewModel.question = options[selectedIndex]
-        R.string.category -> viewModel.category =
-          viewModel.categories.find { options[selectedIndex] == it.title }!!
+        R.string.category -> {
+          val searchCategory = viewModel.categories.find { options[selectedIndex] == it.title }
+          if (searchCategory == null) {
+            viewModel.category = Category(ADD_ANY_TYPE, -1)
+          } else {
+            viewModel.category = searchCategory
+          }
+        }
         R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
         R.string.type -> viewModel.type = options[selectedIndex]
       }
@@ -152,11 +163,20 @@ class SetupQuestionsFragment : Fragment() {
 
   private fun navigateToPlayFragment() {
     val bundle = Bundle().apply {
-      putString(CATEGORY_TITLE, viewModel.category.title)
-      putInt(CATEGORY_ID, viewModel.category.id)
-      putString(DIFFICULTY, viewModel.difficulty.lowercase())
+      if (viewModel.category.id != -1) {
+        putInt(CATEGORY_ID, viewModel.category.id)
+      } else {
+        putInt(CATEGORY_ID, -1)
+      }
+      if (viewModel.difficulty != ADD_ANY_TYPE) {
+        putString(DIFFICULTY, viewModel.difficulty.lowercase())
+      } else {
+        putString(DIFFICULTY, null)
+      }
+
       putString(QUESTIONS_NUMBER, viewModel.question)
       when (viewModel.type) {
+        ADD_ANY_TYPE -> putString(TYPE, null)
         TYPE_MULTIPLE -> putString(TYPE, MULTIPLE)
         TYPE_BOOLEAN -> putString(TYPE, BOOLEAN)
       }

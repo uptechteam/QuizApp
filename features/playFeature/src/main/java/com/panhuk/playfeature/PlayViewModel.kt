@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.panhuk.domain.model.Category
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
@@ -25,10 +24,10 @@ class PlayViewModel @AssistedInject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
   private val dispatcher: CoroutineDispatcher,
-  @Assisted("category") val category: Category,
-  @Assisted("difficulty") val difficulty: String,
-  @Assisted("question_number") val questionNumber: String,
-  @Assisted("type") val type: String
+  @Assisted("category") val category: Int?,
+  @Assisted("difficulty") val difficulty: String?,
+  @Assisted("question_number") val questionNumber: String?,
+  @Assisted("type") val type: String?
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -83,9 +82,13 @@ class PlayViewModel @AssistedInject constructor(
   }
 
   private suspend fun getQuestions() {
+    var tempCategoryId: String? = category.toString()
+    if (tempCategoryId == "-1") {
+      tempCategoryId = null
+    }
     getQuestionsUseCase.getQuestions(
-      amount = questionNumber.toInt(),
-      categoryId = category.id.toString(),
+      amount = questionNumber!!.toInt(),
+      categoryId = tempCategoryId,
       difficulty = difficulty,
       type = type,
       token = sessionToken
