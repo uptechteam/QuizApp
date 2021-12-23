@@ -154,9 +154,12 @@ class SetupQuestionsFragment : Fragment() {
     val bundle = Bundle().apply {
       putString(CATEGORY_TITLE, viewModel.category.title)
       putInt(CATEGORY_ID, viewModel.category.id)
-      putString(DIFFICULTY, viewModel.difficulty)
+      putString(DIFFICULTY, viewModel.difficulty.lowercase())
       putString(QUESTIONS_NUMBER, viewModel.question)
-      putString(TYPE, viewModel.type)
+      when (viewModel.type) {
+        TYPE_MULTIPLE -> putString(TYPE, MULTIPLE)
+        TYPE_BOOLEAN -> putString(TYPE, BOOLEAN)
+      }
     }
     (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment(bundle)
   }

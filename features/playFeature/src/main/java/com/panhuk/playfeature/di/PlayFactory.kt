@@ -14,7 +14,7 @@ class PlayFactory {
     fun create(
       @Assisted("category") category: Category,
       @Assisted("difficulty") difficulty: String,
-      @Assisted("question") question: String,
+      @Assisted("question_number") questionNumber: String,
       @Assisted("type") type: String
     ): PlayViewModel
   }
@@ -25,11 +25,11 @@ class PlayFactory {
       assistedFactory: Factory,
       category: Category,
       difficulty: String,
-      question: String,
+      questionNumber: String,
       type: String
     ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
       override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return assistedFactory.create(category, difficulty, question, type) as T
+        return assistedFactory.create(category, difficulty, questionNumber, type) as T
       }
     }
   }

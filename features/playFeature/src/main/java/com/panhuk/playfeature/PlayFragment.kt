@@ -55,14 +55,14 @@ class PlayFragment : Fragment() {
     val results = arguments
     val category = Category(results!!.getString(CATEGORY_TITLE)!!,results.getInt(CATEGORY_ID) )
     val difficulty = results.getString(DIFFICULTY)
-    val question = results.getString(QUESTIONS_NUMBER)
+    val questionNumber = results.getString(QUESTIONS_NUMBER)
     val type = results.getString(TYPE)
 
     PlayFactory.provideFactory(
       viewModelAssistedFactory,
       category,
       difficulty!!,
-      question!!,
+      questionNumber!!,
       type!!
     )
   }

@@ -1,7 +1,6 @@
 package com.panhuk.playfeature
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -18,18 +17,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.LinkedList
 import java.util.Queue
-import timber.log.Timber
 
 class PlayViewModel @AssistedInject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
   private val dispatcher: CoroutineDispatcher,
-  @Assisted("category") category: Category,
-  @Assisted("difficulty") difficulty: String,
-  @Assisted("question") question: String,
-  @Assisted("type") type: String
+  @Assisted("category") val category: Category,
+  @Assisted("difficulty") val difficulty: String,
+  @Assisted("question_number") val questionNumber: String,
+  @Assisted("type") val type: String
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -84,7 +83,13 @@ class PlayViewModel @AssistedInject constructor(
   }
 
   private suspend fun getQuestions() {
-    getQuestionsUseCase.getQuestions().collect { qst ->
+    getQuestionsUseCase.getQuestions(
+      amount = questionNumber.toInt(),
+      categoryId = category.id.toString(),
+      difficulty = difficulty,
+      type = type,
+      token = sessionToken
+    ).collect { qst ->
       if (qst != null) {
         questions.clear()
         questions.addAll(qst)
