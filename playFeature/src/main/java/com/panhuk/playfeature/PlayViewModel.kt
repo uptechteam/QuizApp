@@ -8,14 +8,20 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.panhuk.core.ERROR
+import com.panhuk.core.getDrawableRes
+import com.panhuk.domain.model.Leaderboard
 import com.panhuk.domain.model.Question
+import com.panhuk.repository.LeaderboardRepo
 import com.panhuk.repository.SessionTokenRepoReader
+import com.panhuk.repository.UsernameRepo
 import com.panhuk.useCase.GetQuestionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import java.util.LinkedList
 import java.util.Queue
 import javax.inject.Inject
@@ -23,7 +29,9 @@ import javax.inject.Inject
 class PlayViewModel @Inject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
-  private val dispatcher: CoroutineDispatcher
+  private val dispatcher: CoroutineDispatcher,
+  private val leaderboardRepo: LeaderboardRepo,
+  private val usernameRepo: UsernameRepo
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -88,6 +96,20 @@ class PlayViewModel @Inject constructor(
       } else {
         Log.e(ERROR, "questions are null")
       }
+    }
+  }
+
+  fun saveScore() {
+    viewModelScope.launch {
+      val username = usernameRepo.getUsername().single().orEmpty()
+
+      val leaderboard = Leaderboard(
+        imageId = getDrawableRes(),
+        username = username,
+        scoreLocalDate = LocalDateTime.now(),
+        score = totalScore
+      )
+      leaderboardRepo.insert(leaderboard)
     }
   }
 

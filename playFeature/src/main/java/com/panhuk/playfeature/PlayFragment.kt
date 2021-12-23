@@ -73,12 +73,13 @@ class PlayFragment : Fragment() {
     }
   }
 
-  private fun checkIfLastQuestionAndGoToFinishFragment(){
+  private fun checkIfLastQuestionAndGoToFinishFragment() {
     if (viewModel.isLastQuestion) {
       val bundle = Bundle().apply {
         putInt(CORRECT_ANSWERS, viewModel.totalScore)
         putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
       }
+      viewModel.saveScore()
       (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
     }
   }

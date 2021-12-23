@@ -1,6 +1,5 @@
-package com.panhuk.leaderboardfeature.utils
+package com.panhuk.core
 
-import com.panhuk.leaderboardfeature.R
 import kotlin.random.Random
 
 private val drawables = listOf(
