@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.example.setupquestionfeature.SetupQuestionsNavigator
 import com.panhuk.menufeature.MenuNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), MenuNavigator {
+class MainActivity : AppCompatActivity(), MenuNavigator, SetupQuestionsNavigator {
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
 
@@ -28,5 +29,9 @@ class MainActivity : AppCompatActivity(), MenuNavigator {
 
   override fun navigateMenuToLeaderboardFragment() {
     navigator.navigate(R.id.menu_leaderboard)
+  }
+
+  override fun navigateSetupQuestionsToPlayFragment() {
+    navigator.navigate(R.id.setup_questions_play)
   }
 }
