@@ -42,8 +42,8 @@ dependencies {
   coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugaring_version")
 
   implementation project(':domain')
-  implementation project(':dataSource')
-  implementation project(':repository')
-  implementation project(':dataSourceDI')
+  implementation project(':dataSourceModules:dataSource')
+  implementation project(':repositoryModules:repository')
+  implementation project(':dataSourceModules:dataSourceDI')
   implementation project(':database')
 }

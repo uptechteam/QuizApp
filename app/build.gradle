@@ -51,17 +51,20 @@ dependencies {
 
   implementation project(':domain')
   implementation project(':core')
-  implementation project(':repository')
-  implementation project(':useCase')
-  implementation project(':repositoryDI')
-  implementation project(':dataSourceDI')
-  implementation project(':apiDI')
-  implementation project(':usecaseDI')
 
-  implementation project(':playFeature')
-  implementation project(':settingsFeature')
-  implementation project(':leaderboardFeature')
-  implementation project(':menuFeature')
-  implementation project(':firstTimeFeature')
-  implementation project(':finishFeature')
+  implementation project(':useCaseModules:useCase')
+  implementation project(':useCaseModules:usecaseDI')
+
+  implementation project(':repositoryModules:repository')
+  implementation project(':repositoryModules:repositoryDI')
+
+  implementation project(':dataSourceModules:dataSourceDI')
+  implementation project(':apiModules:apiDI')
+  
+  implementation project(':features:playFeature')
+  implementation project(':features:settingsFeature')
+  implementation project(':features:leaderboardFeature')
+  implementation project(':features:menuFeature')
+  implementation project(':features:firstTimeFeature')
+  implementation project(':features:finishFeature')
 }

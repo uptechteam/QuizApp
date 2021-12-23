@@ -47,11 +47,11 @@ dependencies {
   kapt dagger2_kapt.values()
   implementation navigation.values()
 
-  implementation project(':repositoryDI')
-  implementation project(':dataSourceDI')
+  implementation project(':repositoryModules:repositoryDI')
+  implementation project(':dataSourceModules:dataSourceDI')
 
   implementation project(':domain')
   implementation project(':core')
-  implementation project(':repository')
-  implementation project(':useCase')
+  implementation project(':repositoryModules:repository')
+  implementation project(':useCaseModules:useCase')
 }

@@ -8,10 +8,12 @@ android {
   compileSdk 31
 
   defaultConfig {
-    minSdk 21
+    minSdk 23
     targetSdk 31
     versionCode 1
     versionName "1.0"
+
+    buildConfigField "String", "APP_PREFERENCES", '"settings"'
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
@@ -34,14 +36,13 @@ android {
 
 dependencies {
   implementation kotlin_core.values()
-  implementation dagger2.values()
-  kapt dagger2_kapt.values()
+  implementation network.values()
+  implementation junit_test.values()
+  implementation datastore.values()
+  implementation coroutines_flow.values()
 
-  implementation project(':repositoryDI')
-  implementation project(':apiDI')
-  implementation project(':dataSourceDI')
-  implementation project(':repository')
-  implementation project(':core')
-  implementation project(':useCase')
-  implementation project(':usecaseImpl')
+  implementation project(':domain')
+  implementation project(':dataSourceModules:dataSource')
+  implementation project(':apiModules:api')
+  implementation project(':database')
 }

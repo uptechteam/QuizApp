@@ -58,10 +58,10 @@ dependencies {
 
   implementation project(':domain')
   implementation project(':core')
-  implementation project(':repository')
-  implementation project(':useCase')
+  implementation project(':repositoryModules:repository')
+  implementation project(':useCaseModules:useCase')
 
-  implementation project(':playFeature')
-  implementation project(':settingsFeature')
-  implementation project(':leaderboardFeature')
+  implementation project(':features:playFeature')
+  implementation project(':features:settingsFeature')
+  implementation project(':features:leaderboardFeature')
 }

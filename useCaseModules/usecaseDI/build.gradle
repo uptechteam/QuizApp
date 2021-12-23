@@ -30,30 +30,18 @@ android {
   kotlinOptions {
     jvmTarget = '1.8'
   }
-  buildFeatures {
-    viewBinding = true
-    compose true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = "$compose_version"
-  }
 }
 
 dependencies {
   implementation kotlin_core.values()
-  implementation junit_test.values()
-  implementation compose.values()
   implementation dagger2.values()
   kapt dagger2_kapt.values()
-  implementation navigation.values()
 
-  implementation project(':apiDI')
-  implementation project(':dataSourceDI')
-  implementation project(':repositoryDI')
-  implementation project(':usecaseDI')
-
-  implementation project(':domain')
+  implementation project(':repositoryModules:repositoryDI')
+  implementation project(':apiModules:apiDI')
+  implementation project(':dataSourceModules:dataSourceDI')
+  implementation project(':repositoryModules:repository')
   implementation project(':core')
-  implementation project(':repository')
-  implementation project(':useCase')
+  implementation project(':useCaseModules:useCase')
+  implementation project(':useCaseModules:usecaseImpl')
 }
