@@ -1,4 +1,4 @@
-package com.panhuk.leaderboardfeature.model
+package com.panhuk.domain.model
 
 import java.time.LocalDateTime
 
