@@ -111,7 +111,7 @@ class MenuFragment : Fragment() {
   private fun navigateToFragment(fragment: Screen) {
     val navigator = (requireActivity() as MenuNavigator)
     when (fragment) {
-      Screen.SETUP_QUESTIONS -> navigator.navigateMenuToPlayFragment()
+      Screen.SETUP_QUESTIONS -> navigator.navigateMenuToSetupQuestionsFragment()
       Screen.SETTINGS -> navigator.navigateMenuToSettingsFragment()
       Screen.LEADERBOARD -> navigator.navigateMenuToLeaderboardFragment()
     }
