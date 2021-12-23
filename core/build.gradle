@@ -43,5 +43,5 @@ dependencies {
     kapt dagger2_kapt.values()
     implementation datastore.values()
     implementation project(':domain')
-    implementation project(':useCase')
+    implementation project(':useCaseModules:useCase')
 }
