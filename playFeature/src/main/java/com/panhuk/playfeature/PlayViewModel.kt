@@ -11,6 +11,8 @@ import com.panhuk.core.ERROR
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,12 +20,15 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue
-import javax.inject.Inject
 
-class PlayViewModel @Inject constructor(
+class PlayViewModel @AssistedInject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
-  private val dispatcher: CoroutineDispatcher
+  private val dispatcher: CoroutineDispatcher,
+  @Assisted("category") category: String,
+  @Assisted("difficulty") difficulty: String,
+  @Assisted("question") question: String,
+  @Assisted("type") type: String
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -57,7 +62,6 @@ class PlayViewModel @Inject constructor(
 
     viewModelScope.launch(dispatcher) {
       try {
-
         generateNewSessionToken()
         getQuestions()
         loadQuestion()

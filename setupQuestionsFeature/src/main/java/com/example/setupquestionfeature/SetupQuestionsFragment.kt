@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.MaterialTheme
@@ -26,12 +28,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.example.setupquestionfeature.di.SetupQuestionsComponent
+import com.panhuk.core.CATEGORY
+import com.panhuk.core.DIFFICULTY
+import com.panhuk.core.QUESTIONS_NUMBER
+import com.panhuk.core.TYPE
 import javax.inject.Inject
 
 class SetupQuestionsFragment : Fragment() {
@@ -64,11 +71,25 @@ class SetupQuestionsFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      Spinner(R.string.number_of_questions, listOf("5", "10", "20", "50"))
-      Spinner(R.string.category, listOf("Any category", "Music", "Games", "Films")) // category
-      Spinner(R.string.difficulty, listOf("Easy", "Medium", "Hard")) //difficulty
-      Spinner(R.string.type, listOf("Some type 1", "Some type 2")) //difficulty
-      Confirm()
+      if (viewModel.isLoading) {
+        CircularProgress()
+      } else {
+        Spinner(R.string.number_of_questions, stringArrayResource(viewModel.questions).toList())
+        Spinner(R.string.category, viewModel.categories)
+        Spinner(R.string.difficulty, stringArrayResource(viewModel.difficulties).toList())
+        Spinner(R.string.type, stringArrayResource(viewModel.types).toList())
+        Confirm()
+      }
+    }
+  }
+
+  @Composable
+  fun CircularProgress() {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      CircularProgressIndicator(modifier = Modifier.size(200.dp))
     }
   }
 
@@ -89,6 +110,14 @@ class SetupQuestionsFragment : Fragment() {
         fontSize = 20.sp,
         modifier = Modifier
       )
+
+      when (title) {
+        R.string.number_of_questions -> viewModel.question = options[selectedIndex]
+        R.string.category -> viewModel.category = options[selectedIndex]
+        R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
+        R.string.type -> viewModel.type = options[selectedIndex]
+      }
+
       DropdownMenu(
         expanded = expanded,
         onDismissRequest = { expanded = false },
@@ -118,6 +147,12 @@ class SetupQuestionsFragment : Fragment() {
   }
 
   private fun navigateToPlayFragment() {
-    (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment()
+    val bundle = Bundle().apply {
+      putString(CATEGORY, viewModel.category)
+      putString(DIFFICULTY, viewModel.difficulty)
+      putString(QUESTIONS_NUMBER, viewModel.question)
+      putString(TYPE, viewModel.type)
+    }
+    (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment(bundle)
   }
 }

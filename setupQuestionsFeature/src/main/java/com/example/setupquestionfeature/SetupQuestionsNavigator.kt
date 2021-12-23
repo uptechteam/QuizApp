@@ -1,5 +1,7 @@
 package com.example.setupquestionfeature
 
+import android.os.Bundle
+
 interface SetupQuestionsNavigator {
-  fun navigateSetupQuestionsToPlayFragment()
+  fun navigateSetupQuestionsToPlayFragment(bundle: Bundle)
 }
