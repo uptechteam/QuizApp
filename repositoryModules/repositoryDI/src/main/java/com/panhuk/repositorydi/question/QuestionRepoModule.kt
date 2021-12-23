@@ -2,7 +2,7 @@ package com.panhuk.repositorydi.question
 
 import com.panhuk.datasourcedi.di.Api
 import com.panhuk.repository.QuestionRepoReader
-import com.panhuk.repository_impl.QuestionRepoImpl
+import com.panhuk.repository_impl.question.QuestionRepoImpl
 import dagger.Module
 import dagger.Provides
 
