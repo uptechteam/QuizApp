@@ -1,21 +1,20 @@
 plugins {
-  id 'com.android.application'
+  id 'com.android.library'
   id 'kotlin-android'
   id 'kotlin-kapt'
-  id 'com.google.gms.google-services'
 }
 
 android {
   compileSdk 31
 
   defaultConfig {
-    applicationId "com.panhuk.quizapp"
-    minSdk 23
+    minSdk 21
     targetSdk 31
     versionCode 1
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -27,6 +26,7 @@ android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+    coreLibraryDesugaringEnabled = true
   }
   kotlinOptions {
     jvmTarget = '1.8'
@@ -42,31 +42,21 @@ android {
 
 dependencies {
   implementation kotlin_core.values()
-  implementation dagger2.values()
-  implementation firebase_analytic.values()
-  kapt dagger2_kapt.values()
-  implementation compose.values()
   implementation junit_test.values()
+  implementation compose.values()
+  implementation dagger2.values()
+  kapt dagger2_kapt.values()
   implementation navigation.values()
   implementation timber.values()
+  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugaring_version")
+
+  implementation project(':apiModules:apiDI')
+  implementation project(':dataSourceModules:dataSourceDI')
+  implementation project(':repositoryModules:repositoryDI')
+  implementation project(':useCaseModules:usecaseDI')
 
   implementation project(':domain')
   implementation project(':core')
-
-  implementation project(':useCaseModules:useCase')
-  implementation project(':useCaseModules:usecaseDI')
-
   implementation project(':repositoryModules:repository')
-  implementation project(':repositoryModules:repositoryDI')
-
-  implementation project(':dataSourceModules:dataSourceDI')
-  implementation project(':apiModules:apiDI')
-
-  implementation project(':features:playFeature')
-  implementation project(':features:settingsFeature')
-  implementation project(':features:leaderboardFeature')
-  implementation project(':features:menuFeature')
-  implementation project(':features:firstTimeFeature')
-  implementation project(':features:finishFeature')
-  implementation project(':setupQuestionsFeature')
+  implementation project(':useCaseModules:useCase')
 }
