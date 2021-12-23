@@ -1,4 +1,4 @@
-package com.panhuk.dataSourceimpl
+package com.panhuk.dataSourceimpl.question
 
 import com.panhuk.api.dto.CategoryResponse
 import com.panhuk.api.dto.QuestionResponse

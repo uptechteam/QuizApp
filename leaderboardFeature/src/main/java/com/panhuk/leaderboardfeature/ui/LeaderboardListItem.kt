@@ -22,8 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.panhuk.leaderboardfeature.R
-import com.panhuk.leaderboardfeature.date.getDateAgo
-import com.panhuk.leaderboardfeature.model.Leaderboard
+import com.panhuk.leaderboardfeature.utils.getDateAgo
+import com.panhuk.domain.model.Leaderboard
 import java.time.temporal.ChronoUnit
 import java.time.temporal.ChronoUnit.DAYS
 import java.time.temporal.ChronoUnit.HOURS

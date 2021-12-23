@@ -7,4 +7,6 @@
   <string name="days_ago">%1$dd. ago</string>
   <string name="months_ago">%1$dmth. ago</string>
   <string name="years_ago">%1$dy. ago</string>
+  <string name="sort_date">Sort by date</string>
+  <string name="sort_score">Sort by score</string>
 </resources>

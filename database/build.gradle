@@ -35,5 +35,7 @@ android {
 dependencies {
   implementation kotlin_core.values()
   implementation junit_test.values()
-  implementation database.values()
+  implementation database.room_ktx
+  implementation database.room_runtime
+  kapt database.room_compiler
 }
