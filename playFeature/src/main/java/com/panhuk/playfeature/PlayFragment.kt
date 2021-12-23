@@ -34,12 +34,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.panhuk.core.CATEGORY
+import com.panhuk.core.CATEGORY_ID
+import com.panhuk.core.CATEGORY_TITLE
 import com.panhuk.core.CORRECT_ANSWERS
 import com.panhuk.core.DIFFICULTY
 import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TOTAL_ANSWERS
 import com.panhuk.core.TYPE
+import com.panhuk.domain.model.Category
 import com.panhuk.playfeature.di.PlayComponent
 import com.panhuk.playfeature.di.PlayFactory
 import javax.inject.Inject
@@ -51,14 +53,14 @@ class PlayFragment : Fragment() {
 
   private val viewModel: PlayViewModel by viewModels {
     val results = arguments
-    val category = results!!.getString(CATEGORY)
+    val category = Category(results!!.getString(CATEGORY_TITLE)!!,results.getInt(CATEGORY_ID) )
     val difficulty = results.getString(DIFFICULTY)
     val question = results.getString(QUESTIONS_NUMBER)
     val type = results.getString(TYPE)
 
     PlayFactory.provideFactory(
       viewModelAssistedFactory,
-      category!!,
+      category,
       difficulty!!,
       question!!,
       type!!

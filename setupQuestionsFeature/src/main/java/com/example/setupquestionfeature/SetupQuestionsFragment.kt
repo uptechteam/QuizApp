@@ -35,7 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.example.setupquestionfeature.di.SetupQuestionsComponent
-import com.panhuk.core.CATEGORY
+import com.panhuk.core.CATEGORY_ID
+import com.panhuk.core.CATEGORY_TITLE
 import com.panhuk.core.DIFFICULTY
 import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TYPE
@@ -75,7 +76,7 @@ class SetupQuestionsFragment : Fragment() {
         CircularProgress()
       } else {
         Spinner(R.string.number_of_questions, stringArrayResource(viewModel.questions).toList())
-        Spinner(R.string.category, viewModel.categories)
+        Spinner(R.string.category, viewModel.categories.map { it.title })
         Spinner(R.string.difficulty, stringArrayResource(viewModel.difficulties).toList())
         Spinner(R.string.type, stringArrayResource(viewModel.types).toList())
         Confirm()
@@ -111,9 +112,12 @@ class SetupQuestionsFragment : Fragment() {
         modifier = Modifier
       )
 
+
+
       when (title) {
         R.string.number_of_questions -> viewModel.question = options[selectedIndex]
-        R.string.category -> viewModel.category = options[selectedIndex]
+        R.string.category -> viewModel.category =
+          viewModel.categories.find { options[selectedIndex] == it.title }!!
         R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
         R.string.type -> viewModel.type = options[selectedIndex]
       }
@@ -148,7 +152,8 @@ class SetupQuestionsFragment : Fragment() {
 
   private fun navigateToPlayFragment() {
     val bundle = Bundle().apply {
-      putString(CATEGORY, viewModel.category)
+      putString(CATEGORY_TITLE, viewModel.category.title)
+      putInt(CATEGORY_ID, viewModel.category.id)
       putString(DIFFICULTY, viewModel.difficulty)
       putString(QUESTIONS_NUMBER, viewModel.question)
       putString(TYPE, viewModel.type)

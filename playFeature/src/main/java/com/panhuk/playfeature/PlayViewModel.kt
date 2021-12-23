@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.panhuk.core.ERROR
+import com.panhuk.domain.model.Category
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
@@ -25,7 +26,7 @@ class PlayViewModel @AssistedInject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
   private val dispatcher: CoroutineDispatcher,
-  @Assisted("category") category: String,
+  @Assisted("category") category: Category,
   @Assisted("difficulty") difficulty: String,
   @Assisted("question") question: String,
   @Assisted("type") type: String

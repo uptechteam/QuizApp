@@ -17,5 +17,5 @@ fun QuestionResponse.mapToDomain(): Question {
 }
 
 fun CategoryResponse.mapToDomain(): Category {
-  return Category(name)
+  return Category(name, id)
 }

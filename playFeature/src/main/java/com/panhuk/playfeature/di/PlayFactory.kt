@@ -2,6 +2,7 @@ package com.panhuk.playfeature.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.panhuk.domain.model.Category
 import com.panhuk.playfeature.PlayViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -11,7 +12,7 @@ class PlayFactory {
   @AssistedFactory
   interface Factory {
     fun create(
-      @Assisted("category") category: String,
+      @Assisted("category") category: Category,
       @Assisted("difficulty") difficulty: String,
       @Assisted("question") question: String,
       @Assisted("type") type: String
@@ -22,7 +23,7 @@ class PlayFactory {
   companion object {
     fun provideFactory(
       assistedFactory: Factory,
-      category: String,
+      category: Category,
       difficulty: String,
       question: String,
       type: String
