@@ -48,9 +48,9 @@ class SettingsFragment : Fragment() {
     }
   }
 
-  override fun onDestroy() {
+  override fun onPause() {
     viewModel.saveUsername()
-    super.onDestroy()
+    super.onPause()
   }
 
   @Preview(showBackground = true)

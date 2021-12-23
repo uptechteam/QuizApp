@@ -13,7 +13,6 @@ import com.panhuk.playfeature.PlayNavigator
 import com.panhuk.quizapp.databinding.ActivityMainBinding
 import com.panhuk.quizapp.di.MainActivityComponent
 import kotlinx.coroutines.flow.first
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, FinishNavigator,
@@ -35,19 +34,14 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
     disableDarkMode()
     subscribeStateFlow()
     setupNavigation()
-    setupTimber()
   }
 
-  private fun disableDarkMode(){
+  private fun disableDarkMode() {
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
   }
 
   private fun setupNavigation() {
     navigator = findNavController(R.id.nav_fragment)
-  }
-
-  private fun setupTimber() {
-    Timber.plant(Timber.DebugTree())
   }
 
   private fun subscribeStateFlow() {
