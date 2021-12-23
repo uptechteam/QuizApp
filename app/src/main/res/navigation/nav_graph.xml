@@ -45,4 +45,12 @@
         android:id="@+id/finish_play"
         app:destination="@id/playFragment" />
   </fragment>
+  <fragment
+      android:id="@+id/firstTimeFragment"
+      android:name="com.panhuk.firstTimeFeature.FirstTimeFragment"
+      android:label="FirstTimeFragment">
+    <action
+        android:id="@+id/firstTime_menu"
+        app:destination="@id/menuFragment" />
+  </fragment>
 </navigation>

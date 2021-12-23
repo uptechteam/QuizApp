@@ -1,11 +1,9 @@
 package com.panhuk.datasourcedi.di.datastore
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import com.panhuk.datasource.DatastorePreferences
 import dagger.BindsInstance
 import dagger.Component
-import java.util.prefs.Preferences
 
 @Component(
   modules = [
