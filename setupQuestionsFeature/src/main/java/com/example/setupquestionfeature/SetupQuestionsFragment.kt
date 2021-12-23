@@ -5,10 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,30 +60,34 @@ class SetupQuestionsFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun QuestionsFragment() {
-    NumberOfQuestions()
-    Spinner(listOf("Any category", "Music", "Games", "Films")) // category
-    Spinner(listOf("Easy", "Medium", "Hard")) //difficulty
-    Spinner(listOf("Some type 2", "Some type 2")) //difficulty
-    Confirm()
+    Column(
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Spinner(R.string.number_of_questions, listOf("5", "10", "20", "50"))
+      Spinner(R.string.category, listOf("Any category", "Music", "Games", "Films")) // category
+      Spinner(R.string.difficulty, listOf("Easy", "Medium", "Hard")) //difficulty
+      Spinner(R.string.type, listOf("Some type 1", "Some type 2")) //difficulty
+      Confirm()
+    }
   }
 
   @Composable
-  fun NumberOfQuestions() {
-    Text("10 questions")
-  }
-
-  @Composable
-  fun Spinner(options: List<String>) {
+  fun Spinner(title: Int, options: List<String>) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
-    OutlinedButton(onClick = { expanded = true }) {
+    OutlinedButton(
+      onClick = { expanded = true },
+      Modifier
+        .padding(bottom = 30.dp)
+        .width(300.dp),
+      border = BorderStroke(1.dp, MaterialTheme.colors.onSecondary)
+    ) {
       Text(
-        options[selectedIndex],
-        fontSize = 12.sp,
+        stringResource(R.string.name_of_button, stringResource(title), options[selectedIndex]),
+        fontSize = 20.sp,
         modifier = Modifier
-          .width(75.dp)
-          .align(Alignment.CenterVertically)
       )
       DropdownMenu(
         expanded = expanded,
@@ -87,7 +98,7 @@ class SetupQuestionsFragment : Fragment() {
             selectedIndex = index
             expanded = false
           }) {
-            Text(item)
+            Text(item, fontSize = 20.sp)
           }
         }
       }
@@ -97,11 +108,16 @@ class SetupQuestionsFragment : Fragment() {
   @Composable
   fun Confirm() {
     Button(
-      onClick = {
-        (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment()
-      }
+      onClick = { navigateToPlayFragment() },
+      Modifier
+        .width(200.dp)
+        .height(50.dp)
     ) {
-      Text("Confirm")
+      Text(stringResource(R.string.confirm))
     }
+  }
+
+  private fun navigateToPlayFragment() {
+    (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment()
   }
 }

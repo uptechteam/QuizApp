@@ -63,6 +63,6 @@ dependencies {
   implementation project(':leaderboardFeature')
   implementation project(':menuFeature')
   implementation project(':firstTimeFeature')
-  implementation project(':finishFeature')  implementation project(':setupQuestionsFeature')
+  implementation project(':finishFeature')
   implementation project(':setupQuestionsFeature')
 }

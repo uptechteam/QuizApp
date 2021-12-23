@@ -15,7 +15,7 @@ interface SetupQuestionsComponent {
 
   companion object {
     fun create(): SetupQuestionsComponent =
-      DaggersetupQuestionsComponent.builder()
+      DaggerSetupQuestionsComponent.builder()
         .build()
   }
 }

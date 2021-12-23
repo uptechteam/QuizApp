@@ -15,7 +15,7 @@
         android:id="@+id/menu_leaderboard"
         app:destination="@id/leaderboardFragment" />
     <action
-        android:id="@+id/menu_setupQuestions"
+        android:id="@+id/menu_setup_questions"
         app:destination="@id/setupQuestionsFragment" />
   </fragment>
   <fragment

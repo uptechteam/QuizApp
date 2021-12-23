@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.example.setupquestionfeature.SetupQuestionsNavigator
 import com.panhuk.finishfeature.FinishNavigator
 import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, FinishNavigator,
-  PlayNavigator {
+  PlayNavigator, SetupQuestionsNavigator {
 
   private lateinit var binding: ActivityMainBinding
   private lateinit var navigator: NavController
@@ -44,8 +45,8 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
     navigator.navigate(R.id.firstTimeFragment)
   }
 
-  override fun navigateMenuToPlayFragment() {
-    navigator.navigate(R.id.menu_play)
+  override fun navigateMenuToSetupQuestionsFragment() {
+    navigator.navigate(R.id.menu_setup_questions)
   }
 
   override fun navigateMenuToSettingsFragment() {
@@ -70,5 +71,9 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
 
   override fun navigatePlayToFinishFragment(bundle: Bundle) {
     navigator.navigate(R.id.play_finish, bundle)
+  }
+
+  override fun navigateSetupQuestionsToPlayFragment() {
+    navigator.navigate(R.id.setup_questions_play)
   }
 }

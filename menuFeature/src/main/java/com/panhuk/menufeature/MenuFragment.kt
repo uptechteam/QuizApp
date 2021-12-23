@@ -91,7 +91,7 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      CreateButton(R.string.play, Screen.PLAY)
+      CreateButton(R.string.play, Screen.SETUP_QUESTIONS)
       CreateButton(R.string.settings, Screen.SETTINGS)
       CreateButton(R.string.leaderboard, Screen.LEADERBOARD)
     }
@@ -113,7 +113,7 @@ class MenuFragment : Fragment() {
   private fun navigateToFragment(fragment: Screen) {
     val navigator = (requireActivity() as MenuNavigator)
     when (fragment) {
-      Screen.PLAY -> navigator.navigateMenuToPlayFragment()
+      Screen.SETUP_QUESTIONS -> navigator.navigateMenuToSetupQuestionsFragment()
       Screen.SETTINGS -> navigator.navigateMenuToSettingsFragment()
       Screen.LEADERBOARD -> navigator.navigateMenuToLeaderboardFragment()
     }

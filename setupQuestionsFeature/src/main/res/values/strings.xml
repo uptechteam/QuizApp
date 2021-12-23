@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="name_of_button">%1$s: %2$s</string>
+  <string name="number_of_questions">Number of questions</string>
+  <string name="category">Category</string>
+  <string name="difficulty">Difficulty</string>
+  <string name="type">Type</string>
+  <string name="confirm">Confirm</string>
+</resources>

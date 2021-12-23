@@ -4,5 +4,6 @@ enum class Screen {
   PLAY,
   SETTINGS,
   LEADERBOARD,
-  MENU
+  MENU,
+  SETUP_QUESTIONS
 }
