@@ -22,6 +22,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,47 +31,43 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.panhuk.core.Screen
-import com.panhuk.menufeature.databinding.MenuFragmentBinding
 
 class MenuFragment : Fragment() {
-  private var _binding: MenuFragmentBinding? = null
-  private val binding get() = _binding!!
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
   ): View {
-    _binding = MenuFragmentBinding.inflate(inflater, container, false)
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.menuFragment.setContent { CreateMainActivity() }
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        Menu()
+      }
+    }
   }
 
   @Preview(showBackground = true)
   @Composable
-  fun CreateMainActivity() {
-    CreateIconAndTitle()
-    CreateButtons()
-    CreateDeveloperInfo()
+  fun Menu() {
+    IconAndTitle()
+    Buttons()
+    DeveloperInfo()
   }
 
   @Composable
-  fun CreateIconAndTitle() {
+  fun IconAndTitle() {
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = 210.dp)
     ) {
-      CreateIcon()
-      CreateTitle()
+      Icon()
+      Title()
     }
   }
 
   @Composable
-  fun CreateIcon() {
+  fun Icon() {
     Image(
       painterResource(R.drawable.ic_launcher_foreground),
       contentDescription = null,
@@ -78,12 +76,12 @@ class MenuFragment : Fragment() {
   }
 
   @Composable
-  fun CreateTitle() {
+  fun Title() {
     Text(stringResource(R.string.app_name), fontSize = 30.sp)
   }
 
   @Composable
-  fun CreateButtons() {
+  fun Buttons() {
     Column(
       modifier = Modifier
         .fillMaxSize()
@@ -91,14 +89,14 @@ class MenuFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      CreateButton(R.string.play, Screen.PLAY)
-      CreateButton(R.string.settings, Screen.SETTINGS)
-      CreateButton(R.string.leaderboard, Screen.LEADERBOARD)
+      Button(R.string.play, Screen.PLAY)
+      Button(R.string.settings, Screen.SETTINGS)
+      Button(R.string.leaderboard, Screen.LEADERBOARD)
     }
   }
 
   @Composable
-  fun CreateButton(textId: Int, fragment: Screen) {
+  fun Button(textId: Int, fragment: Screen) {
     OutlinedButton(
       onClick = { navigateToFragment(fragment) },
       modifier = Modifier
@@ -120,7 +118,7 @@ class MenuFragment : Fragment() {
   }
 
   @Composable
-  fun CreateDeveloperInfo() {
+  fun DeveloperInfo() {
     Box(
       modifier = Modifier
         .fillMaxWidth()

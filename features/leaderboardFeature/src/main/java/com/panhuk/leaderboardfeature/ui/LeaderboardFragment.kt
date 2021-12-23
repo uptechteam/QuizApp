@@ -28,20 +28,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.panhuk.leaderboardfeature.R.string
-import com.panhuk.leaderboardfeature.databinding.FragmentLeaderboardBinding
 import com.panhuk.leaderboardfeature.di.LeaderboardComponent
 import javax.inject.Inject
 
 class LeaderboardFragment : Fragment() {
-
-  private var _binding: FragmentLeaderboardBinding? = null
-  private val binding get() = _binding!!
 
   @Inject
   protected lateinit var viewModel: LeaderboardViewModel
@@ -55,31 +53,25 @@ class LeaderboardFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.leaderboardFragment.setContent { CreateLeaderboardFragment() }
-  }
-
-  override fun onDestroyView() {
-    _binding = null
-    super.onDestroyView()
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        Leaderboard()
+      }
+    }
   }
 
   @Preview(showBackground = true)
   @Composable
-  fun CreateLeaderboardFragment() {
+  fun Leaderboard() {
     Column() {
-      CreateLeaderboardTitleAndSort()
-      CreateLazyColumn()
+      LeaderboardTitleAndSort()
+      LazyColumn()
     }
   }
 
   @Composable
-  fun CreateLeaderboardTitleAndSort() {
+  fun LeaderboardTitleAndSort() {
     Row(
       modifier = Modifier
         .fillMaxWidth()
@@ -93,12 +85,12 @@ class LeaderboardFragment : Fragment() {
         text = stringResource(string.leaderboard),
         fontSize = 30.sp
       )
-      CreateSort()
+      Sort()
     }
   }
 
   @Composable
-  fun CreateSort() {
+  fun Sort() {
     val options = viewModel.sortTypes
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
@@ -129,7 +121,7 @@ class LeaderboardFragment : Fragment() {
   }
 
   @Composable
-  fun CreateLazyColumn() {
+  fun LazyColumn() {
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
       items(
         items = viewModel.leaderboardSorted,

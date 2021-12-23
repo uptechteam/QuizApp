@@ -13,18 +13,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import com.panhuk.firstTimeFeature.databinding.FirstTimeFragmentBinding
 import com.panhuk.firstTimeFeature.di.FirstTimeComponent
 import javax.inject.Inject
 
 class FirstTimeFragment : Fragment() {
-  private var _binding: FirstTimeFragmentBinding? = null
-  private val binding get() = _binding!!
-
   @Inject
   protected lateinit var viewModel: FirstTimeViewModel
 
@@ -38,20 +36,19 @@ class FirstTimeFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _binding = FirstTimeFragmentBinding.inflate(inflater, container, false)
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.firstTime.setContent { CreateFirstTimeScreen() }
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        FirstTime()
+      }
+    }
   }
 
   @Composable
   @Preview
-  fun CreateFirstTimeScreen() {
+  fun FirstTime() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-      SetUsernameTextField(
+      UsernameTextField(
         username = viewModel.username.value,
         onUsernameChanged = { viewModel.username.value = it }
       )
@@ -69,7 +66,7 @@ class FirstTimeFragment : Fragment() {
   }
 
   @Composable
-  fun SetUsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
+  fun UsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
     OutlinedTextField(
       value = username,
       onValueChange = onUsernameChanged,

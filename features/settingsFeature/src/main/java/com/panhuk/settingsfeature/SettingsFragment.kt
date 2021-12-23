@@ -16,18 +16,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.panhuk.settingsfeature.R.string
-import com.panhuk.settingsfeature.databinding.FragmentSettingsBinding
 import com.panhuk.settingsfeature.di.SettingsComponent
 import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
-  private var _binding: FragmentSettingsBinding? = null
-  private val binding get() = _binding!!
 
   @Inject
   protected lateinit var viewModel: SettingsViewModel
@@ -42,37 +41,30 @@ class SettingsFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.settingsFragment.setContent { CreateSettingsFragment() }
-  }
-
-  override fun onDestroyView() {
-    viewModel.saveUsername()
-    _binding = null
-    super.onDestroyView()
+    return ComposeView(requireContext()).apply {
+      setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
+      setContent {
+        Settings()
+      }
+    }
   }
 
   @Preview(showBackground = true)
   @Composable
-  fun CreateSettingsFragment() {
+  fun Settings() {
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
     ) {
-      ChangeUsernameTextField(
+      UsernameTextField(
         username = viewModel.username.value,
         onUsernameChanged = { viewModel.username.value = it })
-      CreateTextWithSwitchInRow()
+      TextWithSwitchInRow()
     }
   }
 
   @Composable
-  fun ChangeUsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
+  fun UsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
     OutlinedTextField(
       value = username,
       onValueChange = onUsernameChanged,
@@ -82,15 +74,15 @@ class SettingsFragment : Fragment() {
   }
 
   @Composable
-  fun CreateTextWithSwitchInRow() {
+  fun TextWithSwitchInRow() {
     Row() {
       Text(stringResource(string.use_your_data_to_improve_our_service))
-      CreateSwitch()
+      Switch()
     }
   }
 
   @Composable
-  fun CreateSwitch() {
+  fun Switch() {
     val checkedState = remember { mutableStateOf(true) }
     Switch(
       checked = checkedState.value,
