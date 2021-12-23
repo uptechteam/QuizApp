@@ -1,5 +1,6 @@
 package com.panhuk.settingsfeature
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,8 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,10 +22,20 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.panhuk.settingsfeature.R.string
 import com.panhuk.settingsfeature.databinding.FragmentSettingsBinding
+import com.panhuk.settingsfeature.di.SettingsComponent
+import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
   private var _binding: FragmentSettingsBinding? = null
   private val binding get() = _binding!!
+
+  @Inject
+  protected lateinit var viewModel: SettingsViewModel
+
+  override fun onAttach(context: Context) {
+    SettingsComponent.create(requireActivity().applicationContext).inject(this)
+    super.onAttach(context)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -43,6 +52,7 @@ class SettingsFragment : Fragment() {
   }
 
   override fun onDestroyView() {
+    viewModel.saveUsername()
     _binding = null
     super.onDestroyView()
   }
@@ -54,19 +64,18 @@ class SettingsFragment : Fragment() {
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
     ) {
-      ChangeUsernameTextField()
+      ChangeUsernameTextField(
+        username = viewModel.username.value,
+        onUsernameChanged = { viewModel.username.value = it })
       CreateTextWithSwitchInRow()
     }
   }
 
   @Composable
-  fun ChangeUsernameTextField() {
-    val tempText = "John Smith"
-    var text by remember { mutableStateOf(tempText) }
-
+  fun ChangeUsernameTextField(username: String, onUsernameChanged: (String) -> Unit) {
     OutlinedTextField(
-      value = text,
-      onValueChange = { text = it },
+      value = username,
+      onValueChange = onUsernameChanged,
       label = { Text(stringResource(R.string.your_username)) },
       modifier = Modifier.padding(bottom = 10.dp, start = 5.dp, end = 5.dp)
     )
