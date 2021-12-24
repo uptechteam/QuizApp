@@ -120,19 +120,7 @@ class SetupQuestionsFragment : Fragment() {
         modifier = Modifier
       )
 
-      when (title) {
-        R.string.number_of_questions -> viewModel.question = options[selectedIndex]
-        R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
-        R.string.type -> viewModel.type = options[selectedIndex]
-        R.string.category -> {
-          val searchCategory = viewModel.categories.find { options[selectedIndex] == it.title }
-          if (searchCategory == null) {
-            viewModel.category = Category(ADD_ANY, NOT_FOUND)
-          } else {
-            viewModel.category = searchCategory
-          }
-        }
-      }
+      viewModel.updateQuestion(title, options[selectedIndex])
 
       DropdownMenu(
         expanded = expanded,
@@ -149,6 +137,7 @@ class SetupQuestionsFragment : Fragment() {
       }
     }
   }
+
 
   @Composable
   fun Confirm() {

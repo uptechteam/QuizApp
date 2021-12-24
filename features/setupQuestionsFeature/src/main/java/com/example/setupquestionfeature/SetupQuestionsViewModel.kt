@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.panhuk.core.NOT_FOUND
 import com.panhuk.domain.model.Category
 import com.panhuk.useCase.GetQuestionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -33,6 +34,17 @@ class SetupQuestionsViewModel @Inject constructor(
       getQuestionsUseCase.getCategories().collect { category ->
         this@SetupQuestionsViewModel.categories = category
         isLoading = false
+      }
+    }
+  }
+
+  fun updateQuestion(title: Int, text: String) {
+    when (title) {
+      R.string.number_of_questions -> question = text
+      R.string.difficulty -> difficulty = text
+      R.string.type -> type = text
+      R.string.category -> {
+        category = categories.find { text == it.title } ?: Category(ADD_ANY, NOT_FOUND)
       }
     }
   }
