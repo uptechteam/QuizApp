@@ -88,20 +88,22 @@ class PlayViewModel @AssistedInject constructor(
       tempCategoryId = null
     }
 
-    getQuestionsUseCase.getQuestions(
-      amount = questionNumber.toInt(),
-      categoryId = tempCategoryId,
-      difficulty = difficulty,
-      type = type,
-      token = sessionToken
-    ).collect { qst ->
-      if (qst != null) {
-        questions.clear()
-        questions.addAll(qst)
-        totalNumberOfQuestions = questions.size
-        isLoading = false
-      } else {
-        Timber.e("questions are null")
+    if (questionNumber != null) {
+      getQuestionsUseCase.getQuestions(
+        amount = questionNumber.toInt(),
+        categoryId = tempCategoryId,
+        difficulty = difficulty,
+        type = type,
+        token = sessionToken
+      ).collect { qst ->
+        if (qst != null) {
+          questions.clear()
+          questions.addAll(qst)
+          totalNumberOfQuestions = questions.size
+          isLoading = false
+        } else {
+          Timber.e("questions are null")
+        }
       }
     }
   }
@@ -155,4 +157,3 @@ class PlayViewModel @AssistedInject constructor(
     _timer.start()
   }
 }
-
