@@ -9,4 +9,6 @@
   <string name="years_ago">%1$dy. ago</string>
   <string name="sort_date">Sort by date</string>
   <string name="sort_score">Sort by score</string>
+  <string name="empty_leaderboard">There is no leaderboard records yet. Play a few games to see your results</string>
+  <string name="action_go_menu">Go to main menu</string>
 </resources>

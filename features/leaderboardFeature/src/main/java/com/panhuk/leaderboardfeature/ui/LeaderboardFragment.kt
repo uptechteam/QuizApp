@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.OutlinedButton
@@ -35,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.panhuk.leaderboardfeature.R.string
 import com.panhuk.leaderboardfeature.di.LeaderboardComponent
 import javax.inject.Inject
@@ -64,10 +66,37 @@ class LeaderboardFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun Leaderboard() {
-    Column() {
-      LeaderboardTitleAndSort()
-      LazyColumn()
+    if (viewModel.isLeaderboardEmpty) {
+      EmptyLeaderboardScreen()
+    } else {
+      Column() {
+        LeaderboardTitleAndSort()
+        LazyColumn()
+      }
     }
+  }
+
+  @Composable
+  fun EmptyLeaderboardScreen() {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      Text(
+        stringResource(string.empty_leaderboard),
+        fontSize = 24.sp,
+        modifier = Modifier
+          .width(300.dp)
+          .padding(bottom = 20.dp)
+      )
+      Button(onClick = { navigateToMenu() }) {
+        Text(stringResource(string.action_go_menu))
+      }
+    }
+  }
+
+  private fun navigateToMenu() {
+    findNavController().popBackStack()
   }
 
   @Composable
