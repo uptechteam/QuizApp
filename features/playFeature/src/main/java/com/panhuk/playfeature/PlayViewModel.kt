@@ -50,8 +50,7 @@ class PlayViewModel @Inject constructor(
         loadQuestion()
         initTimer()
       } catch (e: Exception) {
-        isLoading = false
-        Timber.e(e.toString())
+        showError(e.toString())
       }
     }
   }
@@ -77,7 +76,7 @@ class PlayViewModel @Inject constructor(
       if (token != null) {
         sessionToken = token
       } else {
-        Timber.e("sessionToken is null")
+        showError("sessionToken is null")
       }
     }
   }
@@ -90,9 +89,14 @@ class PlayViewModel @Inject constructor(
         totalNumberOfQuestions = questions.size
         isLoading = false
       } else {
-        Timber.e("questions are null")
+        showError("questions are null")
       }
     }
+  }
+
+  private fun showError(messageText: String) {
+    isLoading = false
+    Timber.e(messageText)
   }
 
   fun checkAnswer(answer: String = ""): Boolean {
