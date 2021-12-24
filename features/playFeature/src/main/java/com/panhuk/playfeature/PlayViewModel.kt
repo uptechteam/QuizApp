@@ -38,9 +38,26 @@ class PlayViewModel @Inject constructor(
   var currentQuestionNumber by mutableStateOf(0)
   var isLastQuestion by mutableStateOf(false)
   var isLoading by mutableStateOf(true)
+  var isQuestionsEmpty by mutableStateOf(true)
 
   init {
-    _timer = object : CountDownTimer(5000, 1000) {
+    _timer = createTimer()
+
+    viewModelScope.launch(dispatcher) {
+      try {
+        generateNewSessionToken()
+        getQuestions()
+        loadQuestion()
+        initTimer()
+      } catch (e: Exception) {
+        isLoading = false
+        Timber.e(e.toString())
+      }
+    }
+  }
+
+  private fun createTimer(): CountDownTimer {
+    return object : CountDownTimer(5000, 1000) {
       override fun onTick(millisUntilFinished: Long) {
         timer = (millisUntilFinished / 1000).toInt()
       }
@@ -51,18 +68,6 @@ class PlayViewModel @Inject constructor(
           delay(200) // is needed to update timerIsActive status for compose fragment
           checkAnswer()
         }
-      }
-    }
-
-    viewModelScope.launch(dispatcher) {
-      try {
-
-        generateNewSessionToken()
-        getQuestions()
-        loadQuestion()
-        initTimer()
-      } catch (e: Exception) {
-        Timber.e(e.toString())
       }
     }
   }
