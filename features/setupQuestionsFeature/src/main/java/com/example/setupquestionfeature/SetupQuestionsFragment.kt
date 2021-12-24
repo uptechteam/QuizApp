@@ -37,6 +37,7 @@ import androidx.fragment.app.Fragment
 import com.example.setupquestionfeature.di.SetupQuestionsComponent
 import com.panhuk.core.CATEGORY_ID
 import com.panhuk.core.DIFFICULTY
+import com.panhuk.core.NOT_FOUND
 import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TYPE
 import com.panhuk.domain.model.Category
@@ -103,7 +104,7 @@ class SetupQuestionsFragment : Fragment() {
     var selectedIndex by remember { mutableStateOf(0) }
 
     if(title != R.string.number_of_questions){
-      options.add(0, ADD_ANY_TYPE)
+      options.add(0, ADD_ANY)
     }
 
     OutlinedButton(
@@ -121,16 +122,16 @@ class SetupQuestionsFragment : Fragment() {
 
       when (title) {
         R.string.number_of_questions -> viewModel.question = options[selectedIndex]
+        R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
+        R.string.type -> viewModel.type = options[selectedIndex]
         R.string.category -> {
           val searchCategory = viewModel.categories.find { options[selectedIndex] == it.title }
           if (searchCategory == null) {
-            viewModel.category = Category(ADD_ANY_TYPE, -1)
+            viewModel.category = Category(ADD_ANY, NOT_FOUND)
           } else {
             viewModel.category = searchCategory
           }
         }
-        R.string.difficulty -> viewModel.difficulty = options[selectedIndex]
-        R.string.type -> viewModel.type = options[selectedIndex]
       }
 
       DropdownMenu(
@@ -163,20 +164,23 @@ class SetupQuestionsFragment : Fragment() {
 
   private fun navigateToPlayFragment() {
     val bundle = Bundle().apply {
-      if (viewModel.category.id != -1) {
+
+      putString(QUESTIONS_NUMBER, viewModel.question)
+
+      if (viewModel.category.id != NOT_FOUND) {
         putInt(CATEGORY_ID, viewModel.category.id)
       } else {
-        putInt(CATEGORY_ID, -1)
+        putInt(CATEGORY_ID, NOT_FOUND)
       }
-      if (viewModel.difficulty != ADD_ANY_TYPE) {
+
+      if (viewModel.difficulty != ADD_ANY) {
         putString(DIFFICULTY, viewModel.difficulty.lowercase())
       } else {
         putString(DIFFICULTY, null)
       }
 
-      putString(QUESTIONS_NUMBER, viewModel.question)
       when (viewModel.type) {
-        ADD_ANY_TYPE -> putString(TYPE, null)
+        ADD_ANY -> putString(TYPE, null)
         TYPE_MULTIPLE -> putString(TYPE, MULTIPLE)
         TYPE_BOOLEAN -> putString(TYPE, BOOLEAN)
       }

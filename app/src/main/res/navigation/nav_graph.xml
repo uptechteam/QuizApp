@@ -42,8 +42,8 @@
         android:id="@+id/finish_menu"
         app:destination="@id/menuFragment" />
     <action
-        android:id="@+id/finish_play"
-        app:destination="@id/playFragment" />
+        android:id="@+id/finish_setup_questions"
+        app:destination="@id/setupQuestionsFragment" />
   </fragment>
   <fragment
       android:id="@+id/firstTimeFragment"

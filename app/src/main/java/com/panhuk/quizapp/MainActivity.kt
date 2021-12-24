@@ -77,8 +77,8 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
     navigator.navigate(R.id.finish_menu)
   }
 
-  override fun navigateFinishToPlayFragment() {
-    navigator.navigate(R.id.finish_play)
+  override fun navigateFinishToSetupQuestionFragment() {
+    navigator.navigate(R.id.finish_setup_questions)
   }
 
   override fun navigatePlayToFinishFragment(bundle: Bundle) {

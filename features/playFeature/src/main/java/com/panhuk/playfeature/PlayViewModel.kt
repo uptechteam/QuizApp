@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.panhuk.core.NOT_FOUND
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.useCase.GetQuestionsUseCase
@@ -83,11 +84,12 @@ class PlayViewModel @AssistedInject constructor(
 
   private suspend fun getQuestions() {
     var tempCategoryId: String? = category.toString()
-    if (tempCategoryId == "-1") {
+    if (tempCategoryId == NOT_FOUND.toString()) {
       tempCategoryId = null
     }
+
     getQuestionsUseCase.getQuestions(
-      amount = questionNumber!!.toInt(),
+      amount = questionNumber.toInt(),
       categoryId = tempCategoryId,
       difficulty = difficulty,
       type = type,
