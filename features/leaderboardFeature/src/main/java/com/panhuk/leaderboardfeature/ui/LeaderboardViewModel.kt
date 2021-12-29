@@ -19,13 +19,19 @@ class LeaderboardViewModel @Inject constructor(
 ) : ViewModel() {
 
   private lateinit var leaderboards: List<Leaderboard>
-  var leaderboardSorted by mutableStateOf(sortByTime())
+  var leaderboardSorted by mutableStateOf(listOf<Leaderboard>())
   val sortTypes = listOf(R.string.sort_date, R.string.sort_score)
+  var isLeaderboardEmpty by mutableStateOf(false)
 
   init {
     viewModelScope.launch(dispatcher) {
       leaderboardRepo.getLeaderboards().collect { leaderboard ->
-        this@LeaderboardViewModel.leaderboards = leaderboard
+        leaderboards = leaderboard
+        if(leaderboards.isEmpty()){
+          isLeaderboardEmpty = true
+        }else {
+          leaderboards = sortByTime()
+        }
       }
     }
   }
