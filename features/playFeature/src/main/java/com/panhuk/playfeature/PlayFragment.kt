@@ -99,6 +99,7 @@ class PlayFragment : Fragment() {
         putInt(CORRECT_ANSWERS, viewModel.totalScore)
         putInt(TOTAL_ANSWERS, viewModel.totalNumberOfQuestions)
       }
+      viewModel.saveScore()
       (requireActivity() as PlayNavigator).navigatePlayToFinishFragment(bundle)
     }
   }
