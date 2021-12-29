@@ -46,6 +46,7 @@ dependencies {
   implementation dagger2.values()
   kapt dagger2_kapt.values()
   implementation navigation.values()
+  implementation timber.values()
 
   implementation project(':apiModules:apiDI')
   implementation project(':dataSourceModules:dataSourceDI')

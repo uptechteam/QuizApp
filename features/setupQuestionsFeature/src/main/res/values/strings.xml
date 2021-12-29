@@ -6,6 +6,7 @@
   <string name="difficulty">Difficulty</string>
   <string name="type">Type</string>
   <string name="confirm">Confirm</string>
+  <string name="something_wrong">Something wrong with the server. Try later</string>
   <string-array name="questions_number_array">
     <item>5</item>
     <item>10</item>

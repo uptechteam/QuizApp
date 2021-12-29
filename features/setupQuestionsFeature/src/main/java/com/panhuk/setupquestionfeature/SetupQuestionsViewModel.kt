@@ -23,6 +23,7 @@ class SetupQuestionsViewModel @Inject constructor(
   var difficulties by mutableStateOf(R.array.difficulty_array)
   var types by mutableStateOf(R.array.type_array)
   var isLoading by mutableStateOf(true)
+  var isQuestionsEmpty by mutableStateOf(true)
 
   lateinit var question: String
   lateinit var category: Category

@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,30 +73,49 @@ class SetupQuestionsFragment : Fragment() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      if (viewModel.isLoading) {
-        CircularProgress()
-      } else {
-        Spinner(
-          Title.NUMBER_OF_QUESTIONS,
-          R.string.number_of_questions,
-          stringArrayResource(viewModel.questions).toMutableList()
-        )
-        Spinner(
-          Title.CATEGORY,
-          R.string.category,
-          viewModel.categories.map { it.title } as MutableList<String>)
-        Spinner(
-          Title.DIFFICULTY,
-          R.string.difficulty,
-          stringArrayResource(viewModel.difficulties).toMutableList()
-        )
-        Spinner(
-          Title.TYPE,
-          R.string.type,
-          stringArrayResource(viewModel.types).toMutableList()
-        )
-        Confirm()
+      when {
+        viewModel.isLoading and viewModel.isQuestionsEmpty -> CircularProgress()
+        !viewModel.isLoading and viewModel.isQuestionsEmpty -> EmptyQuestionsScreen()
+        else -> {
+          Spinner(
+            Title.NUMBER_OF_QUESTIONS,
+            R.string.number_of_questions,
+            stringArrayResource(viewModel.questions).toMutableList()
+          )
+          Spinner(
+            Title.CATEGORY,
+            R.string.category,
+            viewModel.categories.map { it.title } as MutableList<String>)
+          Spinner(
+            Title.DIFFICULTY,
+            R.string.difficulty,
+            stringArrayResource(viewModel.difficulties).toMutableList()
+          )
+          Spinner(
+            Title.TYPE,
+            R.string.type,
+            stringArrayResource(viewModel.types).toMutableList()
+          )
+          Confirm()
+        }
       }
+    }
+  }
+
+  @Composable
+  fun EmptyQuestionsScreen() {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      Text(
+        stringResource(R.string.something_wrong),
+        fontSize = 24.sp,
+        modifier = Modifier
+          .width(300.dp)
+          .padding(bottom = 20.dp),
+        textAlign = TextAlign.Center
+      )
     }
   }
 
