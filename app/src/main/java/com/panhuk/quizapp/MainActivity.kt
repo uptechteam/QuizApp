@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.panhuk.setupquestionfeature.SetupQuestionsNavigator
 import com.panhuk.finishfeature.FinishNavigator
 import com.panhuk.firstTimeFeature.FirstTimeNavigator
 import com.panhuk.menufeature.MenuNavigator
@@ -16,10 +17,10 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, FinishNavigator,
-  PlayNavigator {
+  PlayNavigator, SetupQuestionsNavigator {
 
   private lateinit var binding: ActivityMainBinding
-  private lateinit var navigator: NavController
+  private lateinit var navController: NavController
 
   @Inject
   protected lateinit var viewModel: MainViewModel
@@ -41,7 +42,7 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
   }
 
   private fun setupNavigation() {
-    navigator = findNavController(R.id.nav_fragment)
+    navController = findNavController(R.id.nav_fragment)
   }
 
   private fun subscribeStateFlow() {
@@ -53,34 +54,38 @@ class MainActivity() : AppCompatActivity(), MenuNavigator, FirstTimeNavigator, F
   }
 
   private fun navigateToFirstScreen() {
-    navigator.navigate(R.id.firstTimeFragment)
+    navController.navigate(R.id.firstTimeFragment)
   }
 
-  override fun navigateMenuToPlayFragment() {
-    navigator.navigate(R.id.menu_play)
+  override fun navigateMenuToSetupQuestionsFragment() {
+    navController.navigate(R.id.menu_setup_questions)
   }
 
   override fun navigateMenuToSettingsFragment() {
-    navigator.navigate(R.id.menu_settings)
+    navController.navigate(R.id.menu_settings)
   }
 
   override fun navigateMenuToLeaderboardFragment() {
-    navigator.navigate(R.id.menu_leaderboard)
+    navController.navigate(R.id.menu_leaderboard)
   }
 
   override fun navigateToMenuFragment() {
-    navigator.navigate(R.id.firstTime_menu)
+    navController.navigate(R.id.firstTime_menu)
   }
 
   override fun navigateFinishToMenuFragment() {
-    navigator.navigate(R.id.finish_menu)
+    navController.navigate(R.id.finish_menu)
   }
 
-  override fun navigateFinishToPlayFragment() {
-    navigator.navigate(R.id.finish_play)
+  override fun navigateFinishToSetupQuestionFragment() {
+    navController.navigate(R.id.finish_setup_questions)
   }
 
   override fun navigatePlayToFinishFragment(bundle: Bundle) {
-    navigator.navigate(R.id.play_finish, bundle)
+    navController.navigate(R.id.play_finish, bundle)
+  }
+
+  override fun navigateSetupQuestionsToPlayFragment(bundle: Bundle) {
+    navController.navigate(R.id.setup_questions_play, bundle)
   }
 }

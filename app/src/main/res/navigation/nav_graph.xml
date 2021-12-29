@@ -15,8 +15,8 @@
         android:id="@+id/menu_leaderboard"
         app:destination="@id/leaderboardFragment" />
     <action
-        android:id="@+id/menu_play"
-        app:destination="@id/playFragment" />
+        android:id="@+id/menu_setup_questions"
+        app:destination="@id/setupQuestionsFragment" />
   </fragment>
   <fragment
       android:id="@+id/playFragment"
@@ -42,8 +42,8 @@
         android:id="@+id/finish_menu"
         app:destination="@id/menuFragment" />
     <action
-        android:id="@+id/finish_play"
-        app:destination="@id/playFragment" />
+        android:id="@+id/finish_setup_questions"
+        app:destination="@id/setupQuestionsFragment" />
   </fragment>
   <fragment
       android:id="@+id/firstTimeFragment"
@@ -52,5 +52,13 @@
     <action
         android:id="@+id/firstTime_menu"
         app:destination="@id/menuFragment" />
+  </fragment>
+  <fragment
+      android:id="@+id/setupQuestionsFragment"
+      android:name="com.panhuk.setupquestionfeature.SetupQuestionsFragment"
+      android:label="SetupQuestionsFragment">
+    <action
+        android:id="@+id/setup_questions_play"
+        app:destination="@id/playFragment" />
   </fragment>
 </navigation>

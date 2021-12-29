@@ -32,17 +32,39 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.panhuk.core.CATEGORY_ID
 import com.panhuk.core.CORRECT_ANSWERS
+import com.panhuk.core.DIFFICULTY
+import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TOTAL_ANSWERS
+import com.panhuk.core.TYPE
 import com.panhuk.playfeature.di.PlayComponent
+import com.panhuk.playfeature.di.PlayFactory
 import javax.inject.Inject
 
 class PlayFragment : Fragment() {
 
   @Inject
-  protected lateinit var viewModel: PlayViewModel
+  lateinit var viewModelAssistedFactory: PlayFactory.Factory
+
+  private val viewModel: PlayViewModel by viewModels {
+    val results = arguments
+    val category = results?.getInt(CATEGORY_ID)
+    val difficulty = results?.getString(DIFFICULTY)
+    val questionNumber = results?.getString(QUESTIONS_NUMBER)
+    val type = results?.getString(TYPE)
+
+    PlayFactory.provideFactory(
+      viewModelAssistedFactory,
+      category,
+      difficulty,
+      questionNumber,
+      type
+    )
+  }
 
   override fun onAttach(context: Context) {
     PlayComponent.create(requireContext().applicationContext).inject(this)

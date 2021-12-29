@@ -1,12 +1,12 @@
 package com.panhuk.playfeature
 
 import android.os.CountDownTimer
-import timber.log.Timber
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.panhuk.core.NOT_FOUND
 import com.panhuk.core.getDrawableRes
 import com.panhuk.domain.model.Leaderboard
 import com.panhuk.domain.model.Question
@@ -14,23 +14,29 @@ import com.panhuk.repository.LeaderboardRepo
 import com.panhuk.repository.SessionTokenRepoReader
 import com.panhuk.repository.UsernameRepo
 import com.panhuk.useCase.GetQuestionsUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.util.LinkedList
 import java.util.Queue
-import javax.inject.Inject
 
-class PlayViewModel @Inject constructor(
+class PlayViewModel @AssistedInject constructor(
   private val getQuestionsUseCase: GetQuestionsUseCase,
   private val sessionTokenRepoReader: SessionTokenRepoReader,
   private val dispatcher: CoroutineDispatcher,
   private val leaderboardRepo: LeaderboardRepo,
-  private val usernameRepo: UsernameRepo
+  private val usernameRepo: UsernameRepo,
+  @Assisted("category") val category: Int?,
+  @Assisted("difficulty") val difficulty: String?,
+  @Assisted("question_number") val questionNumber: String?,
+  @Assisted("type") val type: String?
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -86,29 +92,28 @@ class PlayViewModel @Inject constructor(
   }
 
   private suspend fun getQuestions() {
-    getQuestionsUseCase.getQuestions().collect { qst ->
-      if (qst != null) {
-        questions.clear()
-        questions.addAll(qst)
-        totalNumberOfQuestions = questions.size
-        isLoading = false
-      } else {
-        Timber.e("questions are null")
-      }
+    var tempCategoryId: String? = category.toString()
+    if (tempCategoryId == NOT_FOUND.toString()) {
+      tempCategoryId = null
     }
-  }
 
-  fun saveScore() {
-    viewModelScope.launch {
-      val username = usernameRepo.getUsername().single().orEmpty()
-
-      val leaderboard = Leaderboard(
-        imageId = getDrawableRes(),
-        username = username,
-        scoreLocalDate = LocalDateTime.now(),
-        score = totalScore
-      )
-      leaderboardRepo.insert(leaderboard)
+    if (questionNumber != null) {
+      getQuestionsUseCase.getQuestions(
+        amount = questionNumber.toInt(),
+        categoryId = tempCategoryId,
+        difficulty = difficulty,
+        type = type,
+        token = sessionToken
+      ).collect { qst ->
+        if (qst != null) {
+          questions.clear()
+          questions.addAll(qst)
+          totalNumberOfQuestions = questions.size
+          isLoading = false
+        } else {
+          Timber.e("questions are null")
+        }
+      }
     }
   }
 
@@ -145,6 +150,20 @@ class PlayViewModel @Inject constructor(
 
   private fun deleteCurrentQuestion() {
     questions.poll()
+  }
+
+  fun saveScore() {
+    viewModelScope.launch {
+      val username = usernameRepo.getUsername().single().orEmpty()
+
+      val leaderboard = Leaderboard(
+        imageId = getDrawableRes(),
+        username = username,
+        scoreLocalDate = LocalDateTime.now(),
+        score = totalScore
+      )
+      leaderboardRepo.insert(leaderboard)
+    }
   }
 
   private fun reInitTimer() {

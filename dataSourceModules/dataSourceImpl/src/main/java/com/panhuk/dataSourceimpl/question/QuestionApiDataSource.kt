@@ -8,14 +8,19 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class QuestionApiDataSource(private val api: QuestionApi) : QuestionDSReader {
-  override val questions: Flow<List<Question>?>
-    get() = flow {
-      emit(
-        api.getQuestions().results.map { questionDTO ->
-          questionDTO.mapToDomain()
-        }
-      )
-    }
+  override fun getQuestions(
+    amount: Int,
+    categoryId: String?,
+    difficulty: String?,
+    type: String?,
+    token: String?
+  ): Flow<List<Question>?> = flow {
+    emit(
+      api.getQuestions(amount, categoryId, difficulty, type, token).results.map { questionDTO ->
+        questionDTO.mapToDomain()
+      }
+    )
+  }
 
   override val categories: Flow<List<Category>>
     get() = flow {

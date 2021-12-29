@@ -1,7 +1,7 @@
 package com.panhuk.menufeature
 
 interface MenuNavigator {
-  fun navigateMenuToPlayFragment()
+  fun navigateMenuToSetupQuestionsFragment()
   fun navigateMenuToSettingsFragment()
   fun navigateMenuToLeaderboardFragment()
 }

@@ -12,8 +12,14 @@ class QuestionRepoImpl(
   private val questionApiReader: DataSourceQuestionReader
 ) : RepositoryQuestionReader {
 
-  override val questions: Flow<List<Question>?>
-    get() = questionApiReader.questions
+  override fun getQuestions(
+    amount: Int,
+    categoryId: String?,
+    difficulty: String?,
+    type: String?,
+    token: String?
+  ): Flow<List<Question>?> =
+    questionApiReader.getQuestions(amount, categoryId, difficulty, type, token)
 
   override val categories: Flow<List<Category>>
     get() = questionApiReader.categories

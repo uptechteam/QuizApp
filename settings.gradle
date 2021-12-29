@@ -28,6 +28,7 @@ include ':features:playFeature'
 include ':features:menuFeature'
 include ':features:settingsFeature'
 include ':features:leaderboardFeature'
+include ':features:setupQuestionsFeature'
 
 include ':useCaseModules:useCase'
 include ':useCaseModules:usecaseDI'
