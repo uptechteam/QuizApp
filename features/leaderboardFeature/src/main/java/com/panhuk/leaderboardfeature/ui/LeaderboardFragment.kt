@@ -89,13 +89,13 @@ class LeaderboardFragment : Fragment() {
           .width(300.dp)
           .padding(bottom = 20.dp)
       )
-      Button(onClick = { navigateToMenu() }) {
+      Button(onClick = { navigateUp() }) {
         Text(stringResource(string.action_go_menu))
       }
     }
   }
 
-  private fun navigateToMenu() {
+  private fun navigateUp() {
     findNavController().popBackStack()
   }
 
