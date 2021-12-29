@@ -1,4 +1,4 @@
-package com.example.setupquestionfeature
+package com.panhuk.setupquestionfeature
 
 import android.os.Bundle
 

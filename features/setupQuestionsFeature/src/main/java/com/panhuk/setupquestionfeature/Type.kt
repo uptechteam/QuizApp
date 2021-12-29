@@ -1,4 +1,4 @@
-package com.example.setupquestionfeature
+package com.panhuk.setupquestionfeature
 
 const val MULTIPLE = "multiple"
 const val BOOLEAN = "boolean"

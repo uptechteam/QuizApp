@@ -1,8 +1,7 @@
-package com.example.setupquestionfeature.di
+package com.panhuk.setupquestionfeature.di
 
-import com.example.setupquestionfeature.SetupQuestionsFragment
+import com.panhuk.setupquestionfeature.SetupQuestionsFragment
 import com.panhuk.core.di.CoreComponent
-import com.panhuk.repositorydi.SessionTokenRepoComponent
 import com.panhuk.usecasedi.UseCaseComponent
 import dagger.Component
 

@@ -1,4 +1,4 @@
-package com.example.setupquestionfeature
+package com.panhuk.setupquestionfeature
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,12 +38,12 @@ class SetupQuestionsViewModel @Inject constructor(
     }
   }
 
-  fun updateQuestion(title: Int, text: String) {
+  fun updateQuestion(title: Title, text: String) {
     when (title) {
-      R.string.number_of_questions -> question = text
-      R.string.difficulty -> difficulty = text
-      R.string.type -> type = text
-      R.string.category -> {
+      Title.NUMBER_OF_QUESTIONS -> question = text
+      Title.DIFFICULTY -> difficulty = text
+      Title.TYPE -> type = text
+      Title.CATEGORY -> {
         category = categories.find { text == it.title } ?: Category(ADD_ANY, NOT_FOUND)
       }
     }

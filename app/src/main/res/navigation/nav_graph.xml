@@ -55,7 +55,7 @@
   </fragment>
   <fragment
       android:id="@+id/setupQuestionsFragment"
-      android:name="com.example.setupquestionfeature.SetupQuestionsFragment"
+      android:name="com.panhuk.setupquestionfeature.SetupQuestionsFragment"
       android:label="SetupQuestionsFragment">
     <action
         android:id="@+id/setup_questions_play"

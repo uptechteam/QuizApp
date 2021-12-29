@@ -1,4 +1,4 @@
-package com.example.setupquestionfeature
+package com.panhuk.setupquestionfeature
 
 import android.content.Context
 import android.os.Bundle
@@ -34,13 +34,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.example.setupquestionfeature.di.SetupQuestionsComponent
 import com.panhuk.core.CATEGORY_ID
 import com.panhuk.core.DIFFICULTY
 import com.panhuk.core.NOT_FOUND
 import com.panhuk.core.QUESTIONS_NUMBER
 import com.panhuk.core.TYPE
-import com.panhuk.domain.model.Category
+import com.panhuk.setupquestionfeature.di.SetupQuestionsComponent
 import javax.inject.Inject
 
 class SetupQuestionsFragment : Fragment() {
@@ -77,12 +76,24 @@ class SetupQuestionsFragment : Fragment() {
         CircularProgress()
       } else {
         Spinner(
+          Title.NUMBER_OF_QUESTIONS,
           R.string.number_of_questions,
           stringArrayResource(viewModel.questions).toMutableList()
         )
-        Spinner(R.string.category, viewModel.categories.map { it.title } as MutableList<String>)
-        Spinner(R.string.difficulty, stringArrayResource(viewModel.difficulties).toMutableList())
-        Spinner(R.string.type, stringArrayResource(viewModel.types).toMutableList())
+        Spinner(
+          Title.CATEGORY,
+          R.string.category,
+          viewModel.categories.map { it.title } as MutableList<String>)
+        Spinner(
+          Title.DIFFICULTY,
+          R.string.difficulty,
+          stringArrayResource(viewModel.difficulties).toMutableList()
+        )
+        Spinner(
+          Title.TYPE,
+          R.string.type,
+          stringArrayResource(viewModel.types).toMutableList()
+        )
         Confirm()
       }
     }
@@ -99,11 +110,11 @@ class SetupQuestionsFragment : Fragment() {
   }
 
   @Composable
-  fun Spinner(title: Int, options: MutableList<String>) {
+  fun Spinner(titleEnum: Title, title: Int, options: MutableList<String>) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
-    if(title != R.string.number_of_questions){
+    if (title != R.string.number_of_questions) {
       options.add(0, ADD_ANY)
     }
 
@@ -120,7 +131,7 @@ class SetupQuestionsFragment : Fragment() {
         modifier = Modifier
       )
 
-      viewModel.updateQuestion(title, options[selectedIndex])
+      viewModel.updateQuestion(titleEnum, options[selectedIndex])
 
       DropdownMenu(
         expanded = expanded,
@@ -137,7 +148,6 @@ class SetupQuestionsFragment : Fragment() {
       }
     }
   }
-
 
   @Composable
   fun Confirm() {
