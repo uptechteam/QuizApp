@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.panhuk.core.NOT_FOUND
+import com.panhuk.core.getDrawableRes
 import com.panhuk.domain.model.Leaderboard
 import com.panhuk.domain.model.Question
 import com.panhuk.repository.LeaderboardRepo
