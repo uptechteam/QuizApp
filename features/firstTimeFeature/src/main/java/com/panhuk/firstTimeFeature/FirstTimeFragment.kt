@@ -54,8 +54,8 @@ class FirstTimeFragment : Fragment() {
       )
       Button(onClick = {
         if (viewModel.username.value.isNotEmpty()) {
-          (requireActivity() as FirstTimeNavigator).navigateToMenuFragment()
           viewModel.saveUsername()
+          (requireActivity() as FirstTimeNavigator).navigateToMenuFragment()
         } else {
           viewModel.username.value = "Error"
         }

@@ -7,4 +7,5 @@
   <string name="number_of_question">Question: %1$d/%2$d</string>
   <string name="quit">Quit</string>
   <string name="timer">Timer: %1$ds</string>
+  <string name="something_wrong">Something wrong with the server. Try later</string>
 </resources>

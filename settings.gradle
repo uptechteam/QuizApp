@@ -30,6 +30,6 @@ include ':features:settingsFeature'
 include ':features:leaderboardFeature'
 include ':features:setupQuestionsFeature'
 
+include ':useCaseModules:useCase'
 include ':useCaseModules:usecaseDI'
 include ':useCaseModules:usecaseImpl'
-include ':useCaseModules:useCase'
