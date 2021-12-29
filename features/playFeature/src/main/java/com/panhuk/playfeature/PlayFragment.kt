@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,18 +63,37 @@ class PlayFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun PlayFragment() {
-    if (viewModel.isLoading) {
-      CircularProgress()
-    } else {
-      QuestionTitleAndNumeration()
-      QuestionsAndScore()
-      QuitButton()
+    when {
+      viewModel.isLoading and viewModel.isQuestionsEmpty -> CircularProgress()
+      !viewModel.isLoading and viewModel.isQuestionsEmpty -> EmptyQuestionsScreen()
+      else -> {
+        QuestionTitleAndNumeration()
+        QuestionsAndScore()
+        QuitButton()
 
-      checkIfLastQuestionAndGoToFinishFragment()
+        checkIfLastQuestionAndGoToFinishFragment()
+      }
     }
   }
 
-  private fun checkIfLastQuestionAndGoToFinishFragment(){
+  @Composable
+  fun EmptyQuestionsScreen() {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      Text(
+        stringResource(R.string.something_wrong),
+        fontSize = 24.sp,
+        modifier = Modifier
+          .width(300.dp)
+          .padding(bottom = 20.dp),
+        textAlign = TextAlign.Center
+      )
+    }
+  }
+
+  private fun checkIfLastQuestionAndGoToFinishFragment() {
     if (viewModel.isLastQuestion) {
       val bundle = Bundle().apply {
         putInt(CORRECT_ANSWERS, viewModel.totalScore)

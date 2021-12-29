@@ -38,9 +38,25 @@ class PlayViewModel @Inject constructor(
   var currentQuestionNumber by mutableStateOf(0)
   var isLastQuestion by mutableStateOf(false)
   var isLoading by mutableStateOf(true)
+  var isQuestionsEmpty by mutableStateOf(true)
 
   init {
-    _timer = object : CountDownTimer(5000, 1000) {
+    _timer = createTimer()
+
+    viewModelScope.launch(dispatcher) {
+      try {
+        generateNewSessionToken()
+        getQuestions()
+        loadQuestion()
+        initTimer()
+      } catch (e: Exception) {
+        showError(e.toString())
+      }
+    }
+  }
+
+  private fun createTimer(): CountDownTimer {
+    return object : CountDownTimer(5000, 1000) {
       override fun onTick(millisUntilFinished: Long) {
         timer = (millisUntilFinished / 1000).toInt()
       }
@@ -53,18 +69,6 @@ class PlayViewModel @Inject constructor(
         }
       }
     }
-
-    viewModelScope.launch(dispatcher) {
-      try {
-
-        generateNewSessionToken()
-        getQuestions()
-        loadQuestion()
-        initTimer()
-      } catch (e: Exception) {
-        Timber.e(e.toString())
-      }
-    }
   }
 
   private suspend fun generateNewSessionToken() {
@@ -72,7 +76,7 @@ class PlayViewModel @Inject constructor(
       if (token != null) {
         sessionToken = token
       } else {
-        Timber.e("sessionToken is null")
+        showError("sessionToken is null")
       }
     }
   }
@@ -85,9 +89,14 @@ class PlayViewModel @Inject constructor(
         totalNumberOfQuestions = questions.size
         isLoading = false
       } else {
-        Timber.e("questions are null")
+        showError("questions are null")
       }
     }
+  }
+
+  private fun showError(messageText: String) {
+    isLoading = false
+    Timber.e(messageText)
   }
 
   fun checkAnswer(answer: String = ""): Boolean {
