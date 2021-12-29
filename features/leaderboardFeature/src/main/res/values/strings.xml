@@ -1,0 +1,14 @@
+<resources>
+  <string name="leaderboard">LEADERBOARD</string>
+  <string name="Score">Score:</string>
+  <string name="minutes_ago">%1$dm. ago</string>
+  <string name="seconds_ago">%1$ds. ago</string>
+  <string name="hours_ago">%1$dh. ago</string>
+  <string name="days_ago">%1$dd. ago</string>
+  <string name="months_ago">%1$dmth. ago</string>
+  <string name="years_ago">%1$dy. ago</string>
+  <string name="sort_date">Sort by date</string>
+  <string name="sort_score">Sort by score</string>
+  <string name="empty_leaderboard">There is no leaderboard records yet. Play a few games to see your results</string>
+  <string name="action_go_menu">Go to main menu</string>
+</resources>
