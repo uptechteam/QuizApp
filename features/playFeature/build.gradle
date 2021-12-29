@@ -50,13 +50,13 @@ dependencies {
   implementation timber.values()
   coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugaring_version")
 
-  implementation project(':apiModules:apiDI')
-  implementation project(':dataSourceModules:dataSourceDI')
-  implementation project(':repositoryModules:repositoryDI')
-  implementation project(':useCaseModules:usecaseDI')
-
   implementation project(':domain')
   implementation project(':core')
   implementation project(':repositoryModules:repository')
   implementation project(':useCaseModules:useCase')
+
+  implementation project(':apiModules:apiDI')
+  implementation project(':dataSourceModules:dataSourceDI')
+  implementation project(':repositoryModules:repositoryDI')
+  implementation project(':useCaseModules:usecaseDI')
 }

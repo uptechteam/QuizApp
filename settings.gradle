@@ -29,6 +29,6 @@ include ':features:menuFeature'
 include ':features:settingsFeature'
 include ':features:leaderboardFeature'
 
+include ':useCaseModules:useCase'
 include ':useCaseModules:usecaseDI'
 include ':useCaseModules:usecaseImpl'
-include ':useCaseModules:useCase'
