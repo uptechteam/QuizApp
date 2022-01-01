@@ -11,9 +11,6 @@ import dagger.Component
   dependencies = [
     FirstTimeRepoComponent::class,
     CoreComponent::class
-  ],
-  modules = [
-    MainActivityModule::class
   ]
 )
 interface MainActivityComponent {
