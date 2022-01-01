@@ -22,6 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.panhuk.analytic.Analytic
+import com.panhuk.core.AnalyticTags
+import com.panhuk.core.Screen
 import com.panhuk.settingsfeature.di.SettingsComponent
 import javax.inject.Inject
 
@@ -29,6 +32,9 @@ class SettingsFragment : Fragment() {
 
   @Inject
   protected lateinit var viewModel: SettingsViewModel
+
+  @Inject
+  protected lateinit var analytic: Analytic
 
   override fun onAttach(context: Context) {
     SettingsComponent.create(requireActivity().applicationContext).inject(this)
@@ -56,6 +62,11 @@ class SettingsFragment : Fragment() {
   @Preview(showBackground = true)
   @Composable
   fun Settings() {
+
+    analytic.logEvent(Screen.SETTINGS.toString(), Bundle().apply {
+      putString(AnalyticTags.DATA, viewModel.username.value)
+    })
+
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
