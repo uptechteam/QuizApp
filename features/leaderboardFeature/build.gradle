@@ -55,4 +55,7 @@ dependencies {
   implementation project(':useCaseModules:useCase')
   implementation project(':repositoryModules:repositoryDI')
   implementation project(':dataSourceModules:dataSourceDI')
+
+  implementation project(':analyticModules:analyticDI')
+  implementation project(':analyticModules:analytic')
 }

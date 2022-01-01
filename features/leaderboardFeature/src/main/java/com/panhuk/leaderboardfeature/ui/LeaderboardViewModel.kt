@@ -27,9 +27,9 @@ class LeaderboardViewModel @Inject constructor(
     viewModelScope.launch(dispatcher) {
       leaderboardRepo.getLeaderboards().collect { leaderboard ->
         leaderboards = leaderboard
-        if(leaderboards.isEmpty()){
+        if (leaderboards.isEmpty()) {
           isLeaderboardEmpty = true
-        }else {
+        } else {
           leaderboards = sortByTime()
         }
       }

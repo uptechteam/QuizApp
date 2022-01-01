@@ -19,12 +19,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.panhuk.analytic.Analytic
+import com.panhuk.core.AnalyticTags
 import com.panhuk.firstTimeFeature.di.FirstTimeComponent
 import javax.inject.Inject
 
 class FirstTimeFragment : Fragment() {
   @Inject
   protected lateinit var viewModel: FirstTimeViewModel
+
+  @Inject
+  protected lateinit var analytic: Analytic
 
   override fun onAttach(context: Context) {
     FirstTimeComponent.create(requireActivity().applicationContext).inject(this)
@@ -55,6 +60,12 @@ class FirstTimeFragment : Fragment() {
       Button(onClick = {
         if (viewModel.username.value.isNotEmpty()) {
           viewModel.saveUsername()
+
+          analytic.logUserProperties(
+            AnalyticTags.CREATE_USERNAME,
+            AnalyticTags.CREATE_USERNAME_DESC
+          )
+
           (requireActivity() as FirstTimeNavigator).navigateToMenuFragment()
         } else {
           viewModel.username.value = "Error"
