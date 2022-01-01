@@ -17,15 +17,13 @@ interface AnalyticComponent {
   @Component.Builder
   interface Builder {
     fun analyticsModule(module: AnalyticModule): Builder
-    @BindsInstance fun context(context: Context): Builder
     fun build(): AnalyticComponent
   }
 
   companion object {
-    fun create(context: Context): AnalyticComponent =
+    fun create(): AnalyticComponent =
       DaggerAnalyticComponent.builder()
         .analyticsModule(AnalyticModule())
-        .context(context)
         .build()
   }
 }

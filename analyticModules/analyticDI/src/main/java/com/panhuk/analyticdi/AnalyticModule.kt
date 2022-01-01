@@ -1,7 +1,8 @@
 package com.panhuk.analyticdi
 
-import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.panhuk.analytic.Analytic
 import com.panhuk.analyticimpl.AnalyticImpl
 import dagger.Module
@@ -10,8 +11,7 @@ import dagger.Provides
 @Module
 class AnalyticModule {
   @Provides
-  fun provideFirebase(context: Context) =
-    FirebaseAnalytics.getInstance(context)
+  fun provideFirebase() = Firebase.analytics
 
   @Provides
   fun provideAnalytic(firebaseAnalytics: FirebaseAnalytics): Analytic =
