@@ -30,7 +30,7 @@ class LeaderboardViewModel @Inject constructor(
         if (leaderboards.isEmpty()) {
           isLeaderboardEmpty = true
         } else {
-          leaderboards = sortByTime()
+          leaderboardSorted = sortByTime()
         }
       }
     }

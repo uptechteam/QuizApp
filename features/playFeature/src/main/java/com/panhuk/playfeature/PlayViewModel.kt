@@ -17,10 +17,8 @@ import com.panhuk.useCase.GetQuestionsUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.LocalDateTime
@@ -61,7 +59,7 @@ class PlayViewModel @AssistedInject constructor(
       }
 
       override fun onFinish() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(dispatcher) {
           timerIsActive = false
           delay(200) // is needed to update timerIsActive status for compose fragment
           checkAnswer()
@@ -110,6 +108,7 @@ class PlayViewModel @AssistedInject constructor(
           questions.addAll(qst)
           totalNumberOfQuestions = questions.size
           isLoading = false
+          isQuestionsEmpty = false
         } else {
           Timber.e("questions are null")
         }
@@ -153,16 +152,16 @@ class PlayViewModel @AssistedInject constructor(
   }
 
   fun saveScore() {
-    viewModelScope.launch {
-      val username = usernameRepo.getUsername().single().orEmpty()
-
-      val leaderboard = Leaderboard(
-        imageId = getDrawableRes(),
-        username = username,
-        scoreLocalDate = LocalDateTime.now(),
-        score = totalScore
-      )
-      leaderboardRepo.insert(leaderboard)
+    viewModelScope.launch(dispatcher) {
+      usernameRepo.getUsername().collect { username ->
+        val leaderboard = Leaderboard(
+          imageId = getDrawableRes(),
+          username = username.toString(),
+          scoreLocalDate = LocalDateTime.now(),
+          score = totalScore
+        )
+        leaderboardRepo.insert(leaderboard)
+      }
     }
   }
 
