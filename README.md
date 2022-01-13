@@ -1,7 +1,7 @@
 # Quiz-App
 
 
-App for using (opentdb.com) API for making quizes with customizable options
+App for using (opentdb.com) API for making quizzes with customizable options
 ## Used Stack:
 * Coroutines/Flow
 * MVVM 
