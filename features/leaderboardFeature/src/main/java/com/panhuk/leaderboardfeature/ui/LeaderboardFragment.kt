@@ -37,7 +37,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.panhuk.leaderboardfeature.R.string
+import com.panhuk.analytic.Analytic
+import com.panhuk.core.AnalyticTags.DATA
+import com.panhuk.core.AnalyticTags.EMPTY_SCREEN
+import com.panhuk.core.Screen
+import com.panhuk.leaderboardfeature.R
 import com.panhuk.leaderboardfeature.di.LeaderboardComponent
 import javax.inject.Inject
 
@@ -45,6 +49,9 @@ class LeaderboardFragment : Fragment() {
 
   @Inject
   protected lateinit var viewModel: LeaderboardViewModel
+
+  @Inject
+  protected lateinit var analytic: Analytic
 
   override fun onAttach(context: Context) {
     LeaderboardComponent.create(requireActivity().applicationContext).inject(this)
@@ -68,10 +75,17 @@ class LeaderboardFragment : Fragment() {
   fun Leaderboard() {
     if (viewModel.isLeaderboardEmpty) {
       EmptyLeaderboardScreen()
+      analytic.logEvent(Screen.LEADERBOARD.toString(), Bundle().apply {
+        putString(EMPTY_SCREEN, getString(R.string.empty_leaderboard))
+      })
     } else {
       Column() {
         LeaderboardTitleAndSort()
         LazyColumn()
+
+        analytic.logEvent(Screen.LEADERBOARD.toString(), Bundle().apply {
+          putString(DATA, viewModel.leaderboardSorted.toString())
+        })
       }
     }
   }
@@ -83,14 +97,14 @@ class LeaderboardFragment : Fragment() {
       verticalArrangement = Arrangement.Center
     ) {
       Text(
-        stringResource(string.empty_leaderboard),
+        stringResource(R.string.empty_leaderboard),
         fontSize = 24.sp,
         modifier = Modifier
           .width(300.dp)
           .padding(bottom = 20.dp)
       )
       Button(onClick = { navigateUp() }) {
-        Text(stringResource(string.action_go_menu))
+        Text(stringResource(R.string.action_go_menu))
       }
     }
   }
@@ -111,7 +125,7 @@ class LeaderboardFragment : Fragment() {
         modifier = Modifier
           .border(BorderStroke(2.dp, Color.Blue))
           .padding(start = 8.dp, end = 120.dp, bottom = 8.dp, top = 8.dp),
-        text = stringResource(string.leaderboard),
+        text = stringResource(R.string.leaderboard),
         fontSize = 30.sp
       )
       Sort()

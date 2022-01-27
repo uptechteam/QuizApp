@@ -35,6 +35,7 @@ class SetupQuestionsViewModel @Inject constructor(
       getQuestionsUseCase.getCategories().collect { category ->
         this@SetupQuestionsViewModel.categories = category
         isLoading = false
+        isQuestionsEmpty = false
       }
     }
   }

@@ -1,7 +1,6 @@
 plugins {
   id 'com.android.library'
   id 'kotlin-android'
-  id 'kotlin-kapt'
 }
 
 android {
@@ -27,33 +26,13 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-  buildFeatures {
-    viewBinding = true
-    compose true
-  }
   kotlinOptions {
     jvmTarget = '1.8'
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = "$compose_version"
   }
 }
 
 dependencies {
   implementation kotlin_core.values()
-  implementation junit_test.values()
-  implementation compose.values()
-  implementation dagger2.values()
-  kapt dagger2_kapt.values()
-  implementation navigation.values()
-  implementation project(':repositoryModules:repositoryDI')
-  implementation project(':dataSourceModules:dataSourceDI')
-
-  implementation project(':domain')
-  implementation project(':core')
-  implementation project(':repositoryModules:repository')
-  implementation project(':useCaseModules:useCase')
-
-  implementation project(':analyticModules:analyticDI')
+  implementation firebase_analytic.values()
   implementation project(':analyticModules:analytic')
 }
