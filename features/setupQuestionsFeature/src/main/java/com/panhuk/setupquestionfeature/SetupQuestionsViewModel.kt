@@ -20,15 +20,11 @@ class SetupQuestionsViewModel @Inject constructor(
 
   var questions by mutableStateOf(R.array.questions_number_array)
   var categories by mutableStateOf(listOf<Category>())
-  var difficulties by mutableStateOf(R.array.difficulty_array)
-  var types by mutableStateOf(R.array.type_array)
   var isLoading by mutableStateOf(true)
   var isQuestionsEmpty by mutableStateOf(true)
 
   lateinit var question: String
   lateinit var category: Category
-  lateinit var difficulty: String
-  lateinit var type: String
 
   init {
     viewModelScope.launch(dispatcher) {
@@ -43,8 +39,6 @@ class SetupQuestionsViewModel @Inject constructor(
   fun updateQuestion(title: Title, text: String) {
     when (title) {
       Title.NUMBER_OF_QUESTIONS -> question = text
-      Title.DIFFICULTY -> difficulty = text
-      Title.TYPE -> type = text
       Title.CATEGORY -> {
         category = categories.find { text == it.title } ?: Category(ADD_ANY, NOT_FOUND)
       }

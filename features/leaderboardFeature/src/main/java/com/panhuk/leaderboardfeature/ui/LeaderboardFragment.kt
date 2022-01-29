@@ -126,7 +126,7 @@ class LeaderboardFragment : Fragment() {
           .border(BorderStroke(2.dp, Color.Blue))
           .padding(start = 8.dp, end = 120.dp, bottom = 8.dp, top = 8.dp),
         text = stringResource(R.string.leaderboard),
-        fontSize = 30.sp
+        fontSize = 24.sp
       )
       Sort()
     }

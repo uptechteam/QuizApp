@@ -11,10 +11,8 @@ class PlayFactory {
   @AssistedFactory
   interface Factory {
     fun create(
-      @Assisted("category") category: Int?,
-      @Assisted("difficulty") difficulty: String?,
+      @Assisted("category") category: String?,
       @Assisted("question_number") questionNumber: String?,
-      @Assisted("type") type: String?
     ): PlayViewModel
   }
 
@@ -22,13 +20,11 @@ class PlayFactory {
   companion object {
     fun provideFactory(
       assistedFactory: Factory,
-      category: Int?,
-      difficulty: String?,
+      category: String?,
       questionNumber: String?,
-      type: String?
     ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
       override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return assistedFactory.create(category, difficulty, questionNumber, type) as T
+        return assistedFactory.create(category, questionNumber) as T
       }
     }
   }

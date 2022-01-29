@@ -10,12 +10,14 @@ import kotlinx.coroutines.flow.map
 class GetQuestionsUseCaseImpl(private val questionRepository: QuestionRepoReader) :
   GetQuestionsUseCase {
   override fun getQuestions(
-    amount: Int, categoryId: String?, difficulty: String?, type: String?, token: String?
+    limit: Int, category: String?
   ): Flow<List<Question>?> =
-    questionRepository.getQuestions(amount, categoryId, difficulty, type, token)
+    questionRepository.getQuestions(limit, category)
       .map { questions ->
         questions?.map { question ->
-          question.copy(allAnswers = question.allAnswers.shuffled())
+          question.copy(allAnswers = question.allAnswers.filterIndexed { index, answer ->
+            index < 4 && answer != null // only first 4 answer will get next
+          }.shuffled())
         }
       }
 

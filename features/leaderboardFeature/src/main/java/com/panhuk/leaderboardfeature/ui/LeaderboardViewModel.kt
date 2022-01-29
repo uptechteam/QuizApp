@@ -49,7 +49,7 @@ class LeaderboardViewModel @Inject constructor(
   }
 
   fun setSortType(item: Int) {
-    leaderboardSorted = if (item == R.string.sort_date) {
+    leaderboardSorted = if (item == R.string.sort_date && leaderboards.isNotEmpty()) {
       sortByTime()
     } else {
       sortByScore()

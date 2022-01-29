@@ -35,11 +35,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.panhuk.core.CATEGORY_ID
-import com.panhuk.core.DIFFICULTY
+import com.panhuk.core.CATEGORY
 import com.panhuk.core.NOT_FOUND
 import com.panhuk.core.QUESTIONS_NUMBER
-import com.panhuk.core.TYPE
 import com.panhuk.setupquestionfeature.di.SetupQuestionsComponent
 import javax.inject.Inject
 
@@ -85,16 +83,7 @@ class SetupQuestionsFragment : Fragment() {
           Spinner(
             Title.CATEGORY,
             R.string.category,
-            viewModel.categories.map { it.title } as MutableList<String>)
-          Spinner(
-            Title.DIFFICULTY,
-            R.string.difficulty,
-            stringArrayResource(viewModel.difficulties).toMutableList()
-          )
-          Spinner(
-            Title.TYPE,
-            R.string.type,
-            stringArrayResource(viewModel.types).toMutableList()
+            viewModel.categories.map { it.title } as MutableList<String>
           )
           Confirm()
         }
@@ -186,22 +175,10 @@ class SetupQuestionsFragment : Fragment() {
 
       putString(QUESTIONS_NUMBER, viewModel.question)
 
-      if (viewModel.category.id != NOT_FOUND) {
-        putInt(CATEGORY_ID, viewModel.category.id)
+      if (viewModel.category.titleForServer != null) {
+        putString(CATEGORY, viewModel.category.titleForServer)
       } else {
-        putInt(CATEGORY_ID, NOT_FOUND)
-      }
-
-      if (viewModel.difficulty != ADD_ANY) {
-        putString(DIFFICULTY, viewModel.difficulty.lowercase())
-      } else {
-        putString(DIFFICULTY, null)
-      }
-
-      when (viewModel.type) {
-        ADD_ANY -> putString(TYPE, null)
-        TYPE_MULTIPLE -> putString(TYPE, MULTIPLE)
-        TYPE_BOOLEAN -> putString(TYPE, BOOLEAN)
+        putString(CATEGORY, NOT_FOUND)
       }
     }
     (requireActivity() as SetupQuestionsNavigator).navigateSetupQuestionsToPlayFragment(bundle)

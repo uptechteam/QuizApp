@@ -13,13 +13,10 @@ class QuestionRepoImpl(
 ) : RepositoryQuestionReader {
 
   override fun getQuestions(
-    amount: Int,
-    categoryId: String?,
-    difficulty: String?,
-    type: String?,
-    token: String?
+    limit: Int,
+    category: String?,
   ): Flow<List<Question>?> =
-    questionApiReader.getQuestions(amount, categoryId, difficulty, type, token)
+    questionApiReader.getQuestions(limit, category)
 
   override val categories: Flow<List<Category>>
     get() = questionApiReader.categories

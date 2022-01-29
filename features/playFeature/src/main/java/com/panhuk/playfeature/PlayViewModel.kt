@@ -31,10 +31,8 @@ class PlayViewModel @AssistedInject constructor(
   private val dispatcher: CoroutineDispatcher,
   private val leaderboardRepo: LeaderboardRepo,
   private val usernameRepo: UsernameRepo,
-  @Assisted("category") val category: Int?,
-  @Assisted("difficulty") val difficulty: String?,
+  @Assisted("category") val category: String?,
   @Assisted("question_number") val questionNumber: String?,
-  @Assisted("type") val type: String?
 ) : ViewModel() {
 
   private var questions: Queue<Question> = LinkedList()
@@ -53,7 +51,7 @@ class PlayViewModel @AssistedInject constructor(
   var isQuestionsEmpty by mutableStateOf(true)
 
   init {
-    _timer = object : CountDownTimer(5000, 1000) {
+    _timer = object : CountDownTimer(10000, 1000) {
       override fun onTick(millisUntilFinished: Long) {
         timer = (millisUntilFinished / 1000).toInt()
       }
@@ -90,18 +88,15 @@ class PlayViewModel @AssistedInject constructor(
   }
 
   private suspend fun getQuestions() {
-    var tempCategoryId: String? = category.toString()
-    if (tempCategoryId == NOT_FOUND.toString()) {
-      tempCategoryId = null
+    var tempCategory: String? = category.toString()
+    if (tempCategory == NOT_FOUND) {
+      tempCategory = null
     }
 
     if (questionNumber != null) {
       getQuestionsUseCase.getQuestions(
-        amount = questionNumber.toInt(),
-        categoryId = tempCategoryId,
-        difficulty = difficulty,
-        type = type,
-        token = sessionToken
+        limit = questionNumber.toInt(),
+        category = tempCategory
       ).collect { qst ->
         if (qst != null) {
           questions.clear()

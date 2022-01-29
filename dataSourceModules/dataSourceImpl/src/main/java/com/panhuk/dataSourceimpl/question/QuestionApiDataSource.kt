@@ -8,15 +8,25 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class QuestionApiDataSource(private val api: QuestionApi) : QuestionDSReader {
+
+  private val categoriesDTO = mapOf(
+    "Geography" to "geography",
+    "Sport and leisure" to "sport_and_leisure",
+    "Food and drink" to "food_and_drink",
+    "General Knowledge" to "general_knowledge",
+    "History" to "history",
+    "Movies" to "movies",
+    "Music" to "music",
+    "Science" to "science",
+    "Society and culture" to "society_and_culture"
+  )
+
   override fun getQuestions(
-    amount: Int,
-    categoryId: String?,
-    difficulty: String?,
-    type: String?,
-    token: String?
+    limit: Int,
+    category: String?
   ): Flow<List<Question>?> = flow {
     emit(
-      api.getQuestions(amount, categoryId, difficulty, type, token).results.map { questionDTO ->
+      api.getQuestions(limit, category).map { questionDTO ->
         questionDTO.mapToDomain()
       }
     )
@@ -25,7 +35,7 @@ class QuestionApiDataSource(private val api: QuestionApi) : QuestionDSReader {
   override val categories: Flow<List<Category>>
     get() = flow {
       emit(
-        api.getCategories().triviaResponse.map { categoryDTO ->
+        categoriesDTO.map { categoryDTO ->
           categoryDTO.mapToDomain()
         }
       )

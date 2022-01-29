@@ -6,11 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface QuestionDSReader {
   fun getQuestions(
-    amount: Int,
-    categoryId: String?,
-    difficulty: String?,
-    type: String?,
-    token: String?
+    limit: Int,
+    category: String?,
   ): Flow<List<Question>?>
 
   val categories: Flow<List<Category>>

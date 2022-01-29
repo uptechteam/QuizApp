@@ -35,12 +35,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.panhuk.core.CATEGORY_ID
+import com.panhuk.core.CATEGORY
 import com.panhuk.core.CORRECT_ANSWERS
-import com.panhuk.core.DIFFICULTY
 import com.panhuk.core.QUESTIONS_NUMBER
+import com.panhuk.core.TITLE_LENGTH
 import com.panhuk.core.TOTAL_ANSWERS
-import com.panhuk.core.TYPE
 import com.panhuk.playfeature.di.PlayComponent
 import com.panhuk.playfeature.di.PlayFactory
 import javax.inject.Inject
@@ -52,17 +51,13 @@ class PlayFragment : Fragment() {
 
   private val viewModel: PlayViewModel by viewModels {
     val results = arguments
-    val category = results?.getInt(CATEGORY_ID)
-    val difficulty = results?.getString(DIFFICULTY)
+    val category = results?.getString(CATEGORY)
     val questionNumber = results?.getString(QUESTIONS_NUMBER)
-    val type = results?.getString(TYPE)
 
     PlayFactory.provideFactory(
       viewModelAssistedFactory,
       category,
-      difficulty,
-      questionNumber,
-      type
+      questionNumber
     )
   }
 
@@ -141,7 +136,7 @@ class PlayFragment : Fragment() {
     Box(
       modifier = Modifier
         .fillMaxSize()
-        .padding(top = 100.dp, start = 40.dp, end = 30.dp),
+        .padding(top = 100.dp, start = 40.dp, end = 30.dp, bottom = 10.dp),
       contentAlignment = Alignment.TopCenter
     ) {
       Column() {
@@ -150,8 +145,13 @@ class PlayFragment : Fragment() {
           Timer()
         }
 
+        val fontSize = if (viewModel.title.length > TITLE_LENGTH) {
+          14.sp
+        } else {
+          22.sp
+        }
         val text = Html.fromHtml(viewModel.title).toString()
-        Text(text, fontSize = 24.sp)
+        Text(text, fontSize = fontSize)
       }
     }
   }
@@ -183,7 +183,6 @@ class PlayFragment : Fragment() {
   @Composable
   fun QuestionsAndScore() {
     Column(
-      modifier = Modifier.fillMaxSize(),
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -200,11 +199,11 @@ class PlayFragment : Fragment() {
     Button(
       onClick = { checkAnswerAndShowToast(text) },
       modifier = Modifier
-        .padding(bottom = 30.dp)
+        .padding(top = 30.dp)
         .width(300.dp),
       shape = RoundedCornerShape(40.dp)
     ) {
-      Text(text, fontSize = 18.sp)
+      Text(text, fontSize = 15.sp, textAlign = TextAlign.Center)
     }
   }
 

@@ -11,17 +11,5 @@
     <item>5</item>
     <item>10</item>
     <item>20</item>
-    <item>50</item>
-  </string-array>
-
-  <string-array name="difficulty_array">
-    <item>Easy</item>
-    <item>Medium</item>
-    <item>Hard</item>
-  </string-array>
-
-  <string-array name="type_array">
-    <item>Multiple choice</item>
-    <item>True / False</item>
   </string-array>
 </resources>

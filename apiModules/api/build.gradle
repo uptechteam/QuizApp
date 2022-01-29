@@ -13,7 +13,7 @@ android {
     versionCode 1
     versionName "1.0"
 
-    buildConfigField "String", "TRIVIA_BASE_URL", '"https://opentdb.com"'
+    buildConfigField "String", "TRIVIA_BASE_URL", '"https://api.trivia.willfry.co.uk"'
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
